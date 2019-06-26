@@ -23,6 +23,7 @@ import { withRouter } from "react-router-dom";
 import ItemList from "../containers/ItemList/ItemList";
 import AddDish from "../containers/AddDish/AddDish";
 import FavouritesList from "../containers/Favourites/FavouritesList";
+import { Button } from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -70,6 +71,16 @@ const styles = theme => ({
   drawerHeaderHeading: {
     marginRight: "auto",
     marginLeft: ".7rem"
+  },
+  userPanel: {
+    marginLeft: "auto",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  userPanelParagraph: {
+    fontSize: "12px",
+    marginRight: "1rem"
   }
 });
 
@@ -128,7 +139,7 @@ class PersistentDrawerLeft extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, logout, user } = this.props;
     const { render } = this.state;
 
     return (
@@ -156,6 +167,16 @@ class PersistentDrawerLeft extends Component {
             <Typography variant="h6" noWrap>
               {render.label}
             </Typography>
+            <div className={classes.userPanel}>
+              <Typography
+                variant="h6"
+                noWrap
+                className={classes.userPanelParagraph}
+              >
+                Hello {user.displayName} !
+              </Typography>
+              <Button onClick={logout}>Logout</Button>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer

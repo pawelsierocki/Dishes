@@ -10,7 +10,7 @@ import Drawer from "../../components/Drawer";
 class AppRouter extends Component {
   render() {
     return (
-      <Drawer>
+      <Drawer logout={this.props.logout} user={this.props.user}>
         <Switch>
           <Route path="/add" component={AddDish} />
           <Route path="/list" component={ItemList} />

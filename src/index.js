@@ -7,11 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
 const app = (
-  <SnackbarProvider maxSnack={3}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <SnackbarProvider maxSnack={3}>
       <App />
-    </BrowserRouter>
-  </SnackbarProvider>
+    </SnackbarProvider>
+  </BrowserRouter>
 );
 
 ReactDOM.render(app, document.getElementById("root"));

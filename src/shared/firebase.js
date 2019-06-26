@@ -11,4 +11,4 @@ var config = {
 
 export const api = "https://reactproject-de081.firebaseio.com/dishes.json";
 
-firebase.initializeApp(config);
+export const firebaseApp = firebase.initializeApp(config);
