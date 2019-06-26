@@ -130,7 +130,11 @@ class RecipeReviewCard extends Component {
         />
         <CardMedia
           className={classes.media}
-          image="https://thumbs.dreamstime.com/z/no-fast-food-prohibition-sign-vector-label-34566705.jpg"
+          image={
+            dish[1].imageUrl
+              ? dish[1].imageUrl
+              : "https://thumbs.dreamstime.com/z/no-fast-food-prohibition-sign-vector-label-34566705.jpg"
+          }
           title="Paella dish"
         />
         <CardContent className={classes.content}>

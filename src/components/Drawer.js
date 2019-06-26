@@ -111,7 +111,8 @@ class PersistentDrawerLeft extends Component {
 
     this.state = {
       open: false,
-      render: components[0]
+      render: components[0],
+      confirm: false
     };
   }
 
@@ -138,9 +139,13 @@ class PersistentDrawerLeft extends Component {
     });
   };
 
+  confirmLogout = () => {
+    this.setState({ confirm: !this.state.confirm });
+  };
+
   render() {
     const { classes, logout, user } = this.props;
-    const { render } = this.state;
+    const { render, confirm } = this.state;
 
     return (
       <div className={classes.root}>
@@ -173,9 +178,16 @@ class PersistentDrawerLeft extends Component {
                 noWrap
                 className={classes.userPanelParagraph}
               >
-                Hello {user.displayName} !
+                {!confirm ? `Hello ${user.displayName} !` : `Are you sure?`}
               </Typography>
-              <Button onClick={logout}>Logout</Button>
+              {!confirm ? (
+                <Button onClick={this.confirmLogout}>Logout</Button>
+              ) : (
+                <>
+                  <Button onClick={logout}>YES</Button>
+                  <Button onClick={this.confirmLogout}>NO</Button>
+                </>
+              )}
             </div>
           </Toolbar>
         </AppBar>

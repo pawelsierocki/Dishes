@@ -8,13 +8,21 @@ import AddNewForm from "./AddNewForm";
 import { withSnackbar } from "notistack";
 
 class AddNew extends Component {
-  handleAdd = (title, shortDescription, fullDescription, favourite) => {
+  handleAdd = (
+    title,
+    shortDescription,
+    fullDescription,
+    favourite,
+    imageUrl
+  ) => {
+    console.log(title);
     axios
       .post(api, {
         title,
         shortDescription,
         fullDescription,
-        favourite
+        favourite,
+        imageUrl
       })
       .then(() => {
         this.props.enqueueSnackbar(`Successfully added your dish: ${title}`, {
@@ -29,7 +37,9 @@ class AddNew extends Component {
   };
 
   render() {
-    return <AddNewForm handleAddNew={this.handleAdd} />;
+    return (
+      <AddNewForm handleAddNew={this.handleAdd} upload={this.props.upload} />
+    );
   }
 }
 

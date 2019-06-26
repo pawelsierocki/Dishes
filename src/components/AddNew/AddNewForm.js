@@ -37,6 +37,9 @@ const styles = theme => ({
   },
   checkbox: {
     marginTop: "1rem"
+  },
+  input: {
+    display: "none"
   }
 });
 
@@ -52,20 +55,12 @@ class AddNewForm extends Component {
       isValidForm: false,
       validName: false,
       validShort: false,
-      validFull: false
+      validFull: false,
+      file: null
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    this.props.handleAddNew(
-      this.state.name,
-      this.state.shortDescription,
-      this.state.fullDescription,
-      this.state.favourite
-    );
-
+  clearFields = () => {
     this.setState({
       name: "",
       shortDescription: "",
@@ -74,8 +69,41 @@ class AddNewForm extends Component {
       isValid: false,
       validName: false,
       validShort: false,
-      validFull: false
+      validFull: false,
+      file: null
     });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    if (this.state.file) {
+      const image = this.props.upload.child(this.state.file.name);
+      image.put(this.state.file).then(snapshot => {
+        image.getDownloadURL().then(url => {
+          this.props.handleAddNew(
+            this.state.name,
+            this.state.shortDescription,
+            this.state.fullDescription,
+            this.state.favourite,
+            url
+          );
+
+          this.clearFields();
+        });
+      });
+    } else {
+      let url = null;
+      this.props.handleAddNew(
+        this.state.name,
+        this.state.shortDescription,
+        this.state.fullDescription,
+        this.state.favourite,
+        url
+      );
+
+      this.clearFields();
+    }
   };
 
   handleChange = e => {
@@ -139,8 +167,14 @@ class AddNewForm extends Component {
     });
   };
 
+  handleFileChange = e => {
+    this.setState({ file: e.target.files[0] });
+  };
+
   render() {
     const { classes } = this.props;
+
+    const { file } = this.state;
 
     return (
       <div className={classes.container}>
@@ -192,6 +226,23 @@ class AddNewForm extends Component {
             label="Add to favourites"
             className={classes.checkbox}
           />
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={this.handleFileChange}
+          />
+          <label htmlFor="contained-button-file">
+            <Button
+              variant="contained"
+              component="span"
+              className={classes.button}
+            >
+              {!file ? `Upload image` : `${file.name}`}
+            </Button>
+          </label>
           <Button
             type="submit"
             variant="contained"
