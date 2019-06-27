@@ -59,7 +59,7 @@ class ListView extends Component {
         if (this.props.onListUpdate) this.props.onListUpdate();
       })
       .catch(error => {
-        this.props.enqueueSnackbar(`Something went wrong`, {
+        this.props.enqueueSnackbar(error, {
           variant: "error"
         });
       });

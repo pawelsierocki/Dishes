@@ -125,22 +125,28 @@ class PersistentDrawerLeft extends Component {
   }
 
   handleChange = () => {
-    this.setState({
-      open: !this.state.open
+    this.setState(state => {
+      return {
+        open: !state.open
+      };
     });
   };
 
   handleChangePartial = text => {
     components.map(eachComponent => {
       if (eachComponent.label === text) {
-        this.setState({ render: eachComponent, open: !this.state.open });
+        this.setState(state => {
+          return { render: eachComponent, open: !state.open };
+        });
         this.props.history.push(eachComponent.path);
       }
     });
   };
 
   confirmLogout = () => {
-    this.setState({ confirm: !this.state.confirm });
+    this.setState(state => {
+      return { confirm: !state.confirm };
+    });
   };
 
   render() {

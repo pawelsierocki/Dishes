@@ -96,13 +96,17 @@ class RecipeReviewCard extends Component {
   }
 
   handleExpandClick = () => {
-    this.setState({
-      expanded: !this.state.expanded
+    this.setState(state => {
+      return {
+        expanded: !state.expanded
+      };
     });
   };
 
   onChangeCheckbox = () => {
-    this.setState({ fav: !this.state.fav });
+    this.setState(state => {
+      return { fav: !state.fav };
+    });
 
     this.props.handleHeart(this.props.dish, !this.state.fav);
   };

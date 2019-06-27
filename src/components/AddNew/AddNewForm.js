@@ -77,33 +77,16 @@ class AddNewForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.file) {
-      const image = this.props.upload.child(this.state.file.name);
-      image.put(this.state.file).then(snapshot => {
-        image.getDownloadURL().then(url => {
-          this.props.handleAddNew(
-            this.state.name,
-            this.state.shortDescription,
-            this.state.fullDescription,
-            this.state.favourite,
-            url
-          );
+    const newDish = {
+      title: this.state.name,
+      shortDescription: this.state.shortDescription,
+      fullDescription: this.state.fullDescription,
+      favourite: this.state.favourite
+    };
 
-          this.clearFields();
-        });
-      });
-    } else {
-      let url = null;
-      this.props.handleAddNew(
-        this.state.name,
-        this.state.shortDescription,
-        this.state.fullDescription,
-        this.state.favourite,
-        url
-      );
+    this.props.handleAddNew(newDish, this.state.file);
 
-      this.clearFields();
-    }
+    this.clearFields();
   };
 
   handleChange = e => {
@@ -119,9 +102,11 @@ class AddNewForm extends Component {
   };
 
   onChangeCheckbox = () => {
-    this.setState({
-      ...this.state,
-      favourite: !this.state.favourite
+    this.setState(state => {
+      return {
+        ...state,
+        favourite: !state.favourite
+      };
     });
   };
 

@@ -8,26 +8,37 @@ import AddNewForm from "./AddNewForm";
 import { withSnackbar } from "notistack";
 
 class AddNew extends Component {
-  handleAdd = (
-    title,
-    shortDescription,
-    fullDescription,
-    favourite,
-    imageUrl
-  ) => {
-    console.log(title);
+  handleAdd = (newDish, file) => {
+    console.log(file);
+    if (file) {
+      const image = this.props.upload.child(newDish.title);
+      image.put(file).then(snapshot => {
+        image.getDownloadURL().then(url => {
+          var dishWithImage = {
+            ...newDish,
+            imageUrl: url
+          };
+          this.postData(dishWithImage);
+        });
+      });
+    } else {
+      this.postData(newDish);
+    }
+  };
+
+  postData = newDish => {
+    console.log(newDish);
     axios
       .post(api, {
-        title,
-        shortDescription,
-        fullDescription,
-        favourite,
-        imageUrl
+        ...newDish
       })
       .then(() => {
-        this.props.enqueueSnackbar(`Successfully added your dish: ${title}`, {
-          variant: "success"
-        });
+        this.props.enqueueSnackbar(
+          `Successfully added your dish: ${newDish.title}`,
+          {
+            variant: "success"
+          }
+        );
       })
       .catch(error => {
         this.props.enqueueSnackbar(`${error}`, {
