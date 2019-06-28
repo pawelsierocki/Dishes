@@ -35,7 +35,8 @@ class AddDish extends Component {
   postData = newDish => {
     axios
       .post(api, {
-        ...newDish
+        ...newDish,
+        publishDate: new Date()
       })
       .then(() => {
         this.props.enqueueSnackbar(

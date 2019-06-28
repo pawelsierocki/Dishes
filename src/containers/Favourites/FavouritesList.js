@@ -39,7 +39,11 @@ class FavouritesList extends Component {
   render() {
     const { dishesList, loading } = this.state;
 
-    var arr = Object.entries(dishesList).filter(e => e[1].favourite);
+    const arr = Object.entries(dishesList)
+      .filter(e => e[1].favourite)
+      .reduce((prev, next) => {
+        return [...prev, { id: next[0], data: { ...next[1] } }];
+      }, []);
 
     return (
       <ListView

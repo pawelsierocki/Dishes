@@ -20,12 +20,12 @@ const styles = {
 
 class ListView extends Component {
   handleChangeFavourite = (item, status) => {
-    var data = { ...item[1] };
+    var data = { ...item.data };
     data.favourite = status;
 
     axios
       .put(
-        `https://reactproject-de081.firebaseio.com/dishes/${item[0]}.json`,
+        `https://reactproject-de081.firebaseio.com/dishes/${item.id}.json`,
         data
       )
       .then(() => {

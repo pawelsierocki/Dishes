@@ -100,13 +100,13 @@ class RecipeReviewCard extends Component {
 
     this.state = {
       expanded: false,
-      fav: props.dish[1].favourite
+      fav: props.dish.data.favourite
     };
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      fav: props.dish[1].favourite
+      fav: props.dish.data.favourite
     });
   }
 
@@ -129,7 +129,9 @@ class RecipeReviewCard extends Component {
   render() {
     const { classes, dish } = this.props;
 
-    const splitDesc = dish[1].fullDescription.split("\n");
+    const dishObj = { ...dish.data };
+
+    const splitDesc = dishObj.fullDescription.split("\n");
 
     const ingredients = splitDesc.map((el, index) => (
       <div className={classes.ingredientContainer} key={index}>
@@ -143,19 +145,23 @@ class RecipeReviewCard extends Component {
     return (
       <Card className={classes.card}>
         <CardHeader
-          title={dish[1].title}
-          subheader="September 14, 2016"
+          title={dishObj.title}
+          subheader={
+            dishObj.publishDate
+              ? `Published: ` + dishObj.publishDate.slice(0, 10)
+              : ""
+          }
           className={classes.header}
           classes={{ title: classes.title, subheader: classes.subheader }}
         />
         <CardMedia
           className={classes.media}
           image={
-            dish[1].imageUrl
-              ? dish[1].imageUrl
+            dishObj.imageUrl
+              ? dishObj.imageUrl
               : "https://thumbs.dreamstime.com/z/no-fast-food-prohibition-sign-vector-label-34566705.jpg"
           }
-          title={dish[1].imageUrl ? dish[1].title : "Default image"}
+          title={dishObj.imageUrl ? dishObj.title : "Default image"}
         />
         <CardContent className={classes.content}>
           <Typography
@@ -164,7 +170,7 @@ class RecipeReviewCard extends Component {
             component="p"
             className={classes.contentText}
           >
-            {dish[1].shortDescription}
+            {dishObj.shortDescription}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

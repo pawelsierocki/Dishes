@@ -31,7 +31,11 @@ class ItemList extends Component {
   render() {
     const { dishesList, loading } = this.state;
 
-    var arr = Object.entries(dishesList).filter(e => e);
+    const arr = Object.entries(dishesList).reduce((prev, next) => {
+      return [...prev, { id: next[0], data: { ...next[1] } }];
+    }, []);
+
+    console.log(arr);
 
     return <ListView items={arr} loading={loading} />;
   }
