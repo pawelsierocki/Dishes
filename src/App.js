@@ -3,6 +3,7 @@ import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
+import Drawer from "./components/Drawer";
 import AppRouter from "./containers/Router/AppRouter";
 import Login from "./containers/Login/Login";
 import Spinner from "./components/Spinner";
@@ -16,28 +17,31 @@ const providers = {
 };
 
 export class App extends Component {
+  renderApp = () => {
+    const { user, signInWithGoogle, signOut } = this.props;
+
+    switch (user) {
+      case undefined: {
+        return <Spinner />;
+      }
+
+      case null: {
+        return <Login login={signInWithGoogle} />;
+      }
+
+      default: {
+        return (
+          <>
+            <Drawer logout={signOut} user={user} />
+            <AppRouter />
+          </>
+        );
+      }
+    }
+  };
+
   render() {
-    const { user, signOut, signInWithGoogle } = this.props;
-
-    const appView = <AppRouter logout={signOut} user={user} />;
-    const appLogin = <Login login={signInWithGoogle} />;
-    const spinnerView = (
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          translate: "transform(-50%,-50%)"
-        }}
-      >
-        <Spinner />
-      </div>
-    );
-
-    const appRender =
-      user === undefined ? spinnerView : user === null ? appLogin : appView;
-
-    return appRender;
+    return this.renderApp();
   }
 }
 

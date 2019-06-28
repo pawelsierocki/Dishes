@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -23,35 +23,33 @@ const styles = theme => ({
   }
 });
 
-class LoginView extends Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <Paper className={classes.root}>
-          <Typography variant="h4" component="h3" className={classes.title}>
-            Login
-          </Typography>
-          <Typography component="p" className={classes.paragraph}>
-            This application is using google authentication.
-          </Typography>
-          <Typography component="p" className={classes.paragraph}>
-            Click on the button below to login.
-          </Typography>
-          <Typography component="p">
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.buttonLogin}
-              onClick={this.props.login}
-            >
-              Authenticate
-            </Button>
-          </Typography>
-        </Paper>
-      </div>
-    );
-  }
-}
+const LoginView = props => {
+  const { classes, login } = props;
+  return (
+    <div>
+      <Paper className={classes.root}>
+        <Typography variant="h4" component="h3" className={classes.title}>
+          Login
+        </Typography>
+        <Typography component="p" className={classes.paragraph}>
+          This application is using google authentication.
+        </Typography>
+        <Typography component="p" className={classes.paragraph}>
+          Click on the button below to login.
+        </Typography>
+        <Typography component="p">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.buttonLogin}
+            onClick={login}
+          >
+            Authenticate
+          </Button>
+        </Typography>
+      </Paper>
+    </div>
+  );
+};
 
 export default withStyles(styles)(LoginView);

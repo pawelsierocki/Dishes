@@ -12,31 +12,13 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
-  },
-  spinner: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%,-50%)"
+    flexWrap: "wrap",
+    marginTop: "3rem",
+    justifyContent: "center"
   }
 };
 
 class ListView extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      items: null
-    };
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      items: props.items
-    });
-  }
-
   handleChangeFavourite = (item, status) => {
     var data = { ...item[1] };
     data.favourite = status;
@@ -65,26 +47,34 @@ class ListView extends Component {
       });
   };
 
+  renderList = () => {
+    const { items, classes, loading } = this.props;
+
+    switch (loading) {
+      case true: {
+        return <Spinner />;
+      }
+
+      default: {
+        return items && items.length ? (
+          <div className={classes.container}>
+            {items.map((key, index) => {
+              return (
+                <div key={index}>
+                  <Card dish={key} handleHeart={this.handleChangeFavourite} />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <h1>No dishes added to favourites yet.</h1>
+        );
+      }
+    }
+  };
+
   render() {
-    const { classes } = this.props;
-
-    const { items } = this.state;
-
-    return items ? (
-      <div className={classes.container}>
-        {items.map((key, index) => {
-          return (
-            <div key={index}>
-              <Card dish={key} handleHeart={this.handleChangeFavourite} />
-            </div>
-          );
-        })}
-      </div>
-    ) : (
-      <div className={classes.spinner}>
-        <Spinner />
-      </div>
-    );
+    return this.renderList();
   }
 }
 

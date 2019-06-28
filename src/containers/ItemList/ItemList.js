@@ -9,7 +9,8 @@ class ItemList extends Component {
     super();
 
     this.state = {
-      dishesList: []
+      dishesList: [],
+      loading: true
     };
   }
 
@@ -18,7 +19,8 @@ class ItemList extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          dishesList: res
+          dishesList: res,
+          loading: false
         });
       })
       .catch(error => {
@@ -27,11 +29,11 @@ class ItemList extends Component {
   }
 
   render() {
-    const { dishesList } = this.state;
+    const { dishesList, loading } = this.state;
 
     var arr = Object.entries(dishesList).filter(e => e);
 
-    return <ListView items={arr} />;
+    return <ListView items={arr} loading={loading} />;
   }
 }
 

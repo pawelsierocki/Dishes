@@ -58,6 +58,9 @@ class AddNewForm extends Component {
       validFull: false,
       file: null
     };
+
+    this.inputFile = React.createRef();
+    this.image = React.createRef();
   }
 
   clearFields = () => {
@@ -88,6 +91,18 @@ class AddNewForm extends Component {
 
     this.clearFields();
   };
+
+  componentDidMount() {
+    this.inputFile.current.addEventListener("change", ev => {
+      const fileReader = new FileReader();
+
+      fileReader.readAsDataURL(ev.target.files[0]);
+
+      fileReader.onload = e => {
+        this.image.current.src = e.currentTarget.result;
+      };
+    });
+  }
 
   handleChange = e => {
     e.persist();
@@ -211,6 +226,7 @@ class AddNewForm extends Component {
             label="Add to favourites"
             className={classes.checkbox}
           />
+          {file && <img ref={this.image} alt="miniature" />}
           <input
             accept="image/*"
             className={classes.input}
@@ -218,6 +234,7 @@ class AddNewForm extends Component {
             multiple
             type="file"
             onChange={this.handleFileChange}
+            ref={this.inputFile}
           />
           <label htmlFor="contained-button-file">
             <Button

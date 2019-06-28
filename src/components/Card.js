@@ -21,16 +21,16 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const styles = theme => ({
   card: {
-    width: 345,
+    width: 200,
     margin: "10px",
     transition: "all .3s",
     "&:hover": {
       cursor: "pointer",
-      transform: "scale(1.01)"
+      transform: "scale(0.98)"
     }
   },
   media: {
-    height: 320
+    height: 140
   },
   expand: {
     transform: "rotate(0deg)",
@@ -47,11 +47,20 @@ const styles = theme => ({
     backgroundColor: red[500]
   },
   header: {
-    minHeight: "120px",
+    minHeight: "80px",
     alignItems: "flex-start"
   },
+  title: {
+    fontSize: ".8rem"
+  },
+  subheader: {
+    fontSize: ".6rem"
+  },
   content: {
-    minHeight: "150px"
+    minHeight: "120px"
+  },
+  contentText: {
+    fontSize: ".6rem"
   },
   ingredientContainer: {
     display: "flex",
@@ -61,11 +70,15 @@ const styles = theme => ({
   ingredient: {
     marginBottom: 0,
     marginLeft: "10px",
-    fontSize: "14px"
+    fontSize: ".6rem"
   },
   icon: {
     color: "green",
-    fontSize: "16px"
+    fontSize: ".6rem"
+  },
+  foodIcon: {
+    width: "1rem",
+    height: "1rem"
   },
   headerIngredientsContainer: {
     display: "flex",
@@ -75,7 +88,8 @@ const styles = theme => ({
   },
   headerIngredients: {
     marginBottom: 0,
-    marginLeft: "10px"
+    marginLeft: "10px",
+    fontSize: ".7rem"
   }
 });
 
@@ -131,6 +145,7 @@ class RecipeReviewCard extends Component {
           title={dish[1].title}
           subheader="September 14, 2016"
           className={classes.header}
+          classes={{ title: classes.title, subheader: classes.subheader }}
         />
         <CardMedia
           className={classes.media}
@@ -139,10 +154,15 @@ class RecipeReviewCard extends Component {
               ? dish[1].imageUrl
               : "https://thumbs.dreamstime.com/z/no-fast-food-prohibition-sign-vector-label-34566705.jpg"
           }
-          title="Paella dish"
+          title={dish[1].imageUrl ? dish[1].title : "Default image"}
         />
         <CardContent className={classes.content}>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            className={classes.contentText}
+          >
             {dish[1].shortDescription}
           </Typography>
         </CardContent>
@@ -172,7 +192,7 @@ class RecipeReviewCard extends Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <div className={classes.headerIngredientsContainer}>
-              <FoodIcon />
+              <FoodIcon className={classes.foodIcon} />
               <Typography paragraph className={classes.headerIngredients}>
                 SKŁADNIKI
               </Typography>

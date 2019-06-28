@@ -9,7 +9,8 @@ class FavouritesList extends Component {
     super();
 
     this.state = {
-      dishesList: []
+      dishesList: [],
+      loading: true
     };
   }
 
@@ -18,7 +19,8 @@ class FavouritesList extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          dishesList: res
+          dishesList: res,
+          loading: false
         });
       })
       .catch(error => {
@@ -35,13 +37,17 @@ class FavouritesList extends Component {
   };
 
   render() {
-    const { dishesList } = this.state;
+    const { dishesList, loading } = this.state;
 
-    var arr = Object.entries(dishesList).filter(e =>
-      e[1].favourite ? e : null
+    var arr = Object.entries(dishesList).filter(e => e[1].favourite);
+
+    return (
+      <ListView
+        items={arr}
+        onListUpdate={this.onUpdateList}
+        loading={loading}
+      />
     );
-
-    return <ListView items={arr} onListUpdate={this.onUpdateList} />;
   }
 }
 

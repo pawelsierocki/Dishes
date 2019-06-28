@@ -18,7 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AddIcon from "@material-ui/icons/Add";
 import FastFoodIcon from "@material-ui/icons/Fastfood";
 import FavouriteIcon from "@material-ui/icons/Favorite";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import ItemList from "../containers/ItemList/ItemList";
 import AddDish from "../containers/AddDish/AddDish";
@@ -81,10 +81,14 @@ const styles = theme => ({
   userPanelParagraph: {
     fontSize: "12px",
     marginRight: "1rem"
+  },
+  link: {
+    textDecoration: "none",
+    color: "#000"
   }
 });
 
-let components = [
+let partials = [
   {
     label: "List of dishes",
     path: "/list",
@@ -111,17 +115,9 @@ class PersistentDrawerLeft extends Component {
 
     this.state = {
       open: false,
-      render: components[0],
-      confirm: false
+      confirm: false,
+      render: partials[0]
     };
-  }
-
-  componentWillMount() {
-    components.map(eachComponent => {
-      if (eachComponent.path === this.props.history.location.pathname) {
-        this.setState({ render: eachComponent });
-      }
-    });
   }
 
   handleChange = () => {
@@ -132,15 +128,9 @@ class PersistentDrawerLeft extends Component {
     });
   };
 
-  handleChangePartial = text => {
-    components.map(eachComponent => {
-      if (eachComponent.label === text) {
-        this.setState(state => {
-          return { render: eachComponent, open: !state.open };
-        });
-        this.props.history.push(eachComponent.path);
-      }
-    });
+  handleChangePartial = partial => {
+    this.setState({ render: partial });
+    this.handleChange();
   };
 
   confirmLogout = () => {
@@ -175,9 +165,7 @@ class PersistentDrawerLeft extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              {render.label}
-            </Typography>
+            <Typography variant="h6" noWrap />
             <div className={classes.userPanel}>
               <Typography
                 variant="h6"
@@ -218,15 +206,20 @@ class PersistentDrawerLeft extends Component {
           </div>
           <Divider />
           <List>
-            {components.map((component, index) => (
-              <ListItem
-                button
-                key={component.label}
-                onClick={() => this.handleChangePartial(component.label)}
+            {partials.map(partial => (
+              <Link
+                to={partial.path}
+                className={classes.link}
+                key={partial.label}
               >
-                <ListItemIcon>{component.icon}</ListItemIcon>
-                <ListItemText primary={component.label} />
-              </ListItem>
+                <ListItem
+                  button
+                  onClick={() => this.handleChangePartial(partial)}
+                >
+                  <ListItemIcon>{partial.icon}</ListItemIcon>
+                  <ListItemText primary={partial.label} />
+                </ListItem>
+              </Link>
             ))}
           </List>
         </Drawer>
@@ -234,10 +227,7 @@ class PersistentDrawerLeft extends Component {
           className={clsx(classes.content, {
             [classes.contentShift]: this.state.open
           })}
-        >
-          <div className={classes.drawerHeader} />
-          {render.component}
-        </main>
+        />
       </div>
     );
   }
