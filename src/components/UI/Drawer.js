@@ -20,9 +20,9 @@ import FastFoodIcon from "@material-ui/icons/Fastfood";
 import FavouriteIcon from "@material-ui/icons/Favorite";
 import { withRouter, Link } from "react-router-dom";
 
-import ItemList from "../containers/ItemList/ItemList";
-import AddDish from "../containers/AddDish/AddDish";
-import FavouritesList from "../containers/Favourites/FavouritesList";
+import ItemList from "../../containers/ItemList/ItemList"
+import AddDish from "../../containers/AddDish/AddDish";
+import FavouritesList from "../../containers/Favourites/FavouritesList";
 import { Button } from "@material-ui/core";
 
 const drawerWidth = 240;

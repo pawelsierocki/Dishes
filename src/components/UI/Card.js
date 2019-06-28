@@ -51,7 +51,8 @@ const styles = theme => ({
     alignItems: "flex-start"
   },
   title: {
-    fontSize: ".8rem"
+    fontSize: ".8rem",
+    minHeight: "2rem"
   },
   subheader: {
     fontSize: ".6rem"

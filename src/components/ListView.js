@@ -5,8 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { withSnackbar } from "notistack";
 
-import Card from "./Card";
-import Spinner from "./Spinner";
+import Card from "./UI/Card";
+import Spinner from "./UI/Spinner";
 
 const styles = {
   container: {
@@ -56,18 +56,20 @@ class ListView extends Component {
       }
 
       default: {
-        return items && items.length ? (
+        return (
           <div className={classes.container}>
-            {items.map((key, index) => {
-              return (
-                <div key={index}>
-                  <Card dish={key} handleHeart={this.handleChangeFavourite} />
-                </div>
-              );
-            })}
+            {items && items.length ? (
+              items.map((key, index) => {
+                return (
+                  <div key={index}>
+                    <Card dish={key} handleHeart={this.handleChangeFavourite} />
+                  </div>
+                );
+              })
+            ) : (
+              <h1>No dishes added to favourites yet.</h1>
+            )}
           </div>
-        ) : (
-          <h1>No dishes added to favourites yet.</h1>
         );
       }
     }
