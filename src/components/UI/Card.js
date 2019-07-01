@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Modal from "./Modal";
 
 const styles = theme => ({
   card: {
@@ -102,7 +103,8 @@ class RecipeReviewCard extends Component {
 
     this.state = {
       expanded: false,
-      fav: props.dish.data.favourite
+      fav: props.dish.data.favourite,
+      open: false
     };
   }
 
@@ -126,6 +128,12 @@ class RecipeReviewCard extends Component {
     });
 
     this.props.handleHeart(this.props.dish, !this.state.fav);
+  };
+
+  handleClickOpen = () => {
+    this.setState(state => {
+      return { open: !state.open };
+    });
   };
 
   render() {
@@ -187,7 +195,7 @@ class RecipeReviewCard extends Component {
           />
 
           {showDeleteBtn && (
-            <div onClick={() => this.props.handleDelete(this.props.dish.id)}>
+            <div onClick={this.handleClickOpen}>
               <RemoveButton />
             </div>
           )}
@@ -214,6 +222,7 @@ class RecipeReviewCard extends Component {
             {ingredients}
           </CardContent>
         </Collapse>
+        <Modal handleClick={this.handleClickOpen} open={this.state.open} dish={dish.data.title} handleRemove={() => this.props.handleDelete(this.props.dish.id)}/>
       </Card>
     );
   }

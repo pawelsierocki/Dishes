@@ -6,7 +6,7 @@ import { api } from "../../shared/firebase";
 
 import { connect } from "react-redux";
 
-class ItemList extends Component {
+class MyDishes extends Component {
   constructor() {
     super();
 
@@ -63,4 +63,4 @@ const mapStateToProps = state => ({
   user: state.userReducer.user
 });
 
-export default connect(mapStateToProps)(ItemList);
+export default connect(mapStateToProps)(MyDishes);
