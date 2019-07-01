@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 import { withSnackbar } from "notistack";
 
@@ -38,7 +39,25 @@ class ListView extends Component {
               `Removed ${data.title} from favourite list`,
               { variant: "warning" }
             );
-        if (this.props.onListUpdate) this.props.onListUpdate();
+
+        this.props.onListUpdate();
+      })
+      .catch(error => {
+        this.props.enqueueSnackbar(error, {
+          variant: "error"
+        });
+      });
+  };
+
+  handleDelete = dishId => {
+    axios
+      .delete(`https://reactproject-de081.firebaseio.com/dishes/${dishId}.json`)
+      .then(() => {
+        this.props.enqueueSnackbar(`Successfully deleted`, {
+          variant: "success"
+        });
+
+        this.props.onListUpdate();
       })
       .catch(error => {
         this.props.enqueueSnackbar(error, {
@@ -48,7 +67,7 @@ class ListView extends Component {
   };
 
   renderList = () => {
-    const { items, classes, loading } = this.props;
+    const { items, classes, loading, user } = this.props;
 
     switch (loading) {
       case true: {
@@ -62,12 +81,19 @@ class ListView extends Component {
               items.map((key, index) => {
                 return (
                   <div key={index}>
-                    <Card dish={key} handleHeart={this.handleChangeFavourite} />
+                    <Card
+                      dish={key}
+                      handleHeart={this.handleChangeFavourite}
+                      showDeleteBtn={
+                        key.data.user ? user.uid === key.data.user.uid : false
+                      }
+                      handleDelete={this.handleDelete}
+                    />
                   </div>
                 );
               })
             ) : (
-              <h1>No dishes added to favourites yet.</h1>
+              <h1>No dishes yet.</h1>
             )}
           </div>
         );
@@ -80,4 +106,10 @@ class ListView extends Component {
   }
 }
 
-export default withSnackbar(withStyles(styles)(ListView));
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+});
+
+export default connect(mapStateToProps)(
+  withSnackbar(withStyles(styles)(ListView))
+);

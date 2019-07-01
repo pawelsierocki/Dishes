@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
 import FavouritesList from "../Favourites/FavouritesList";
 import AddDish from "../AddDish/AddDish";
+import MyDishes from "../MyDishes/MyDishes";
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
       <Route path="/add" component={AddDish} />
       <Route path="/list" component={ItemList} />
       <Route path="/favourites" component={FavouritesList} />
+      <Route path="/mydishes" component={MyDishes} />
       <Redirect to="/list" />
     </Switch>
   );

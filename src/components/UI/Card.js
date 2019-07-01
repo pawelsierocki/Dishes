@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
+import RemoveButton from "./Remove";
 import { withStyles } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -21,6 +22,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const styles = theme => ({
   card: {
+    position: "relative",
     width: 200,
     margin: "10px",
     transition: "all .3s",
@@ -127,13 +129,11 @@ class RecipeReviewCard extends Component {
   };
 
   render() {
-    const { classes, dish } = this.props;
+    const { classes, dish, showDeleteBtn } = this.props;
 
     const dishObj = { ...dish.data };
 
-    const splitDesc = dishObj.fullDescription.split("\n");
-
-    const ingredients = splitDesc.map((el, index) => (
+    const ingredients = dishObj.fullDescription.split("\n").map((el, index) => (
       <div className={classes.ingredientContainer} key={index}>
         <Check className={classes.icon} />
         <Typography paragraph className={classes.ingredient}>
@@ -173,7 +173,7 @@ class RecipeReviewCard extends Component {
             {dishObj.shortDescription}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
+        <CardActions disableSpacing className={classes.actions}>
           <FormControlLabel
             control={
               <Checkbox
@@ -185,6 +185,13 @@ class RecipeReviewCard extends Component {
             }
             className={classes.checkbox}
           />
+
+          {showDeleteBtn && (
+            <div onClick={() => this.props.handleDelete(this.props.dish.id)}>
+              <RemoveButton />
+            </div>
+          )}
+
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: classes.expanded

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { firebaseApp } from "../../shared/firebase";
 
+import { connect } from "react-redux";
+
 import axios from "axios";
 
 import { api } from "../../shared/firebase";
@@ -33,10 +35,14 @@ class AddDish extends Component {
   };
 
   postData = newDish => {
+    const { displayName, uid, email } = this.props.user;
+    const user = { displayName, uid, email };
+
     axios
       .post(api, {
         ...newDish,
-        publishDate: new Date()
+        publishDate: new Date(),
+        user
       })
       .then(() => {
         this.props.enqueueSnackbar(
@@ -58,4 +64,8 @@ class AddDish extends Component {
   }
 }
 
-export default withSnackbar(AddDish);
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+});
+
+export default connect(mapStateToProps)(withSnackbar(AddDish));

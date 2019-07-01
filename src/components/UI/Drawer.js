@@ -18,11 +18,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import AddIcon from "@material-ui/icons/Add";
 import FastFoodIcon from "@material-ui/icons/Fastfood";
 import FavouriteIcon from "@material-ui/icons/Favorite";
+import Fingerpring from "@material-ui/icons/Fingerprint";
 import { withRouter, Link } from "react-router-dom";
 
-import ItemList from "../../containers/ItemList/ItemList"
+import ItemList from "../../containers/ItemList/ItemList";
 import AddDish from "../../containers/AddDish/AddDish";
 import FavouritesList from "../../containers/Favourites/FavouritesList";
+import MyDishes from "../../containers/MyDishes/MyDishes";
 import { Button } from "@material-ui/core";
 
 const drawerWidth = 240;
@@ -100,6 +102,12 @@ let partials = [
     path: "/favourites",
     icon: <FavouriteIcon />,
     component: <FavouritesList />
+  },
+  {
+    label: "My dishes",
+    path: "/mydishes",
+    icon: <Fingerpring />,
+    component: <MyDishes />
   },
   {
     label: "Add new dish",

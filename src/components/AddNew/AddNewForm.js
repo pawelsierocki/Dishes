@@ -94,13 +94,15 @@ class AddNewForm extends Component {
 
   componentDidMount() {
     this.inputFile.current.addEventListener("change", ev => {
-      const fileReader = new FileReader();
+      if (ev.target.files[0]) {
+        const fileReader = new FileReader();
 
-      fileReader.readAsDataURL(ev.target.files[0]);
+        fileReader.readAsDataURL(ev.target.files[0]);
 
-      fileReader.onload = e => {
-        this.image.current.src = e.currentTarget.result;
-      };
+        fileReader.onload = e => {
+          this.image.current.src = e.currentTarget.result;
+        };
+      }
     });
   }
 

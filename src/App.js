@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
-
+import { connect } from "react-redux";
 import Drawer from "./components/UI/Drawer";
 import AppRouter from "./containers/Router/AppRouter";
 import Login from "./containers/Login/Login";
 import Spinner from "./components/UI/Spinner";
+
+import { fetchCurrentUserOnStart } from "./store/actions/actions";
 
 import { firebaseApp } from "./shared/firebase";
 
@@ -19,6 +21,8 @@ const providers = {
 export class App extends Component {
   renderApp = () => {
     const { user, signInWithGoogle, signOut } = this.props;
+
+    this.props.fetchCurrentUserOnStart({ user: user });
 
     switch (user) {
       case undefined: {
@@ -45,7 +49,16 @@ export class App extends Component {
   }
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth
-})(App);
+const mapDispatchToProps = dispatch => ({
+  fetchCurrentUserOnStart: user => dispatch(fetchCurrentUserOnStart(user))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(
+  withFirebaseAuth({
+    providers,
+    firebaseAppAuth
+  })(App)
+);

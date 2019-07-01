@@ -4,6 +4,8 @@ import ListView from "../../components/ListView";
 
 import { api } from "../../shared/firebase";
 
+import { connect } from "react-redux";
+
 class ItemList extends Component {
   constructor() {
     super();
@@ -39,9 +41,13 @@ class ItemList extends Component {
   render() {
     const { dishesList, loading } = this.state;
 
-    const arr = Object.entries(dishesList).reduce((prev, next) => {
-      return [...prev, { id: next[0], data: { ...next[1] } }];
-    }, []);
+    const { user } = this.props;
+
+    const arr = Object.entries(dishesList)
+      .reduce((prev, next) => {
+        return [...prev, { id: next[0], data: { ...next[1] } }];
+      }, [])
+      .filter(e => e.data.user.uid === user.uid);
 
     return (
       <ListView
@@ -53,4 +59,8 @@ class ItemList extends Component {
   }
 }
 
-export default ItemList;
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+});
+
+export default connect(mapStateToProps)(ItemList);
