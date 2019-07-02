@@ -25,7 +25,7 @@ import ItemList from "../../containers/ItemList/ItemList";
 import AddDish from "../../containers/AddDish/AddDish";
 import FavouritesList from "../../containers/Favourites/FavouritesList";
 import MyDishes from "../../containers/MyDishes/MyDishes";
-import { Button } from "@material-ui/core";
+import Menu from "./Menu";
 
 const drawerWidth = 240;
 
@@ -82,11 +82,17 @@ const styles = theme => ({
   },
   userPanelParagraph: {
     fontSize: "12px",
-    marginRight: "1rem"
+    marginRight: "3rem"
   },
   link: {
     textDecoration: "none",
     color: "#000"
+  },
+  photo: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    marginRight: "10px"
   }
 });
 
@@ -123,7 +129,6 @@ class PersistentDrawerLeft extends Component {
 
     this.state = {
       open: false,
-      confirm: false,
       render: partials[0]
     };
   }
@@ -141,15 +146,9 @@ class PersistentDrawerLeft extends Component {
     this.handleChange();
   };
 
-  confirmLogout = () => {
-    this.setState(state => {
-      return { confirm: !state.confirm };
-    });
-  };
-
   render() {
     const { classes, logout, user } = this.props;
-    const { render, confirm } = this.state;
+    const { render } = this.state;
 
     return (
       <div className={classes.root}>
@@ -175,21 +174,19 @@ class PersistentDrawerLeft extends Component {
             </IconButton>
             <Typography variant="h6" noWrap />
             <div className={classes.userPanel}>
+              <img
+                src={user.photoURL}
+                className={classes.photo}
+                alt="miniature"
+              />
               <Typography
                 variant="h6"
                 noWrap
                 className={classes.userPanelParagraph}
               >
-                {!confirm ? `Hello ${user.displayName} !` : `Are you sure?`}
+                {user.displayName}
               </Typography>
-              {!confirm ? (
-                <Button onClick={this.confirmLogout}>Logout</Button>
-              ) : (
-                <>
-                  <Button onClick={logout}>YES</Button>
-                  <Button onClick={this.confirmLogout}>NO</Button>
-                </>
-              )}
+              <Menu logout={logout} />
             </div>
           </Toolbar>
         </AppBar>

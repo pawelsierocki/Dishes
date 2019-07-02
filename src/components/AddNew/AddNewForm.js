@@ -92,18 +92,32 @@ class AddNewForm extends Component {
     this.clearFields();
   };
 
+  handleImageChange = ev => {
+    if (ev.target.files[0]) {
+      const fileReader = new FileReader();
+
+      fileReader.readAsDataURL(ev.target.files[0]);
+
+      fileReader.onload = e => {
+        this.image.current.src = e.currentTarget.result;
+      };
+    }
+  };
+
   componentDidMount() {
-    this.inputFile.current.addEventListener("change", ev => {
-      if (ev.target.files[0]) {
-        const fileReader = new FileReader();
+    this.inputFile.current.addEventListener(
+      "change",
+      ev => this.handleImageChange(ev),
+      false
+    );
+  }
 
-        fileReader.readAsDataURL(ev.target.files[0]);
-
-        fileReader.onload = e => {
-          this.image.current.src = e.currentTarget.result;
-        };
-      }
-    });
+  componentWillUnmount() {
+    this.inputFile.current.removeEventListener(
+      "change",
+      ev => this.handleImageChange(ev),
+      false
+    );
   }
 
   handleChange = e => {

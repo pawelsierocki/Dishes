@@ -6,6 +6,7 @@ import ItemList from "../ItemList/ItemList";
 import FavouritesList from "../Favourites/FavouritesList";
 import AddDish from "../AddDish/AddDish";
 import MyDishes from "../MyDishes/MyDishes";
+import Profile from "../Profile/Profile";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
       <Route path="/list" component={ItemList} />
       <Route path="/favourites" component={FavouritesList} />
       <Route path="/mydishes" component={MyDishes} />
+      <Route path="/profile" component={Profile} />
       <Redirect to="/list" />
     </Switch>
   );
