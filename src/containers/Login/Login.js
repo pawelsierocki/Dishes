@@ -5,18 +5,20 @@ import { withStyles } from "@material-ui/core/styles";
 import LoginView from "../../components/LoginView";
 
 const styles = {
-  loginContainer: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%,-50%)"
+  container: {
+    position: "relative",
+    width: "100%",
+    height: "100vh",
+    background:
+      "url(https://firebasestorage.googleapis.com/v0/b/reactproject-de081.appspot.com/o/background.jpg?alt=media&token=24c2b6f4-eeb9-43dc-8840-ee937fe192b6)",
+    backgroundSize: "cover"
   }
 };
 
 const Login = props => {
   const { classes, login } = props;
   return (
-    <div className={classes.loginContainer}>
+    <div className={classes.container}>
       <LoginView login={login} />
     </div>
   );

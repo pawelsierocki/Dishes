@@ -93,6 +93,17 @@ const styles = theme => ({
     height: "30px",
     borderRadius: "50%",
     marginRight: "10px"
+  },
+  userLeft: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    padding: "1rem 0"
+  },
+  userLeftPhoto: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%"
   }
 });
 
@@ -148,7 +159,7 @@ class PersistentDrawerLeft extends Component {
 
   render() {
     const { classes, logout, user } = this.props;
-    const { render } = this.state;
+    const { open } = this.state;
 
     return (
       <div className={classes.root}>
@@ -173,19 +184,24 @@ class PersistentDrawerLeft extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap />
+
             <div className={classes.userPanel}>
-              <img
-                src={user.photoURL}
-                className={classes.photo}
-                alt="miniature"
-              />
-              <Typography
-                variant="h6"
-                noWrap
-                className={classes.userPanelParagraph}
-              >
-                {user.displayName}
-              </Typography>
+              {!open && (
+                <>
+                  <img
+                    src={user.photoURL}
+                    className={classes.photo}
+                    alt="miniature"
+                  />
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    className={classes.userPanelParagraph}
+                  >
+                    {user.displayName}
+                  </Typography>
+                </>
+              )}
               <Menu logout={logout} />
             </div>
           </Toolbar>
@@ -200,7 +216,6 @@ class PersistentDrawerLeft extends Component {
           }}
         >
           <div className={classes.drawerHeader}>
-            <h3 className={classes.drawerHeaderHeading}>{render.label}</h3>
             <IconButton onClick={this.handleChange}>
               {classes.direction === "ltr" ? (
                 <ChevronLeftIcon />
@@ -208,6 +223,17 @@ class PersistentDrawerLeft extends Component {
                 <ChevronRightIcon />
               )}
             </IconButton>
+          </div>
+          <Divider />
+          <div className={classes.userLeft}>
+            <Link to="/profile">
+              <img
+                src={user.photoURL}
+                alt="user_photo"
+                className={classes.userLeftPhoto}
+              />
+            </Link>
+            <p>{user.displayName}</p>
           </div>
           <Divider />
           <List>

@@ -8,7 +8,13 @@ import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
-    padding: theme.spacing(3, 2)
+    padding: theme.spacing(3, 2),
+    boxShadow: "0 0 100px white",
+    transition: 'all .5s',
+    "&:hover": {
+      cursor: "pointer",
+      transform: "translateY(-2%)"
+    }
   },
   paragraph: {
     margin: "1rem"
@@ -20,13 +26,20 @@ const styles = theme => ({
   buttonLogin: {
     marginTop: "2rem",
     width: "100%"
+  },
+  loginContainer: {
+    position: "absolute",
+    top: "50%",
+    left: "30%",
+    transform: "translate(-50%,-50%)",
+    opacity: "0.9"
   }
 });
 
 const LoginView = props => {
   const { classes, login } = props;
   return (
-    <div>
+    <div className={classes.loginContainer}>
       <Paper className={classes.root}>
         <Typography variant="h4" component="h3" className={classes.title}>
           Login

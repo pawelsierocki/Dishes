@@ -2,9 +2,12 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import Fab from "@material-ui/core/Fab";
+
 import EmailIcon from "@material-ui/icons/Email";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import PhoneIcon from "@material-ui/icons/Phone";
+import AddIcon from "@material-ui/icons/Add";
 
 const styles = makeStyles({
   container: {
@@ -45,12 +48,25 @@ const styles = makeStyles({
     transition: "all .5s",
     "&:hover": {
       cursor: "pointer",
-      transform: "translateX(-10%)"
+      color: "#0066CC"
     }
   },
   icon: {
     marginRight: "auto",
     fontSize: "20px"
+  },
+  headerJoined: {
+    position: "absolute",
+    bottom: "1rem",
+    right: "1rem",
+    margin: 0,
+    fontStyle: "italic",
+    fontSize: "12px"
+  },
+  fab: {
+    position: "fixed",
+    bottom: "1rem",
+    left: "1rem"
   }
 });
 
@@ -64,6 +80,9 @@ const ProfileView = props => {
       <div className={classes.container}>
         <div className={classes.header}>
           <img src={user.photoURL} alt="photoURL" className={classes.image} />
+          <p className={classes.headerJoined}>
+            Joined: {user.metadata.creationTime.slice(0, 16)}
+          </p>
         </div>
 
         <div className={classes.content}>
@@ -81,6 +100,9 @@ const ProfileView = props => {
             {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
           </p>
         </div>
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
       </div>
     )
   );

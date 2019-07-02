@@ -55,7 +55,7 @@ export default function SimpleMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/profile" className={classes.link}>
+        <Link to="/profile/" className={classes.link}>
           <MenuItem onClick={handleClose} className={classes.menuLabel}>
             <Face className={classes.iconMenu} />
             Profile
