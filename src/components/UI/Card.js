@@ -20,6 +20,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   card: {
@@ -94,6 +95,10 @@ const styles = theme => ({
     marginBottom: 0,
     marginLeft: "10px",
     fontSize: ".7rem"
+  },
+  link: {
+    color: "#000",
+    textDecoration: "none"
   }
 });
 
@@ -136,6 +141,10 @@ class RecipeReviewCard extends Component {
     });
   };
 
+  setCurrentDish = () => {
+    this.props.setCurrentDish(this.props.dish);
+  };
+
   render() {
     const { classes, dish, showDeleteBtn } = this.props;
 
@@ -152,16 +161,22 @@ class RecipeReviewCard extends Component {
 
     return (
       <Card className={classes.card}>
-        <CardHeader
-          title={dishObj.title}
-          subheader={
-            dishObj.publishDate
-              ? `Published: ` + dishObj.publishDate.slice(0, 10)
-              : ""
-          }
-          className={classes.header}
-          classes={{ title: classes.title, subheader: classes.subheader }}
-        />
+        <Link
+          to={"/details/" + dish.id}
+          className={classes.link}
+          onClick={this.setCurrentDish}
+        >
+          <CardHeader
+            title={dishObj.title}
+            subheader={
+              dishObj.publishDate
+                ? `Published: ` + dishObj.publishDate.slice(0, 10)
+                : ""
+            }
+            className={classes.header}
+            classes={{ title: classes.title, subheader: classes.subheader }}
+          />
+        </Link>
         <CardMedia
           className={classes.media}
           image={
@@ -222,7 +237,12 @@ class RecipeReviewCard extends Component {
             {ingredients}
           </CardContent>
         </Collapse>
-        <Modal handleClick={this.handleClickOpen} open={this.state.open} dish={dish.data.title} handleRemove={() => this.props.handleDelete(this.props.dish.id)}/>
+        <Modal
+          handleClick={this.handleClickOpen}
+          open={this.state.open}
+          dish={dish.data.title}
+          handleRemove={() => this.props.handleDelete(this.props.dish.id)}
+        />
       </Card>
     );
   }

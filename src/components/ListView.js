@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 import { withSnackbar } from "notistack";
 
+import { setSelectedDish } from "../store/actions/actions";
+
 import Card from "./UI/Card";
 import Spinner from "./UI/Spinner";
 
@@ -66,6 +68,10 @@ class ListView extends Component {
       });
   };
 
+  setDish = dish => {
+    this.props.setSelectedDish({ selectedDish: dish });
+  };
+
   renderList = () => {
     const { items, classes, loading, user } = this.props;
 
@@ -88,6 +94,7 @@ class ListView extends Component {
                         key.data.user ? user.uid === key.data.user.uid : false
                       }
                       handleDelete={this.handleDelete}
+                      setCurrentDish={this.setDish}
                     />
                   </div>
                 );
@@ -110,6 +117,11 @@ const mapStateToProps = state => ({
   user: state.userReducer.user
 });
 
-export default connect(mapStateToProps)(
-  withSnackbar(withStyles(styles)(ListView))
-);
+const mapDispatchToProps = dispatch => ({
+  setSelectedDish: dish => dispatch(setSelectedDish(dish))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withSnackbar(withStyles(styles)(ListView)));

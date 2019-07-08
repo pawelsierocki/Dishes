@@ -1,15 +1,8 @@
 import { combineReducers } from "redux";
 import userReducer from "./user";
-
-const initialState = {
-  username: "fromInitial"
-};
-
-function rootReducer(state = initialState, action) {
-  return state;
-}
+import dishesReducer from "./dishes";
 
 export default combineReducers({
-  rootReducer: rootReducer,
-  userReducer: userReducer
+  userReducer: userReducer,
+  dishesReducer: dishesReducer
 });

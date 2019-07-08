@@ -226,7 +226,7 @@ class PersistentDrawerLeft extends Component {
           </div>
           <Divider />
           <div className={classes.userLeft}>
-            <Link to="/profile">
+            <Link to="/profile" onClick={this.handleChange}>
               <img
                 src={user.photoURL}
                 alt="user_photo"

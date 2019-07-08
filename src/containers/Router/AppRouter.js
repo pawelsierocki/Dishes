@@ -7,6 +7,7 @@ import FavouritesList from "../Favourites/FavouritesList";
 import AddDish from "../AddDish/AddDish";
 import MyDishes from "../MyDishes/MyDishes";
 import Profile from "../Profile/Profile";
+import Details from "../Details/Details";
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
       <Route path="/favourites" component={FavouritesList} />
       <Route path="/mydishes" component={MyDishes} />
       <Route path="/profile" component={Profile} />
+      <Route path="/details/:id" component={Details} />
       <Redirect to="/list" />
     </Switch>
   );
