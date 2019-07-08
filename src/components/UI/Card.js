@@ -52,7 +52,12 @@ const styles = theme => ({
   },
   header: {
     minHeight: "80px",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    backgroundColor: "#f9f9f9",
+    transition: "all .5s",
+    "&:hover": {
+      color: "#3f51b5"
+    }
   },
   title: {
     fontSize: ".8rem",

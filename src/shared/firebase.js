@@ -11,4 +11,8 @@ var config = {
 
 export const api = "https://reactproject-de081.firebaseio.com/dishes.json";
 
+export const getComments = id => {
+  return `https://reactproject-de081.firebaseio.com/comments/${id}.json`;
+};
+
 export const firebaseApp = firebase.initializeApp(config);

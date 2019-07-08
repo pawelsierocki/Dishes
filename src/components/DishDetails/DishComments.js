@@ -1,7 +1,15 @@
 import React from "react";
 
-const DishComments = () => {
-  return <h1>Comments</h1>;
+const DishComments = props => {
+  const { comments } = props;
+
+  const render = comments
+    ? comments.map(function(item, i) {
+        return item.data.user.displayName;
+      })
+    : "No comments";
+
+  return render;
 };
 
 export default DishComments;
