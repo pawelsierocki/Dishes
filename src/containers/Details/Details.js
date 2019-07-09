@@ -10,6 +10,7 @@ import SpeedDialTooltipOpen from "../../components/UI/SpeedDial";
 import DishComments from "../../components/DishDetails/DishComments";
 import DishDetails from "../../components/DishDetails/DishDetails";
 import DishOwner from "../../components/DishDetails/DishOwner";
+import DishCommentsForm from "../../components/DishDetails/DishCommentsForm";
 
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -33,6 +34,18 @@ const styles = {
     flexDirection: "column",
     fontSize: "12px",
     fontStyle: "italic"
+  },
+  form: {
+    width: "20%"
+  },
+  bottom: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "5rem"
+  },
+  commentSection: {
+    width: "70%",
+    marginLeft: "auto"
   }
 };
 
@@ -47,28 +60,32 @@ class Details extends Component {
 
   componentDidMount() {
     if (this.props.dish) {
-      const commentEndPoint = getComments(this.props.dish.id);
-
-      axios
-        .get(commentEndPoint)
-        .then(resp => {
-          this.setState({
-            comments: resp.data
-              ? Object.entries(resp.data).reduce((prev, next) => {
-                  return [...prev, { id: next[0], data: { ...next[1] } }];
-                }, [])
-              : null
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.getCommentsFromDB();
     }
   }
 
   componentWillUnmount() {
     this.props.setSelectedDish({ selectedDish: null });
   }
+
+  getCommentsFromDB = () => {
+    const commentEndPoint = getComments(this.props.dish.id);
+
+    axios
+      .get(commentEndPoint)
+      .then(resp => {
+        this.setState({
+          comments: resp.data
+            ? Object.entries(resp.data).reduce((prev, next) => {
+                return [...prev, { id: next[0], data: { ...next[1] } }];
+              }, [])
+            : null
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   addComment = message => {
     const commentEndPoint = getComments(this.props.dish.id);
@@ -78,7 +95,9 @@ class Details extends Component {
         user: this.props.user,
         comment: message
       })
-      .then(resp => {})
+      .then(() => {
+        this.getCommentsFromDB();
+      })
       .catch(err => {
         console.log(err);
       });
@@ -89,7 +108,6 @@ class Details extends Component {
 
     const { comments } = this.state;
 
-    console.log(comments);
     return dish ? (
       <div className={classes.container}>
         <div className={classes.main}>
@@ -100,7 +118,17 @@ class Details extends Component {
             <DishOwner owner={dish.data.user} />
           </div>
         </div>
-        <DishComments comments={comments} />
+        <div className={classes.bottom}>
+          <div className={classes.form}>
+            <DishCommentsForm
+              user={this.props.user}
+              addComment={this.addComment}
+            />
+          </div>
+          <div className={classes.commentSection}>
+            <DishComments comments={comments} />
+          </div>
+        </div>
         <SpeedDialTooltipOpen />
       </div>
     ) : (
