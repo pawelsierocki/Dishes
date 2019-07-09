@@ -12,7 +12,7 @@ const DishDetails = props => {
       <h1>{dish.title}</h1>
       <p>{dish.shortDescription}</p>
       {ingredients}
-      <img src={dish.imageUrl} alt="dish" />
+      {dish.imageUrl && <img src={dish.imageUrl} alt="dish" />}
     </>
   );
 };

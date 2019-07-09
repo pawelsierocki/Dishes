@@ -28,6 +28,11 @@ const useStyles = makeStyles(() => ({
   messageBox: {
     marginTop: "1.5rem",
     padding: "0 .5rem"
+  },
+  date: {
+    marginLeft: "auto",
+    fontSize: "10px",
+    fontStyle: "italic"
   }
 }));
 
@@ -44,6 +49,9 @@ const DishSingleComment = props => {
       <div className={classes.userInfo}>
         <img src={user.photoURL} alt="avatar" className={classes.avatar} />
         <p className={classes.username}>{user.displayName}</p>
+        <p className={classes.date}>
+          Published: {comment.data.publishDate.slice(0, 10)}
+        </p>
       </div>
       <div className={classes.messageBox}>
         <p className={classes.message}>{comment.data.comment}</p>

@@ -41,7 +41,9 @@ const styles = {
   bottom: {
     display: "flex",
     flexDirection: "row",
-    marginTop: "5rem"
+    marginTop: "5rem",
+    borderTop: "1px solid #000",
+    paddingTop: "5rem"
   },
   commentSection: {
     width: "70%",
@@ -93,7 +95,8 @@ class Details extends Component {
     axios
       .post(commentEndPoint, {
         user: this.props.user,
-        comment: message
+        comment: message,
+        publishDate: new Date()
       })
       .then(() => {
         this.getCommentsFromDB();

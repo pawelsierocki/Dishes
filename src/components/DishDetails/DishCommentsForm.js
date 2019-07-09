@@ -25,6 +25,11 @@ const styles = {
   },
   rightIcon: {
     marginLeft: "1rem"
+  },
+  invalid: {
+    color: "red",
+    fontSize: "10px",
+    fontStyle: "italic"
   }
 };
 
@@ -33,7 +38,8 @@ class DishCommentsForm extends Component {
     super();
 
     this.state = {
-      message: ""
+      message: "",
+      invalid: false
     };
   }
 
@@ -44,15 +50,26 @@ class DishCommentsForm extends Component {
   };
 
   handleSubmit = () => {
-    this.props.addComment(this.state.message);
+    const { message } = this.state;
+    if (message.replace(/\s/g, "").length) {
+      this.props.addComment(this.state.message);
 
-    this.setState({
-      message: ""
-    });
+      this.setState({
+        message: "",
+        invalid: false
+      });
+    } else {
+      this.setState({
+        message: "",
+        invalid: true
+      });
+    }
   };
 
   render() {
     const { classes, user } = this.props;
+
+    const { invalid } = this.state;
     return (
       <div className={classes.container}>
         <TextField
@@ -73,6 +90,7 @@ class DishCommentsForm extends Component {
           value={this.state.message}
           onChange={this.onChange}
         />
+        {invalid && <p className={classes.invalid}>Comment can not be empty</p>}
         <Button
           variant="contained"
           color="primary"
