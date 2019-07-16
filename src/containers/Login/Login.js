@@ -9,6 +9,7 @@ const styles = {
     position: "relative",
     width: "100%",
     height: "100vh",
+    //TODO: move to assets
     background:
       "url(https://firebasestorage.googleapis.com/v0/b/reactproject-de081.appspot.com/o/background.jpg?alt=media&token=24c2b6f4-eeb9-43dc-8840-ee937fe192b6)",
     backgroundSize: "cover"

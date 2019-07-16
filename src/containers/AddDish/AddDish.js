@@ -1,48 +1,46 @@
 import React, { Component } from "react";
-
-import { firebaseApp } from "../../shared/firebase";
-
 import { connect } from "react-redux";
 
-import axios from "axios";
-
-import { api } from "../../shared/firebase";
-
+import { firebaseApp, api } from "../../shared/firebase";
 import "firebase/storage";
 
-import AddNewForm from "../../components/AddNew/AddNewForm";
-
+import axios from "axios";
 import { withSnackbar } from "notistack";
+
+import AddNewForm from "../../components/AddNew/AddNewForm";
 
 const storageRef = firebaseApp.storage().ref();
 
 class AddDish extends Component {
-  handleAdd = (newDish, file) => {
-    if (file) {
-      const image = storageRef.child(newDish.title);
-      image.put(file).then(snapshot => {
-        image.getDownloadURL().then(url => {
-          var dishWithImage = {
-            ...newDish,
-            imageUrl: url
-          };
-          this.postData(dishWithImage);
-        });
-      });
-    } else {
+  handleAddNewDish = (newDish, file) => {
+    if (!file) {
       this.postData(newDish);
+      return;
     }
+
+    const image = storageRef.child(newDish.title);
+
+    image.put(file).then(snapshot => {
+      image.getDownloadURL().then(url => {
+        const dishWithImage = {
+          ...newDish,
+          imageUrl: url
+        };
+
+        this.postData(dishWithImage);
+      });
+    });
   };
 
   postData = newDish => {
     const { displayName, uid, email } = this.props.user;
-    const user = { displayName, uid, email };
-
+    const userPropertiesForNewDish = { displayName, uid, email };
+    //TODO: fetch-> change to global api class
     axios
       .post(api, {
         ...newDish,
         publishDate: new Date(),
-        user
+        userPropertiesForNewDish
       })
       .then(() => {
         this.props.enqueueSnackbar(
@@ -60,7 +58,7 @@ class AddDish extends Component {
   };
 
   render() {
-    return <AddNewForm handleAddNew={this.handleAdd} />;
+    return <AddNewForm handleAddNew={this.handleAddNewDish} />;
   }
 }
 

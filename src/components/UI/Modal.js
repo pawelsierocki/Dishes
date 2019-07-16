@@ -9,6 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 export default function Modal(props) {
   const { open, dish, handleClick, handleRemove } = props;
   return (
+    //TODO: universal modal component
     <div>
       <Dialog
         open={open}

@@ -13,7 +13,7 @@ class ItemList extends Component {
       loading: true
     };
   }
-
+  //TODO: fetch-> change to global api class
   getList = () => {
     fetch(api)
       .then(res => res.json())
@@ -38,14 +38,14 @@ class ItemList extends Component {
 
   render() {
     const { dishesList, loading } = this.state;
-
-    const arr = Object.entries(dishesList).reduce((prev, next) => {
+    // TODO: move this to global helper method
+    const dishesCollection = Object.entries(dishesList).reduce((prev, next) => {
       return [...prev, { id: next[0], data: { ...next[1] } }];
     }, []);
 
     return (
       <ListView
-        items={arr}
+        items={dishesCollection}
         loading={loading}
         onListUpdate={this.onUpdateList}
       />

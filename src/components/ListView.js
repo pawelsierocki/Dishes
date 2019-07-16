@@ -23,15 +23,16 @@ const styles = {
 
 class ListView extends Component {
   handleChangeFavourite = (item, status) => {
-    var data = { ...item.data };
+    const data = { ...item.data };
     data.favourite = status;
-
+    //TODO: fetch-> change to global api class
     axios
       .put(
         `https://reactproject-de081.firebaseio.com/dishes/${item.id}.json`,
         data
       )
       .then(() => {
+        //TODO: snackbar class
         status
           ? this.props.enqueueSnackbar(
               `Added ${data.title} to favourite list`,
@@ -52,9 +53,11 @@ class ListView extends Component {
   };
 
   handleDelete = dishId => {
+    //TODO: fetch-> change to global api class
     axios
       .delete(`https://reactproject-de081.firebaseio.com/dishes/${dishId}.json`)
       .then(() => {
+        //TODO: snackbar class
         this.props.enqueueSnackbar(`Successfully deleted`, {
           variant: "success"
         });
@@ -75,37 +78,29 @@ class ListView extends Component {
   renderList = () => {
     const { items, classes, loading, user } = this.props;
 
-    switch (loading) {
-      case true: {
-        return <Spinner />;
-      }
-
-      default: {
-        return (
-          <div className={classes.container}>
-            {items && items.length ? (
-              items.map((key, index) => {
-                return (
-                  <div key={index}>
-                    <Card
-                      dish={key}
-                      handleHeart={this.handleChangeFavourite}
-                      showDeleteBtn={
-                        key.data.user ? user.uid === key.data.user.uid : false
-                      }
-                      handleDelete={this.handleDelete}
-                      setCurrentDish={this.setDish}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <h1>No dishes yet.</h1>
-            )}
-          </div>
-        );
-      }
-    }
+    return loading ? (
+      <Spinner />
+    ) : (
+      <div className={classes.container}>
+        {items && items.length ? (
+          items.map((key, index) => (
+            <div key={index}>
+              <Card
+                dish={key}
+                handleHeart={this.handleChangeFavourite}
+                showDeleteBtn={
+                  key.data.user ? user.uid === key.data.user.uid : false
+                }
+                handleDelete={this.handleDelete}
+                setCurrentDish={this.setDish}
+              />
+            </div>
+          ))
+        ) : (
+          <h1>No dishes yet.</h1>
+        )}
+      </div>
+    );
   };
 
   render() {

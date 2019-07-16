@@ -20,6 +20,7 @@ class Profile extends Component {
 
   render() {
     const { user } = this.state;
+
     return <ProfileView user={user} />;
   }
 }

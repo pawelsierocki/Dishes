@@ -72,10 +72,11 @@ class Details extends Component {
 
   getCommentsFromDB = () => {
     const commentEndPoint = getComments(this.props.dish.id);
-
+    //TODO: fetch-> change to global api class
     axios
       .get(commentEndPoint)
       .then(resp => {
+        //global helper
         this.setState({
           comments: resp.data
             ? Object.entries(resp.data).reduce((prev, next) => {
@@ -85,13 +86,15 @@ class Details extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        this.setState({
+          comments: null
+        });
       });
   };
 
   addComment = message => {
     const commentEndPoint = getComments(this.props.dish.id);
-
+    //TODO: fetch-> change to global api class
     axios
       .post(commentEndPoint, {
         user: this.props.user,

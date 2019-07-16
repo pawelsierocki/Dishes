@@ -33,7 +33,6 @@ const styles = makeStyles({
 
 export default function SimpleMenu(props) {
   const classes = styles();
-
   const { logout } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -46,6 +45,7 @@ export default function SimpleMenu(props) {
   }
 
   return (
+    //TODO: LUDEK TUTAJ
     <div>
       <AccountIcon onClick={handleClick} className={classes.icon} />
       <Menu

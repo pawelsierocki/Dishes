@@ -108,6 +108,7 @@ const styles = theme => ({
 });
 
 class RecipeReviewCard extends Component {
+  //TODO: HOOKS
   constructor(props) {
     super();
 

@@ -39,10 +39,7 @@ const useStyles = makeStyles(() => ({
 const DishSingleComment = props => {
   const classes = useStyles();
   const { comment } = props;
-
   const { user } = comment.data;
-
-  console.log(comment);
 
   return (
     <div className={classes.container}>

@@ -162,6 +162,7 @@ class PersistentDrawerLeft extends Component {
     const { open } = this.state;
 
     return (
+      //TODO: move to separate components
       <div className={classes.root}>
         <CssBaseline />
         <AppBar

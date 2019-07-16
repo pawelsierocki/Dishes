@@ -1,6 +1,8 @@
 import * as firebase from "firebase";
 
-var config = {
+//TODO: move to env file
+
+const config = {
   apiKey: "AIzaSyCJ4P-4Ovyg1d5hfVy9FvPaDzA42jTHom0",
   authDomain: "reactproject-de081.firebaseapp.com",
   databaseURL: "https://reactproject-de081.firebaseio.com",

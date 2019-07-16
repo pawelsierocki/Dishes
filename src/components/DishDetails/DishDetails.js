@@ -2,10 +2,9 @@ import React from "react";
 
 const DishDetails = props => {
   const { dish } = props;
-
   const ingredients = dish.fullDescription
     .split("\n")
-    .map((el, index) => <p key={index}>{el}</p>);
+    .map((ingredient, index) => <p key={index}>{ingredient}</p>);
 
   return (
     <>

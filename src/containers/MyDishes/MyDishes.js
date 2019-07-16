@@ -15,7 +15,7 @@ class MyDishes extends Component {
       loading: true
     };
   }
-
+  //TODO: fetch-> change to global api class
   getList = () => {
     fetch(api)
       .then(res => res.json())
@@ -26,7 +26,10 @@ class MyDishes extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        this.setState({
+          dishesList: [],
+          loading: false
+        });
       });
   };
 
@@ -40,9 +43,8 @@ class MyDishes extends Component {
 
   render() {
     const { dishesList, loading } = this.state;
-
     const { user } = this.props;
-
+    // TODO: move this to global helper method
     const arr = Object.entries(dishesList)
       .reduce((prev, next) => {
         return [...prev, { id: next[0], data: { ...next[1] } }];

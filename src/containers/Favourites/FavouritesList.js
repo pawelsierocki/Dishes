@@ -13,7 +13,7 @@ class FavouritesList extends Component {
       loading: true
     };
   }
-
+  //TODO: fetch-> change to global api class
   getList = () => {
     fetch(api)
       .then(res => res.json())
@@ -38,8 +38,8 @@ class FavouritesList extends Component {
 
   render() {
     const { dishesList, loading } = this.state;
-
-    const arr = Object.entries(dishesList)
+    // TODO: move this to global helper method
+    const favouriteDishes = Object.entries(dishesList)
       .filter(e => e[1].favourite)
       .reduce((prev, next) => {
         return [...prev, { id: next[0], data: { ...next[1] } }];
@@ -47,7 +47,7 @@ class FavouritesList extends Component {
 
     return (
       <ListView
-        items={arr}
+        items={favouriteDishes}
         onListUpdate={this.onUpdateList}
         loading={loading}
       />

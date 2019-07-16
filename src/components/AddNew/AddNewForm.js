@@ -222,7 +222,8 @@ class AddNewForm extends Component {
           />
           <TextField
             id="fullDescription"
-            label="Full description"
+            label="List of ingredients"
+            placeholder="Ingredients must be separated with space"
             multiline
             className={classes.textField}
             variant="filled"
