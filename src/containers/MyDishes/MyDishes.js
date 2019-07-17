@@ -1,10 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import ListView from "../../components/ListView";
-
-import { api } from "../../shared/firebase";
-
-import { connect } from "react-redux";
+import { filterOwnedDishes } from "../../store/helpers/dishes";
+import { getAllDishes } from "../../shared/api/dishesAPI";
 
 class MyDishes extends Component {
   constructor() {
@@ -15,21 +14,17 @@ class MyDishes extends Component {
       loading: true
     };
   }
-  //TODO: fetch-> change to global api class
+
   getList = () => {
-    fetch(api)
-      .then(res => res.json())
-      .then(res => {
+    getAllDishes()
+      .then(response => {
         this.setState({
-          dishesList: res,
+          dishesList: response.data,
           loading: false
         });
       })
       .catch(error => {
-        this.setState({
-          dishesList: [],
-          loading: false
-        });
+        console.log(error);
       });
   };
 
@@ -44,16 +39,11 @@ class MyDishes extends Component {
   render() {
     const { dishesList, loading } = this.state;
     const { user } = this.props;
-    // TODO: move this to global helper method
-    const arr = Object.entries(dishesList)
-      .reduce((prev, next) => {
-        return [...prev, { id: next[0], data: { ...next[1] } }];
-      }, [])
-      .filter(e => e.data.user.uid === user.uid);
+    const usersDishes = filterOwnedDishes(dishesList, user);
 
     return (
       <ListView
-        items={arr}
+        items={usersDishes}
         loading={loading}
         onListUpdate={this.onUpdateList}
       />

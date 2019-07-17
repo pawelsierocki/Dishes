@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 
+import { changeFavourite, deleteDish } from "../shared/api/dishesAPI";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
@@ -25,12 +25,8 @@ class ListView extends Component {
   handleChangeFavourite = (item, status) => {
     const data = { ...item.data };
     data.favourite = status;
-    //TODO: fetch-> change to global api class
-    axios
-      .put(
-        `https://reactproject-de081.firebaseio.com/dishes/${item.id}.json`,
-        data
-      )
+
+    changeFavourite(item.id, data)
       .then(() => {
         //TODO: snackbar class
         status
@@ -53,9 +49,7 @@ class ListView extends Component {
   };
 
   handleDelete = dishId => {
-    //TODO: fetch-> change to global api class
-    axios
-      .delete(`https://reactproject-de081.firebaseio.com/dishes/${dishId}.json`)
+    deleteDish(dishId)
       .then(() => {
         //TODO: snackbar class
         this.props.enqueueSnackbar(`Successfully deleted`, {

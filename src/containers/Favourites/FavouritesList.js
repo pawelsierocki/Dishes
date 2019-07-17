@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import ListView from "../../components/ListView";
-
-import { api } from "../../shared/firebase";
+import { filterFavouriteDishes } from "../../store/helpers/dishes";
+import { getAllDishes } from "../../shared/api/dishesAPI";
 
 class FavouritesList extends Component {
   constructor() {
@@ -13,13 +13,12 @@ class FavouritesList extends Component {
       loading: true
     };
   }
-  //TODO: fetch-> change to global api class
+
   getList = () => {
-    fetch(api)
-      .then(res => res.json())
-      .then(res => {
+    getAllDishes()
+      .then(response => {
         this.setState({
-          dishesList: res,
+          dishesList: response.data,
           loading: false
         });
       })
@@ -38,12 +37,7 @@ class FavouritesList extends Component {
 
   render() {
     const { dishesList, loading } = this.state;
-    // TODO: move this to global helper method
-    const favouriteDishes = Object.entries(dishesList)
-      .filter(e => e[1].favourite)
-      .reduce((prev, next) => {
-        return [...prev, { id: next[0], data: { ...next[1] } }];
-      }, []);
+    const favouriteDishes = filterFavouriteDishes(dishesList);
 
     return (
       <ListView

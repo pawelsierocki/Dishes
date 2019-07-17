@@ -10,7 +10,7 @@ import Spinner from "./components/UI/Spinner";
 
 import { fetchCurrentUserOnStart } from "./store/actions/actions";
 
-import { firebaseApp } from "./shared/firebase";
+import { firebaseApp } from "./constants/api";
 
 const firebaseAppAuth = firebaseApp.auth();
 

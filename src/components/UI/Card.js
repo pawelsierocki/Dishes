@@ -125,6 +125,14 @@ class RecipeReviewCard extends Component {
     });
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   const { fav } = this.state;
+
+  //   const favChanged = nextProps.dish.data.favourite !== nextState.fav;
+
+  //   return favChanged;
+  // }
+
   handleExpandClick = () => {
     this.setState(state => {
       return {

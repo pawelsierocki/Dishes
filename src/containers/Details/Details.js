@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
 
-import axios from "axios";
-
-import { getComments } from "../../shared/firebase";
-
+import { getCommentsForDish, addNewComment } from "../../shared/api/dishesAPI";
+import { filterDishes } from "../../store/helpers/dishes";
 import { setSelectedDish } from "../../store/actions/actions";
 
 import SpeedDialTooltipOpen from "../../components/UI/SpeedDial";
@@ -11,10 +12,6 @@ import DishComments from "../../components/DishDetails/DishComments";
 import DishDetails from "../../components/DishDetails/DishDetails";
 import DishOwner from "../../components/DishDetails/DishOwner";
 import DishCommentsForm from "../../components/DishDetails/DishCommentsForm";
-
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { withStyles } from "@material-ui/core";
 
 const styles = {
   container: {
@@ -71,21 +68,13 @@ class Details extends Component {
   }
 
   getCommentsFromDB = () => {
-    const commentEndPoint = getComments(this.props.dish.id);
-    //TODO: fetch-> change to global api class
-    axios
-      .get(commentEndPoint)
+    getCommentsForDish(this.props.dish.id)
       .then(resp => {
-        //global helper
         this.setState({
           comments: resp.data
-            ? Object.entries(resp.data).reduce((prev, next) => {
-                return [...prev, { id: next[0], data: { ...next[1] } }];
-              }, [])
-            : null
         });
       })
-      .catch(err => {
+      .catch(() => {
         this.setState({
           comments: null
         });
@@ -93,14 +82,11 @@ class Details extends Component {
   };
 
   addComment = message => {
-    const commentEndPoint = getComments(this.props.dish.id);
-    //TODO: fetch-> change to global api class
-    axios
-      .post(commentEndPoint, {
-        user: this.props.user,
-        comment: message,
-        publishDate: new Date()
-      })
+    addNewComment(this.props.dish.id, {
+      user: this.props.user,
+      comment: message,
+      publishDate: new Date()
+    })
       .then(() => {
         this.getCommentsFromDB();
       })
@@ -111,8 +97,8 @@ class Details extends Component {
 
   render() {
     const { dish, classes } = this.props;
-
     const { comments } = this.state;
+    const commentsList = comments ? filterDishes(comments) : null;
 
     return dish ? (
       <div className={classes.container}>
@@ -132,7 +118,7 @@ class Details extends Component {
             />
           </div>
           <div className={classes.commentSection}>
-            <DishComments comments={comments} />
+            <DishComments comments={commentsList} />
           </div>
         </div>
         <SpeedDialTooltipOpen />

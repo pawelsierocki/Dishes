@@ -74,33 +74,35 @@ const ProfileView = props => {
 
   return (
     //TODO: move img to own component
-    <div className={classes.container}>
-      <div className={classes.header}>
-        <img src={user.photoURL} alt="photoURL" className={classes.image} />
-        <p className={classes.headerJoined}>
-          Joined: {user.metadata.creationTime.slice(0, 16)}
-        </p>
-      </div>
+    user && (
+      <div className={classes.container}>
+        <div className={classes.header}>
+          <img src={user.photoURL} alt="photoURL" className={classes.image} />
+          <p className={classes.headerJoined}>
+            Joined: {user.metadata.creationTime.slice(0, 16)}
+          </p>
+        </div>
 
-      <div className={classes.content}>
-        <h2 className={classes.username}>{user.displayName}</h2>
-        <p className={classes.paragraph}>
-          <EmailIcon className={classes.icon} />
-          {user.email}
-        </p>
-        <p className={classes.paragraph}>
-          <PermIdentityIcon className={classes.icon} />
-          {user.uid}
-        </p>
-        <p className={classes.paragraph}>
-          <PhoneIcon className={classes.icon} />
-          {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
-        </p>
+        <div className={classes.content}>
+          <h2 className={classes.username}>{user.displayName}</h2>
+          <p className={classes.paragraph}>
+            <EmailIcon className={classes.icon} />
+            {user.email}
+          </p>
+          <p className={classes.paragraph}>
+            <PermIdentityIcon className={classes.icon} />
+            {user.uid}
+          </p>
+          <p className={classes.paragraph}>
+            <PhoneIcon className={classes.icon} />
+            {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
+          </p>
+        </div>
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
       </div>
-      <Fab color="primary" aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
-    </div>
+    )
   );
 };
 

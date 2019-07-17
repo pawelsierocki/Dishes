@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import ListView from "../../components/ListView";
-
-import { api } from "../../shared/firebase";
+import { filterDishes } from "../../store/helpers/dishes";
+import { getAllDishes } from "../../shared/api/dishesAPI";
 
 class ItemList extends Component {
   constructor() {
@@ -13,18 +13,17 @@ class ItemList extends Component {
       loading: true
     };
   }
-  //TODO: fetch-> change to global api class
+
   getList = () => {
-    fetch(api)
-      .then(res => res.json())
-      .then(res => {
+    getAllDishes()
+      .then(response => {
         this.setState({
-          dishesList: res,
+          dishesList: response.data,
           loading: false
         });
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -38,10 +37,7 @@ class ItemList extends Component {
 
   render() {
     const { dishesList, loading } = this.state;
-    // TODO: move this to global helper method
-    const dishesCollection = Object.entries(dishesList).reduce((prev, next) => {
-      return [...prev, { id: next[0], data: { ...next[1] } }];
-    }, []);
+    const dishesCollection = filterDishes(dishesList);
 
     return (
       <ListView

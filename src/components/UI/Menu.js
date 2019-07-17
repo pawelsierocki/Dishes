@@ -2,7 +2,6 @@ import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Face from "@material-ui/icons/Face";
-import AccountIcon from "@material-ui/icons/AccountCircle";
 import LinkOff from "@material-ui/icons/LinkOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -28,12 +27,21 @@ const styles = makeStyles({
   link: {
     textDecoration: "none",
     color: "#000"
+  },
+  photo: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    marginRight: "10px",
+    "&:hover": {
+      cursor: "pointer"
+    }
   }
 });
 
 export default function SimpleMenu(props) {
   const classes = styles();
-  const { logout } = props;
+  const { logout, user } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   function handleClick(event) {
@@ -45,9 +53,14 @@ export default function SimpleMenu(props) {
   }
 
   return (
-    //TODO: LUDEK TUTAJ
     <div>
-      <AccountIcon onClick={handleClick} className={classes.icon} />
+      <img
+        src={user.photoURL}
+        className={classes.photo}
+        alt="miniature"
+        onClick={handleClick}
+      />
+
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

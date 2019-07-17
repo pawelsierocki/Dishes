@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import { firebaseApp, api } from "../../shared/firebase";
 import "firebase/storage";
 
-import axios from "axios";
-import { withSnackbar } from "notistack";
-
+import { firebaseApp } from "../../constants/api";
+import { addNewDish } from "../../shared/api/dishesAPI";
 import AddNewForm from "../../components/AddNew/AddNewForm";
+
+import { withSnackbar } from "notistack";
 
 const storageRef = firebaseApp.storage().ref();
 
@@ -34,14 +33,13 @@ class AddDish extends Component {
 
   postData = newDish => {
     const { displayName, uid, email } = this.props.user;
-    const userPropertiesForNewDish = { displayName, uid, email };
-    //TODO: fetch-> change to global api class
-    axios
-      .post(api, {
-        ...newDish,
-        publishDate: new Date(),
-        userPropertiesForNewDish
-      })
+    const user = { displayName, uid, email };
+
+    addNewDish({
+      ...newDish,
+      publishDate: new Date(),
+      user
+    })
       .then(() => {
         this.props.enqueueSnackbar(
           `Successfully added your dish: ${newDish.title}`,

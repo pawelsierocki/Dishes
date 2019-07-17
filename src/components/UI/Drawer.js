@@ -88,12 +88,6 @@ const styles = theme => ({
     textDecoration: "none",
     color: "#000"
   },
-  photo: {
-    width: "30px",
-    height: "30px",
-    borderRadius: "50%",
-    marginRight: "10px"
-  },
   userLeft: {
     display: "flex",
     alignItems: "center",
@@ -168,7 +162,7 @@ class PersistentDrawerLeft extends Component {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: this.state.open
+            [classes.appBarShift]: open
           })}
         >
           <Toolbar>
@@ -187,23 +181,7 @@ class PersistentDrawerLeft extends Component {
             <Typography variant="h6" noWrap />
 
             <div className={classes.userPanel}>
-              {!open && (
-                <>
-                  <img
-                    src={user.photoURL}
-                    className={classes.photo}
-                    alt="miniature"
-                  />
-                  <Typography
-                    variant="h6"
-                    noWrap
-                    className={classes.userPanelParagraph}
-                  >
-                    {user.displayName}
-                  </Typography>
-                </>
-              )}
-              <Menu logout={logout} />
+              <Menu logout={logout} user={this.props.user} />
             </div>
           </Toolbar>
         </AppBar>

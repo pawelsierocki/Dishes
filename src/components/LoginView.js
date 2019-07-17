@@ -9,12 +9,7 @@ import Button from "@material-ui/core/Button";
 const styles = theme => ({
   root: {
     padding: theme.spacing(3, 2),
-    boxShadow: "0 0 100px white",
-    transition: 'all .5s',
-    "&:hover": {
-      cursor: "pointer",
-      transform: "translateY(-2%)"
-    }
+    boxShadow: "0 0 100px white"
   },
   paragraph: {
     margin: "1rem"
@@ -30,7 +25,7 @@ const styles = theme => ({
   loginContainer: {
     position: "absolute",
     top: "50%",
-    left: "30%",
+    left: "50%",
     transform: "translate(-50%,-50%)",
     opacity: "0.9"
   }
