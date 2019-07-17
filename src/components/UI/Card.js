@@ -21,6 +21,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
+import NewDishlayer from "./NewDishLayer";
 
 const styles = theme => ({
   card: {
@@ -161,9 +162,7 @@ class RecipeReviewCard extends Component {
 
   render() {
     const { classes, dish, showDeleteBtn } = this.props;
-
     const dishObj = { ...dish.data };
-
     const ingredients = dishObj.fullDescription.split("\n").map((el, index) => (
       <div className={classes.ingredientContainer} key={index}>
         <Check className={classes.icon} />
@@ -191,6 +190,7 @@ class RecipeReviewCard extends Component {
             classes={{ title: classes.title, subheader: classes.subheader }}
           />
         </Link>
+        <NewDishlayer date={dishObj.publishDate} />
         <CardMedia
           className={classes.media}
           image={
