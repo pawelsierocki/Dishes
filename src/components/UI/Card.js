@@ -26,7 +26,7 @@ import NewDishlayer from "./NewDishLayer";
 const styles = theme => ({
   card: {
     position: "relative",
-    width: 200,
+    width: 240,
     margin: "10px",
     transition: "all .3s",
     "&:hover": {
@@ -109,7 +109,6 @@ const styles = theme => ({
 });
 
 class RecipeReviewCard extends Component {
-  //TODO: HOOKS
   constructor(props) {
     super();
 
@@ -126,14 +125,6 @@ class RecipeReviewCard extends Component {
     });
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const { fav } = this.state;
-
-  //   const favChanged = nextProps.dish.data.favourite !== nextState.fav;
-
-  //   return favChanged;
-  // }
-
   handleExpandClick = () => {
     this.setState(state => {
       return {
@@ -143,8 +134,8 @@ class RecipeReviewCard extends Component {
   };
 
   onChangeCheckbox = () => {
-    this.setState(state => {
-      return { fav: !state.fav };
+    this.setState({
+      fav: !this.state.fav
     });
 
     this.props.handleHeart(this.props.dish, !this.state.fav);
@@ -256,6 +247,7 @@ class RecipeReviewCard extends Component {
           open={this.state.open}
           dish={dish.data.title}
           handleRemove={() => this.props.handleDelete(this.props.dish.id)}
+          type="delete"
         />
       </Card>
     );

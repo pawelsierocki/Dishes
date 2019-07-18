@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "firebase/storage";
 
@@ -11,6 +12,14 @@ import { withSnackbar } from "notistack";
 const storageRef = firebaseApp.storage().ref();
 
 class AddDish extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      success: false
+    };
+  }
+
   handleAddNewDish = (newDish, file) => {
     if (!file) {
       this.postData(newDish);
@@ -47,6 +56,10 @@ class AddDish extends Component {
             variant: "success"
           }
         );
+
+        this.setState({
+          success: true
+        });
       })
       .catch(error => {
         this.props.enqueueSnackbar(`${error}`, {
@@ -56,7 +69,12 @@ class AddDish extends Component {
   };
 
   render() {
-    return <AddNewForm handleAddNew={this.handleAddNewDish} />;
+    const { success } = this.state;
+    return !success ? (
+      <AddNewForm handleAddNew={this.handleAddNewDish} />
+    ) : (
+      <Redirect to="/mydishes" />
+    );
   }
 }
 

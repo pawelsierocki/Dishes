@@ -7,7 +7,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -26,6 +25,7 @@ import AddDish from "../../containers/AddDish/AddDish";
 import FavouritesList from "../../containers/Favourites/FavouritesList";
 import MyDishes from "../../containers/MyDishes/MyDishes";
 import Menu from "./Menu";
+import NavigationUserPanel from "./NavigationUserPanel";
 
 const drawerWidth = 240;
 
@@ -151,12 +151,24 @@ class PersistentDrawerLeft extends Component {
     this.handleChange();
   };
 
+  renderPartials = () => {
+    const { classes } = this.props;
+
+    return partials.map(partial => (
+      <Link to={partial.path} className={classes.link} key={partial.label}>
+        <ListItem button onClick={() => this.handleChangePartial(partial)}>
+          <ListItemIcon>{partial.icon}</ListItemIcon>
+          <ListItemText primary={partial.label} />
+        </ListItem>
+      </Link>
+    ));
+  };
+
   render() {
     const { classes, logout, user } = this.props;
     const { open } = this.state;
 
     return (
-      //TODO: move to separate components
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
@@ -203,35 +215,12 @@ class PersistentDrawerLeft extends Component {
               )}
             </IconButton>
           </div>
-          <Divider />
-          <div className={classes.userLeft}>
-            <Link to="/profile" onClick={this.handleChange}>
-              <img
-                src={user.photoURL}
-                alt="user_photo"
-                className={classes.userLeftPhoto}
-              />
-            </Link>
-            <p>{user.displayName}</p>
-          </div>
-          <Divider />
-          <List>
-            {partials.map(partial => (
-              <Link
-                to={partial.path}
-                className={classes.link}
-                key={partial.label}
-              >
-                <ListItem
-                  button
-                  onClick={() => this.handleChangePartial(partial)}
-                >
-                  <ListItemIcon>{partial.icon}</ListItemIcon>
-                  <ListItemText primary={partial.label} />
-                </ListItem>
-              </Link>
-            ))}
-          </List>
+          <NavigationUserPanel
+            user={user}
+            classes={classes}
+            handleChange={this.handleChange}
+          />
+          <List>{this.renderPartials()}</List>
         </Drawer>
         <main
           className={clsx(classes.content, {

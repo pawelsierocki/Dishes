@@ -7,10 +7,23 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function Modal(props) {
-  const { open, dish, handleClick, handleRemove } = props;
+  const { open, dish, handleClick, handleRemove, type } = props;
+  let title = "",
+    body = "";
+
+  switch (type) {
+    case "delete": {
+      title = "Are you sure you want to delete " + dish + "?";
+      body =
+        "This proccess can not be revert. If you want to delete this dish press Yes button.";
+      break;
+    }
+
+    default:
+      return null;
+  }
 
   return (
-    //TODO: universal modal component
     <div>
       <Dialog
         open={open}
@@ -18,21 +31,18 @@ export default function Modal(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure you want to delete " + dish + "?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This proccess can not be revert. If you want to delete this dish
-            press Delete button.
+            {body}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClick} color="primary">
-            Disagree
+            No
           </Button>
           <Button onClick={handleRemove} color="primary" autoFocus>
-            Delete
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
