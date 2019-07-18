@@ -7,6 +7,8 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import PhoneIcon from "@material-ui/icons/Phone";
 import AddIcon from "@material-ui/icons/Add";
 
+import UserImage from "../components/UI/UserImage";
+
 const styles = makeStyles({
   container: {
     width: "100%",
@@ -73,11 +75,10 @@ const ProfileView = props => {
   const classes = styles();
 
   return (
-    //TODO: move img to own component
     user && (
       <div className={classes.container}>
         <div className={classes.header}>
-          <img src={user.photoURL} alt="photoURL" className={classes.image} />
+          <UserImage userPhoto={user.photoURL} scale={classes.image} />
           <p className={classes.headerJoined}>
             Joined: {user.metadata.creationTime.slice(0, 16)}
           </p>

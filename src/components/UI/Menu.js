@@ -5,6 +5,7 @@ import Face from "@material-ui/icons/Face";
 import LinkOff from "@material-ui/icons/LinkOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import UserImage from "./UserImage";
 
 const styles = makeStyles({
   icon: {
@@ -54,12 +55,13 @@ export default function SimpleMenu(props) {
 
   return (
     <div>
-      <img
-        src={user.photoURL}
-        className={classes.photo}
-        alt="miniature"
-        onClick={handleClick}
-      />
+      <div onClick={handleClick}>
+        <UserImage
+          userPhoto={user.photoURL}
+          scale={classes.photo}
+          alt="miniature"
+        />
+      </div>
 
       <Menu
         id="simple-menu"
