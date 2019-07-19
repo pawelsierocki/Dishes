@@ -5,23 +5,17 @@ const pulse = keyframes`
   0% {
     transform: rotate(45deg);
     box-shadow: 0 1px 3px #000;
-    top: 7px;
-    right: -30px;
-    font-size: 9px;
+    opacity: 1;
   }
   50% {
     transform: rotate(45deg);
     box-shadow: 1px 2px 8px #000;
-    top: 10px;
-    right: -27px;
-    font-size: 11px;
+    opacity: .5;
   }
   100% {
     transform: rotate(45deg);
     box-shadow: 0 1px 3px #000;
-    top: 7px;
-    right: -30px;
-    font-size: 9px;
+    opacity: 1
   }
 `;
 

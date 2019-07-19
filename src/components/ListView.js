@@ -4,9 +4,8 @@ import { changeFavourite, deleteDish } from "../shared/api/dishesAPI";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-import { withSnackbar } from "notistack";
-
 import { setSelectedDish } from "../store/actions/actions";
+import { enqueueSnackbar } from "../store/actions/notifier";
 
 import Card from "./UI/Card";
 import Spinner from "./UI/Spinner";
@@ -16,8 +15,8 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: "3rem",
-    justifyContent: "center"
+    margin: "3rem auto",
+    width: "85%"
   }
 };
 
@@ -28,40 +27,26 @@ class ListView extends Component {
 
     changeFavourite(item.id, data)
       .then(() => {
-        //TODO: snackbar class
-        status
-          ? this.props.enqueueSnackbar(
-              `Added ${data.title} to favourite list`,
-              { variant: "success" }
-            )
-          : this.props.enqueueSnackbar(
-              `Removed ${data.title} from favourite list`,
-              { variant: "warning" }
-            );
+        !status
+          ? this.props.enqueueSnackbar({ type: "removedFromFav" })
+          : this.props.enqueueSnackbar({ type: "addedToFav" });
 
         this.props.onListUpdate();
       })
-      .catch(error => {
-        this.props.enqueueSnackbar(error, {
-          variant: "error"
-        });
+      .catch(() => {
+        this.props.enqueueSnackbar({ type: "error" });
       });
   };
 
   handleDelete = dishId => {
     deleteDish(dishId)
       .then(() => {
-        //TODO: snackbar class
-        this.props.enqueueSnackbar(`Successfully deleted`, {
-          variant: "success"
-        });
+        this.props.enqueueSnackbar({ type: "deleted" });
 
         this.props.onListUpdate();
       })
       .catch(error => {
-        this.props.enqueueSnackbar(error, {
-          variant: "error"
-        });
+        this.props.enqueueSnackbar({ type: "error" });
       });
   };
 
@@ -107,10 +92,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedDish: dish => dispatch(setSelectedDish(dish))
+  setSelectedDish: dish => dispatch(setSelectedDish(dish)),
+
+  enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSnackbar(withStyles(styles)(ListView)));
+)(withStyles(styles)(ListView));

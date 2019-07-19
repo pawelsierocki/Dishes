@@ -6,14 +6,11 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
 
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <SnackbarProvider maxSnack={3}>
-        <App />
-      </SnackbarProvider>
+      <App />
     </BrowserRouter>
   </Provider>
 );

@@ -7,10 +7,12 @@ import Drawer from "./components/UI/Drawer";
 import AppRouter from "./containers/Router/AppRouter";
 import Login from "./containers/Login/Login";
 import Spinner from "./components/UI/Spinner";
+import Notifier from "./components/UI/Notifier";
 
 import { fetchCurrentUserOnStart } from "./store/actions/actions";
 
 import { firebaseApp } from "./constants/api";
+import { SnackbarProvider } from "notistack";
 
 const firebaseAppAuth = firebaseApp.auth();
 
@@ -38,6 +40,9 @@ export class App extends Component {
           <>
             <Drawer logout={signOut} user={user} />
             <AppRouter />
+            <SnackbarProvider>
+              <Notifier />
+            </SnackbarProvider>
           </>
         );
       }
