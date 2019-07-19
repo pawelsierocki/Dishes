@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Face from "@material-ui/icons/Face";
 import LinkOff from "@material-ui/icons/LinkOff";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+
 import UserImage from "./UserImage";
 
 const styles = makeStyles({

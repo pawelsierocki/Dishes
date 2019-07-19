@@ -1,5 +1,4 @@
 import { Component } from "react";
-
 import { connect } from "react-redux";
 
 import { withSnackbar } from "notistack";
@@ -16,6 +15,11 @@ class Notifier extends Component {
         body = "Successfully added to favourites";
         break;
       }
+      case "addedNewDish": {
+        variant = "success";
+        body = "Successfully added new dish";
+        break;
+      }
       case "removedFromFav": {
         variant = "warning";
         body = "Successfully removed from favourites";
@@ -28,7 +32,7 @@ class Notifier extends Component {
       }
       case "error": {
         variant = "warning";
-        body = "ERROR";
+        body = "Something went wrong";
         break;
       }
 

@@ -1,18 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import { connect } from "react-redux";
+
+import { SnackbarProvider } from "notistack";
+
 import Drawer from "./components/UI/Drawer";
 import AppRouter from "./containers/Router/AppRouter";
 import Login from "./containers/Login/Login";
 import Spinner from "./components/UI/Spinner";
 import Notifier from "./components/UI/Notifier";
-
 import { fetchCurrentUserOnStart } from "./store/actions/actions";
-
 import { firebaseApp } from "./constants/api";
-import { SnackbarProvider } from "notistack";
 
 const firebaseAppAuth = firebaseApp.auth();
 

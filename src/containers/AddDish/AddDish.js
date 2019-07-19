@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+
 import "firebase/storage";
 
 import { firebaseApp } from "../../constants/api";
 import { addNewDish } from "../../shared/api/dishesAPI";
+import { enqueueSnackbar } from "../../store/actions/notifier";
 import AddNewForm from "../../components/AddNew/AddNewForm";
-
-import { withSnackbar } from "notistack";
 
 const storageRef = firebaseApp.storage().ref();
 
@@ -50,21 +50,14 @@ class AddDish extends Component {
       user
     })
       .then(() => {
-        this.props.enqueueSnackbar(
-          `Successfully added your dish: ${newDish.title}`,
-          {
-            variant: "success"
-          }
-        );
+        this.props.enqueueSnackbar({ type: "addedNewDish" });
 
         this.setState({
           success: true
         });
       })
-      .catch(error => {
-        this.props.enqueueSnackbar(`${error}`, {
-          variant: "error"
-        });
+      .catch(() => {
+        this.props.enqueueSnackbar({ type: "error" });
       });
   };
 
@@ -82,4 +75,11 @@ const mapStateToProps = state => ({
   user: state.userReducer.user
 });
 
-export default connect(mapStateToProps)(withSnackbar(AddDish));
+const mapDispatchToProps = dispatch => ({
+  enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddDish);

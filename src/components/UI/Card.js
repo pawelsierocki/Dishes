@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import RemoveButton from "./Remove";
 import { withStyles } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -19,9 +19,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Card from "@material-ui/core/Card";
+
 import Modal from "./Modal";
-import { Link } from "react-router-dom";
 import NewDishlayer from "./NewDishLayer";
+import RemoveButton from "./Remove";
 
 const styles = theme => ({
   card: {

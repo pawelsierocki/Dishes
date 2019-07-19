@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-
-import { changeFavourite, deleteDish } from "../shared/api/dishesAPI";
-import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+
+import { withStyles } from "@material-ui/core/styles";
 
 import { setSelectedDish } from "../store/actions/actions";
 import { enqueueSnackbar } from "../store/actions/notifier";
-
+import { changeFavourite, deleteDish } from "../shared/api/dishesAPI";
 import Card from "./UI/Card";
 import Spinner from "./UI/Spinner";
 
@@ -93,7 +92,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setSelectedDish: dish => dispatch(setSelectedDish(dish)),
-
   enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify))
 });
 

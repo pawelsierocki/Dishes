@@ -1,7 +1,6 @@
 import React from "react";
 
 import RemoveIcon from "@material-ui/icons/Delete";
-
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
