@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -50,3 +51,11 @@ export default function Modal(props) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  dish: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
+};

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
@@ -128,6 +129,10 @@ class Details extends Component {
     );
   }
 }
+
+Details.propTypes = {
+  setSelectedDish: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   dish: state.dishesReducer.selectedDish,

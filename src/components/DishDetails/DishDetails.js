@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const DishDetails = props => {
   const { dish } = props;
@@ -14,6 +15,10 @@ const DishDetails = props => {
       {dish.imageUrl && <img src={dish.imageUrl} alt="dish" />}
     </>
   );
+};
+
+DishDetails.propTypes = {
+  dish: PropTypes.object.isRequired
 };
 
 export default DishDetails;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
@@ -54,6 +55,10 @@ export class App extends Component {
     return this.renderApp();
   }
 }
+
+App.propTypes = {
+  fetchCurrentUserOnStart: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchCurrentUserOnStart: user => dispatch(fetchCurrentUserOnStart(user))

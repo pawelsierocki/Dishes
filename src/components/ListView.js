@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -85,6 +86,15 @@ class ListView extends Component {
     return this.renderList();
   }
 }
+
+ListView.propTypes = {
+  setSelectedDish: PropTypes.func.isRequired,
+  enqueueSnackbar: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.userReducer.user

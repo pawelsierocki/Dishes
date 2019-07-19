@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -278,5 +279,10 @@ class AddNewForm extends Component {
     );
   }
 }
+
+AddNewForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  handleAddNew: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(AddNewForm);

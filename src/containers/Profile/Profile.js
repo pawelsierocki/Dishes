@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ProfileView from "../../components/ProfileView";
@@ -21,9 +22,13 @@ class Profile extends Component {
   render() {
     const { user } = this.state;
 
-    return <ProfileView user={user} />;
+    return user && <ProfileView user={user} />;
   }
 }
+
+Profile.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.userReducer.user

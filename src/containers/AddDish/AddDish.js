@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -70,6 +71,10 @@ class AddDish extends Component {
     );
   }
 }
+
+AddDish.propTypes = {
+  enqueueSnackbar: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.userReducer.user

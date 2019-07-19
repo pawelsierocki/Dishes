@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ListView from "../../components/ListView";
@@ -50,6 +51,10 @@ class MyDishes extends Component {
     );
   }
 }
+
+MyDishes.propTypes = {
+  user: PropTypes.object
+};
 
 const mapStateToProps = state => ({
   user: state.userReducer.user

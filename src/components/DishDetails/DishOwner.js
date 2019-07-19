@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const DishOwner = props => {
   const { owner } = props;
@@ -10,6 +11,10 @@ const DishOwner = props => {
       <p>{owner.email}</p>
     </>
   );
+};
+
+DishOwner.propTypes = {
+  owner: PropTypes.object.isRequired
 };
 
 export default DishOwner;

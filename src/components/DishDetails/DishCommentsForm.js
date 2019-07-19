@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -104,5 +105,10 @@ class DishCommentsForm extends Component {
     );
   }
 }
+
+DishCommentsForm.propTypes = {
+  user: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(DishCommentsForm);

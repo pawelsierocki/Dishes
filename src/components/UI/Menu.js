@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import Menu from "@material-ui/core/Menu";
@@ -87,3 +88,8 @@ export default function SimpleMenu(props) {
     </div>
   );
 }
+
+SimpleMenu.propTypes = {
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+};

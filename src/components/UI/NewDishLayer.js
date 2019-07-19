@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import styled, { keyframes } from "styled-components";
 
@@ -52,3 +53,7 @@ export default function NewDishlayer(props) {
 
   return render(date);
 }
+
+NewDishlayer.propTypes = {
+  date: PropTypes.string.isRequired
+};

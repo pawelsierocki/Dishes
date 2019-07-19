@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import DishSingleComment from "./DishSingleComment";
 
@@ -11,6 +12,10 @@ const DishComments = props => {
     : "No comments";
 
   return render;
+};
+
+DishComments.propTypes = {
+  comments: PropTypes.array
 };
 
 export default DishComments;

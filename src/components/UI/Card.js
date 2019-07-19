@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import clsx from "clsx";
@@ -153,6 +154,14 @@ class RecipeReviewCard extends Component {
     this.props.setCurrentDish(this.props.dish);
   };
 
+  handleBeforeRemove = () => {
+    this.setState({
+      open: !this.state.open
+    });
+
+    this.props.handleDelete(this.props.dish.id);
+  };
+
   render() {
     const { classes, dish, showDeleteBtn } = this.props;
     const dishObj = { ...dish.data };
@@ -248,12 +257,21 @@ class RecipeReviewCard extends Component {
           handleClick={this.handleClickOpen}
           open={this.state.open}
           dish={dish.data.title}
-          handleRemove={() => this.props.handleDelete(this.props.dish.id)}
+          handleRemove={this.handleBeforeRemove}
           type="delete"
         />
       </Card>
     );
   }
 }
+
+RecipeReviewCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  dish: PropTypes.object.isRequired,
+  handleHeart: PropTypes.func.isRequired,
+  showDeleteBtn: PropTypes.bool.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  setCurrentDish: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(RecipeReviewCard);

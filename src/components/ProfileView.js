@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
@@ -75,36 +76,38 @@ const ProfileView = props => {
   const classes = styles();
 
   return (
-    user && (
-      <div className={classes.container}>
-        <div className={classes.header}>
-          <UserImage userPhoto={user.photoURL} scale={classes.image} />
-          <p className={classes.headerJoined}>
-            Joined: {user.metadata.creationTime.slice(0, 16)}
-          </p>
-        </div>
-
-        <div className={classes.content}>
-          <h2 className={classes.username}>{user.displayName}</h2>
-          <p className={classes.paragraph}>
-            <EmailIcon className={classes.icon} />
-            {user.email}
-          </p>
-          <p className={classes.paragraph}>
-            <PermIdentityIcon className={classes.icon} />
-            {user.uid}
-          </p>
-          <p className={classes.paragraph}>
-            <PhoneIcon className={classes.icon} />
-            {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
-          </p>
-        </div>
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
-          <AddIcon />
-        </Fab>
+    <div className={classes.container}>
+      <div className={classes.header}>
+        <UserImage userPhoto={user.photoURL} scale={classes.image} />
+        <p className={classes.headerJoined}>
+          Joined: {user.metadata.creationTime.slice(0, 16)}
+        </p>
       </div>
-    )
+
+      <div className={classes.content}>
+        <h2 className={classes.username}>{user.displayName}</h2>
+        <p className={classes.paragraph}>
+          <EmailIcon className={classes.icon} />
+          {user.email}
+        </p>
+        <p className={classes.paragraph}>
+          <PermIdentityIcon className={classes.icon} />
+          {user.uid}
+        </p>
+        <p className={classes.paragraph}>
+          <PhoneIcon className={classes.icon} />
+          {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
+        </p>
+      </div>
+      <Fab color="primary" aria-label="Add" className={classes.fab}>
+        <AddIcon />
+      </Fab>
+    </div>
   );
+};
+
+ProfileView.propTypes = {
+  user: PropTypes.object.isRequired
 };
 
 export default ProfileView;

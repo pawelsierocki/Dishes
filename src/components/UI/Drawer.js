@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
@@ -232,5 +233,11 @@ class PersistentDrawerLeft extends Component {
     );
   }
 }
+
+PersistentDrawerLeft.propTypes = {
+  classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 export default withRouter(withStyles(styles)(PersistentDrawerLeft));

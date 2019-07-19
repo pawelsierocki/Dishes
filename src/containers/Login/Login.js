@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -9,7 +10,7 @@ const styles = {
     position: "relative",
     width: "100%",
     height: "100vh",
-    background: '#0066cc'
+    background: "#0066cc"
   }
 };
 
@@ -20,6 +21,11 @@ const Login = props => {
       <LoginView login={login} />
     </div>
   );
+};
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(Login);

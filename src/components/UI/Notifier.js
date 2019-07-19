@@ -1,11 +1,12 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { withSnackbar } from "notistack";
 
 class Notifier extends Component {
   componentWillUpdate(props) {
-    const type = props.type;
+    const { type } = props;
     let variant,
       body = "";
 
@@ -48,6 +49,10 @@ class Notifier extends Component {
     return null;
   }
 }
+
+Notifier.propTypes = {
+  type: PropTypes.string.isRequired
+};
 
 const mapStateToProps = state => ({
   type: state.notifierReducer.type
