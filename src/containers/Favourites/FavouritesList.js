@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import ListView from "../../components/ListView";
 import { filterFavouriteDishes } from "../../store/helpers/dishes";
 import { getAllDishes } from "../../shared/api/dishesAPI";
+import { setActivePage } from "../../store/actions/actions";
 
 class FavouritesList extends Component {
   constructor() {
@@ -28,7 +30,8 @@ class FavouritesList extends Component {
   };
 
   componentWillMount() {
-    this.getList();
+    this.props.setActivePage("Favourites");
+    this.onUpdateList();
   }
 
   onUpdateList = () => {
@@ -49,4 +52,11 @@ class FavouritesList extends Component {
   }
 }
 
-export default FavouritesList;
+const mapDispatchToProps = dispatch => ({
+  setActivePage: page => dispatch(setActivePage(page))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(FavouritesList);

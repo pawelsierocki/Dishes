@@ -9,6 +9,7 @@ import { firebaseApp } from "../../constants/api";
 import { addNewDish } from "../../shared/api/dishesAPI";
 import { enqueueSnackbar } from "../../store/actions/notifier";
 import AddNewForm from "../../components/AddNew/AddNewForm";
+import { setActivePage } from "../../store/actions/actions";
 
 const storageRef = firebaseApp.storage().ref();
 
@@ -19,6 +20,10 @@ class AddDish extends Component {
     this.state = {
       success: false
     };
+  }
+
+  componentDidMount() {
+    this.props.setActivePage("Add new dish");
   }
 
   handleAddNewDish = (newDish, file) => {
@@ -81,7 +86,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify))
+  enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify)),
+  setActivePage: page => dispatch(setActivePage(page))
 });
 
 export default connect(

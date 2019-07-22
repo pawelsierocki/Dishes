@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
@@ -24,7 +24,7 @@ const providers = {
 
 export class App extends Component {
   renderApp = () => {
-    const { user, signInWithGoogle, signOut } = this.props;
+    const { user, signInWithGoogle, signOut, activePage } = this.props;
 
     this.props.fetchCurrentUserOnStart({ user: user });
 
@@ -40,7 +40,7 @@ export class App extends Component {
       default: {
         return (
           <>
-            <Drawer logout={signOut} user={user} />
+            <Drawer logout={signOut} user={user} activePage={activePage} />
             <AppRouter />
             <SnackbarProvider>
               <Notifier />
@@ -57,15 +57,20 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  fetchCurrentUserOnStart: PropTypes.func.isRequired
+  fetchCurrentUserOnStart: PropTypes.func.isRequired,
+  activePage: PropTypes.string.isRequired
 };
+
+const mapStateToProps = state => ({
+  activePage: state.userReducer.activePage
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchCurrentUserOnStart: user => dispatch(fetchCurrentUserOnStart(user))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(
   withFirebaseAuth({

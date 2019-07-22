@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core";
 
 import { getCommentsForDish, addNewComment } from "../../shared/api/dishesAPI";
 import { filterDishes } from "../../store/helpers/dishes";
-import { setSelectedDish } from "../../store/actions/actions";
+import { setSelectedDish, setActivePage } from "../../store/actions/actions";
 
 import SpeedDialTooltipOpen from "../../components/UI/SpeedDial";
 import DishComments from "../../components/DishDetails/DishComments";
@@ -61,6 +61,7 @@ class Details extends Component {
   componentDidMount() {
     if (this.props.dish) {
       this.getCommentsFromDB();
+      this.props.setActivePage(`Details: ${this.props.dish.data.title}`);
     }
   }
 
@@ -140,7 +141,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedDish: dish => dispatch(setSelectedDish(dish))
+  setSelectedDish: dish => dispatch(setSelectedDish(dish)),
+  setActivePage: page => dispatch(setActivePage(page))
 });
 
 export default connect(

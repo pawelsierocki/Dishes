@@ -2,13 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
 import EmailIcon from "@material-ui/icons/Email";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import PhoneIcon from "@material-ui/icons/Phone";
-import AddIcon from "@material-ui/icons/Add";
 
 import UserImage from "../components/UI/UserImage";
+import AddButton from "./UI/AddButton";
 
 const styles = makeStyles({
   container: {
@@ -99,9 +98,7 @@ const ProfileView = props => {
           {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
         </p>
       </div>
-      <Fab color="primary" aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
+      <AddButton />
     </div>
   );
 };

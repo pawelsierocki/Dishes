@@ -17,6 +17,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AddIcon from "@material-ui/icons/Add";
+import AccessibilityNew from "@material-ui/icons/AccessibilityNew";
 import FastFoodIcon from "@material-ui/icons/Fastfood";
 import FavouriteIcon from "@material-ui/icons/Favorite";
 import Fingerpring from "@material-ui/icons/Fingerprint";
@@ -26,6 +27,7 @@ import ItemList from "../../containers/ItemList/ItemList";
 import AddDish from "../../containers/AddDish/AddDish";
 import FavouritesList from "../../containers/Favourites/FavouritesList";
 import MyDishes from "../../containers/MyDishes/MyDishes";
+import Dietetic from "../../containers/Dietetic/Dietetic";
 import Menu from "./Menu";
 import NavigationUserPanel from "./NavigationUserPanel";
 
@@ -35,7 +37,9 @@ const styles = theme => ({
   root: {
     display: "flex"
   },
-
+  appBar: {
+    backgroundColor: "#0066cc"
+  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -123,6 +127,12 @@ let partials = [
     component: <MyDishes />
   },
   {
+    label: "Dietetic",
+    path: "/dietetic/patients",
+    icon: <AccessibilityNew />,
+    component: <Dietetic />
+  },
+  {
     label: "Add new dish",
     path: "/add",
     icon: <AddIcon />,
@@ -192,8 +202,8 @@ class PersistentDrawerLeft extends Component {
             >
               <MenuIcon />
             </IconButton>
+            {this.props.activePage}
             <Typography variant="h6" noWrap />
-
             <div className={classes.userPanel}>
               <Menu logout={logout} user={this.props.user} />
             </div>

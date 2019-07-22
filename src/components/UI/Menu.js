@@ -32,6 +32,13 @@ const styles = makeStyles({
     textDecoration: "none",
     color: "#000"
   },
+  imageContainer: {
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    width: "40px",
+    height: "40px",
+    position: "relative"
+  },
   photo: {
     width: "30px",
     height: "30px",
@@ -39,7 +46,11 @@ const styles = makeStyles({
     marginRight: "10px",
     "&:hover": {
       cursor: "pointer"
-    }
+    },
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)"
   }
 });
 
@@ -58,7 +69,7 @@ export default function SimpleMenu(props) {
 
   return (
     <div>
-      <div onClick={handleClick}>
+      <div className={classes.imageContainer} onClick={handleClick}>
         <UserImage
           userPhoto={user.photoURL}
           scale={classes.photo}

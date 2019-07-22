@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import ListView from "../../components/ListView";
 import { filterDishes } from "../../store/helpers/dishes";
 import { getAllDishes } from "../../shared/api/dishesAPI";
+import { setActivePage } from "../../store/actions/actions";
 
 class ItemList extends Component {
   constructor() {
@@ -28,7 +30,8 @@ class ItemList extends Component {
   };
 
   componentDidMount() {
-    this.getList();
+    this.props.setActivePage("List of dishes");
+    this.onUpdateList();
   }
 
   onUpdateList = () => {
@@ -49,4 +52,11 @@ class ItemList extends Component {
   }
 }
 
-export default ItemList;
+const mapDispatchToProps = dispatch => ({
+  setActivePage: page => dispatch(setActivePage(page))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ItemList);

@@ -7,6 +7,7 @@ import AddDish from "../AddDish/AddDish";
 import MyDishes from "../MyDishes/MyDishes";
 import Profile from "../Profile/Profile";
 import Details from "../Details/Details";
+import Dietetic from "../Dietetic/Dietetic";
 
 const AppRouter = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter = () => {
       <Route path="/mydishes" component={MyDishes} />
       <Route path="/profile" component={Profile} />
       <Route path="/details/:id" component={Details} />
+      <Route path="/dietetic" component={Dietetic} />
       <Redirect to="/list" />
     </Switch>
   );

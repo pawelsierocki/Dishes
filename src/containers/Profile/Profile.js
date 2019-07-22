@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ProfileView from "../../components/ProfileView";
+import { setActivePage } from "../../store/actions/actions";
 
 class Profile extends Component {
   constructor() {
@@ -17,6 +18,8 @@ class Profile extends Component {
     this.setState({
       user: this.props.user
     });
+
+    this.props.setActivePage("Profile");
   }
 
   render() {
@@ -34,4 +37,11 @@ const mapStateToProps = state => ({
   user: state.userReducer.user
 });
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = dispatch => ({
+  setActivePage: page => dispatch(setActivePage(page))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);
