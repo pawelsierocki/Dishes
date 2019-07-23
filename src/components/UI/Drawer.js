@@ -219,12 +219,9 @@ class PersistentDrawerLeft extends Component {
           }}
         >
           <div className={classes.drawerHeader}>
+            {this.props.activePage}
             <IconButton onClick={this.handleChange}>
-              {classes.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
+              {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           <NavigationUserPanel

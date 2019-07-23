@@ -11,12 +11,20 @@ const API_CONFIG = {
 };
 const API_URI = `${API_HOST}`;
 const API_COMMENTS_URI = `${API_HOST}/comments`;
+const API_DIETETIC = `${API_HOST}/dietetic`;
 
-export const firebaseApp = firebase.initializeApp(API_CONFIG);
 export const ENDPOINT_DISH = `${API_URI}/dishes.json`;
+
 export const ENDPOINT_DISH_CHANGE = id => {
   return `${API_URI}/dishes/${id}.json`;
 };
+
 export const ENDPOINT_COMMENT = id => {
   return `${API_COMMENTS_URI}/${id}.json`;
 };
+
+export const DIETETIC_ENDPOINT = id => {
+  return `${API_DIETETIC}/${id}.json`;
+};
+
+export const firebaseApp = firebase.initializeApp(API_CONFIG);

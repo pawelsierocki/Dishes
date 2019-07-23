@@ -7,7 +7,6 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import PhoneIcon from "@material-ui/icons/Phone";
 
 import UserImage from "../components/UI/UserImage";
-import AddButton from "./UI/AddButton";
 
 const styles = makeStyles({
   container: {
@@ -98,7 +97,6 @@ const ProfileView = props => {
           {user.phoneNumer ? user.phoneNumer : "xxx-xxx-xxx"}
         </p>
       </div>
-      <AddButton />
     </div>
   );
 };

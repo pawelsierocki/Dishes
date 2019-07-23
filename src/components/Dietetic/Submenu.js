@@ -52,6 +52,24 @@ export default function Submenu() {
           component={Link}
           to={"/dietetic/diet"}
         />
+        <Tab
+          icon={<PersonPinIcon />}
+          label="PLACEHOLDER"
+          component={Link}
+          to={"/dietetic/diet"}
+        />
+        <Tab
+          icon={<PersonPinIcon />}
+          label="PLACEHOLDER"
+          component={Link}
+          to={"/dietetic/diet"}
+        />
+        <Tab
+          icon={<PersonPinIcon />}
+          label="PLACEHOLDER"
+          component={Link}
+          to={"/dietetic/diet"}
+        />
       </Tabs>
     </Paper>
   );

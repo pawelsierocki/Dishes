@@ -12,6 +12,10 @@ import AddNewPatient from "../../components/Dietetic/AddNewPatient";
 const styles = {
   submenu: {
     marginTop: ".8rem"
+  },
+  main: {
+    width: "80%",
+    margin: "3rem auto"
   }
 };
 
