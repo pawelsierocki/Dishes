@@ -58,7 +58,8 @@ const styles = theme => ({
     alignItems: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    background: "#f9f9f9"
   },
   content: {
     flexGrow: 1,
@@ -107,7 +108,18 @@ const styles = theme => ({
   },
   logo: {
     width: 50,
-    marginRight: "auto"
+    marginLeft: "auto"
+  },
+  companyName: {
+    marginRight: "auto",
+    marginLeft: ".8rem",
+    fontStyle: "italic",
+    letterSpacing: ".5px",
+    fontSize: "14px"
+  },
+  companyNameBigLetter: {
+    color: "#5EDFAC",
+    fontSize: "20px"
   }
 });
 
@@ -224,10 +236,14 @@ class PersistentDrawerLeft extends Component {
         >
           <div className={classes.drawerHeader}>
             <img
-              src="http://www.pngall.com/wp-content/uploads/2017/11/Bacteria-Download-PNG.png"
+              src="https://telemedi.co/build/media/disease-icons/sore_throat.png"
               alt="logo"
               className={classes.logo}
             />
+            <p className={classes.companyName}>
+              <span className={classes.companyNameBigLetter}>D</span>iet
+              <span className={classes.companyNameBigLetter}>P</span>ro
+            </p>
             <IconButton onClick={this.handleChange}>
               {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
