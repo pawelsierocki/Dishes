@@ -1,11 +1,36 @@
 import "date-fns";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import Button from "@material-ui/core/Button";
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import { withStyles } from "@material-ui/core/styles";
 
 import { setActivePage } from "../../store/actions/actions";
 import AddNewPatientForm from "./AddNewPatientForm";
 import { addNewPatient } from "../../shared/api/patientsAPI";
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  button: {
+    marginBottom: "2rem",
+    width: "9rem",
+    textDecoration: "none",
+  },
+  btn: {
+    fontSize: "10px",
+    padding: "8px 20px"
+  },
+  leftIcon: {
+    marginRight: "1rem",
+    fontSize: 18
+  }
+};
 
 class AddNewPatient extends Component {
   componentDidMount() {
@@ -23,7 +48,18 @@ class AddNewPatient extends Component {
   };
 
   render() {
-    return <AddNewPatientForm handleAddPatient={this.handleAddPatient} />;
+    const { classes } = this.props;
+    return (
+      <div className={classes.container}>
+        <Link to="/dietetic/patients" className={classes.button}>
+          <Button variant="contained" color="primary" className={classes.btn}>
+            <ArrowBack className={classes.leftIcon} />
+            Go back
+          </Button>
+        </Link>
+        <AddNewPatientForm handleAddPatient={this.handleAddPatient} />
+      </div>
+    );
   }
 }
 
@@ -43,4 +79,4 @@ const mapeStateToProps = state => ({
 export default connect(
   mapeStateToProps,
   mapDispatchToProps
-)(AddNewPatient);
+)(withStyles(styles)(AddNewPatient));
