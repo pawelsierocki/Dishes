@@ -69,12 +69,19 @@ class Patients extends Component {
     const render = loading ? (
       <Spinner />
     ) : !loading && patients !== null ? (
-      <PatientsTable patients={mappedPatients} />
+      <PatientsTable
+        patients={mappedPatients}
+        setActivePatient={this.setActivePatient}
+      />
     ) : (
       <h2>No patients yet</h2>
     );
 
     return render;
+  };
+
+  setActivePatient = patient => {
+    console.log(patient);
   };
 
   render() {

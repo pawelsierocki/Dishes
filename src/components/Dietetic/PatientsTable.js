@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -6,6 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Edit from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +19,19 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     minWidth: 650
+  },
+  row: {
+    transition: "all .5s",
+    "&:hover": {
+      backgroundColor: "#f9f9f9"
+    }
+  },
+  actionIcon: {
+    transition: "all .5s",
+    "&:hover": {
+      cursor: "pointer",
+      color: "#0066cc"
+    }
   }
 }));
 
@@ -40,11 +56,12 @@ export default function SimpleTable(props) {
             <TableCell align="right">City</TableCell>
             <TableCell align="right">Telephone</TableCell>
             <TableCell align="right">Sex</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {patients.map((row, index) => (
-            <TableRow key={row.id}>
+            <TableRow className={classes.row} key={row.id}>
               <TableCell component="th" scope="row">
                 {row.data.fullName}
               </TableCell>
@@ -52,6 +69,14 @@ export default function SimpleTable(props) {
               <TableCell align="right">{row.data.city}</TableCell>
               <TableCell align="right">{row.data.telephoneNumber}</TableCell>
               <TableCell align="right">{row.data.sex}</TableCell>
+              <TableCell align="right">
+                <Link to={`/dietetic/patients/id/${row.id}`}>
+                  <Edit
+                    className={classes.actionIcon}
+                    onClick={() => props.setActivePatient(row)}
+                  />
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

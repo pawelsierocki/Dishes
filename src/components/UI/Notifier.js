@@ -21,6 +21,11 @@ class Notifier extends Component {
         body = "Successfully added new dish";
         break;
       }
+      case "addedNewPatient": {
+        variant = "success";
+        body = "Successfully added new patient";
+        break;
+      }
       case "removedFromFav": {
         variant = "warning";
         body = "Successfully removed from favourites";

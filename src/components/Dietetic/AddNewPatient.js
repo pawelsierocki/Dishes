@@ -1,62 +1,60 @@
 import "date-fns";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import Button from "@material-ui/core/Button";
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import { withStyles } from "@material-ui/core/styles";
 
 import { setActivePage } from "../../store/actions/actions";
+import { enqueueSnackbar } from "../../store/actions/notifier";
 import AddNewPatientForm from "./AddNewPatientForm";
 import { addNewPatient } from "../../shared/api/patientsAPI";
+import GoBack from "../UI/GoBack";
 
 const styles = {
   container: {
     display: "flex",
     flexDirection: "column"
-  },
-  button: {
-    marginBottom: "2rem",
-    width: "9rem",
-    textDecoration: "none",
-  },
-  btn: {
-    fontSize: "10px",
-    padding: "8px 20px"
-  },
-  leftIcon: {
-    marginRight: "1rem",
-    fontSize: 18
   }
 };
 
 class AddNewPatient extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      addedNewPatient: false
+    };
+  }
+
   componentDidMount() {
     this.props.setActivePage("Dietetic - Patients - Add new patient");
   }
 
   handleAddPatient = patient => {
-    addNewPatient(this.props.user.uid, patient)
-      .then(res => {
-        console.log(res);
+    addNewPatient(this.props.user.uid, { ...patient, interwiew: false })
+      .then(() => {
+        this.props.enqueueSnackbar({ type: "addedNewPatient" });
+        this.setState({
+          addedNewPatient: true
+        });
       })
       .catch(error => {
         console.log(error);
       });
   };
 
+  redirectToMain = () => {
+    return <Redirect to={"/dietetic/patients"} />;
+  };
+
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <Link to="/dietetic/patients" className={classes.button}>
-          <Button variant="contained" color="primary" className={classes.btn}>
-            <ArrowBack className={classes.leftIcon} />
-            Go back
-          </Button>
-        </Link>
+        {this.state.addedNewPatient && this.redirectToMain()}
+        <GoBack />
         <AddNewPatientForm handleAddPatient={this.handleAddPatient} />
       </div>
     );
@@ -69,7 +67,8 @@ AddNewPatient.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setActivePage: page => dispatch(setActivePage(page))
+  setActivePage: page => dispatch(setActivePage(page)),
+  enqueueSnackbar: notify => dispatch(enqueueSnackbar(notify))
 });
 
 const mapeStateToProps = state => ({

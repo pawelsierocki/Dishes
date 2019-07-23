@@ -104,6 +104,10 @@ const styles = theme => ({
     width: "50px",
     height: "50px",
     borderRadius: "50%"
+  },
+  logo: {
+    width: 50,
+    marginRight: "auto"
   }
 });
 
@@ -219,7 +223,11 @@ class PersistentDrawerLeft extends Component {
           }}
         >
           <div className={classes.drawerHeader}>
-            {this.props.activePage}
+            <img
+              src="http://www.pngall.com/wp-content/uploads/2017/11/Bacteria-Download-PNG.png"
+              alt="logo"
+              className={classes.logo}
+            />
             <IconButton onClick={this.handleChange}>
               {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
