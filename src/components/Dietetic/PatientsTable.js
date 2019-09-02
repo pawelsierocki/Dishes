@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,8 +8,11 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Edit from "@material-ui/icons/Edit";
+import PriorityHigh from "@material-ui/icons/NotificationsNone";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,6 +36,34 @@ const useStyles = makeStyles(theme => ({
       cursor: "pointer",
       color: "#0066cc"
     }
+  },
+  link: {
+    color: "#000",
+    textDecoration: "none"
+  },
+  warning: {
+    color: "red",
+    fontSize: "18px",
+    marginLeft: ".5rem"
+  },
+  popover: {
+    pointerEvents: "none"
+  },
+  paper: {
+    padding: theme.spacing(1)
+  },
+  centerRow: {
+    display: "flex",
+    alignItems: "center"
+  },
+  center: {
+    display: "flex",
+    alignItems: "center"
+  },
+  tooltipText: {
+    fontSize: "12px",
+    fontStyle: "italic",
+    color: "red"
   }
 }));
 
@@ -42,9 +74,19 @@ const calculateAge = birthdayDate => {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 };
 
-export default function SimpleTable(props) {
+function SimpleTable(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const classes = useStyles();
   const { patients } = props;
+
+  function handlePopoverOpen(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handlePopoverClose() {
+    setAnchorEl(null);
+  }
 
   return (
     <Paper className={classes.root}>
@@ -63,14 +105,27 @@ export default function SimpleTable(props) {
           {patients.map((row, index) => (
             <TableRow className={classes.row} key={row.id}>
               <TableCell component="th" scope="row">
-                {row.data.fullName}
+                <div className={classes.center}>
+                  {row.data.fullName}
+                  {!row.data.interview && (
+                    <PriorityHigh
+                      className={classes.warning}
+                      onMouseEnter={handlePopoverOpen}
+                      onMouseLeave={handlePopoverClose}
+                    />
+                  )}
+                </div>
               </TableCell>
               <TableCell align="right">{calculateAge(row.data.date)}</TableCell>
               <TableCell align="right">{row.data.city}</TableCell>
               <TableCell align="right">{row.data.telephoneNumber}</TableCell>
               <TableCell align="right">{row.data.sex}</TableCell>
               <TableCell align="right">
-                <Link to={`/dietetic/patients/id/${row.id}`}>
+                <Link
+                  to={`/dietetic/patients/id/${row.id}`}
+                  className={classes.link}
+                  onClick={() => props.setActivePatient(row)}
+                >
                   <Edit
                     className={classes.actionIcon}
                     onClick={() => props.setActivePatient(row)}
@@ -81,6 +136,36 @@ export default function SimpleTable(props) {
           ))}
         </TableBody>
       </Table>
+
+      <Popover
+        id="mouse-over-popover"
+        className={classes.popover}
+        classes={{
+          paper: classes.paper
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left"
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography className={classes.tooltipText}>
+          Interview is not conducted. Click edit button to finish an interview.
+        </Typography>
+      </Popover>
     </Paper>
   );
 }
+
+SimpleTable.propTypes = {
+  patients: PropTypes.array.isRequired
+};
+
+export default SimpleTable;

@@ -9,6 +9,7 @@ import Patients from "../../components/Dietetic/Patients";
 import Diet from "../../components/Dietetic/Diet";
 import AddNewPatient from "../../components/Dietetic/AddNewPatient";
 import PatientDetails from "../../components/Dietetic/PatientDetails";
+import PatientInterview from "../../components/Dietetic/PatientInterview";
 
 const styles = {
   submenu: {
@@ -34,6 +35,11 @@ class Dietetic extends Component {
             path="/dietetic/patients/id/:id"
             exact
             component={PatientDetails}
+          />
+          <Route
+            path="/dietetic/patients/id/:id/interview"
+            exact
+            component={PatientInterview}
           />
           <Route path="/dietetic/patients/add" component={AddNewPatient} />
 

@@ -33,7 +33,7 @@ class AddNewPatient extends Component {
   }
 
   handleAddPatient = patient => {
-    addNewPatient(this.props.user.uid, { ...patient, interwiew: false })
+    addNewPatient(this.props.user.uid, { ...patient, interview: false })
       .then(() => {
         this.props.enqueueSnackbar({ type: "addedNewPatient" });
         this.setState({

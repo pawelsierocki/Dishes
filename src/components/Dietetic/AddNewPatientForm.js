@@ -36,11 +36,11 @@ const styles = theme => ({
     width: "100%"
   },
   button: {
-    width: "10%",
+    width: "170px",
     marginTop: "2rem"
   },
   rightIcon: {
-    marginLeft: "1rem",
+    marginLeft: "auto",
     height: ".8em"
   },
   date: {
@@ -65,7 +65,6 @@ class AddNewPatientForm extends Component {
   }
 
   handleDateChange = date => {
-    console.log(date);
     this.setState(
       {
         date,
@@ -203,7 +202,7 @@ class AddNewPatientForm extends Component {
             className={classes.button}
             disabled={!this.state.isValid}
           >
-            Send
+            Add patient
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
         </form>
