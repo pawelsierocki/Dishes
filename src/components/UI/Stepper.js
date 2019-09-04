@@ -15,29 +15,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Slide from "@material-ui/core/Slide";
 
-const QontoConnector = withStyles({
-  alternativeLabel: {
-    top: 10,
-    left: "calc(-50% + 16px)",
-    right: "calc(50% + 16px)"
-  },
-  active: {
-    "& $line": {
-      borderColor: "#784af4"
-    }
-  },
-  completed: {
-    "& $line": {
-      borderColor: "#784af4"
-    }
-  },
-  line: {
-    borderColor: "#eaeaf0",
-    borderTopWidth: 3,
-    borderRadius: 1
-  }
-})(StepConnector);
-
 const useQontoStepIconStyles = makeStyles({
   root: {
     color: "#eaeaf0",
@@ -212,10 +189,6 @@ export default function CustomizedSteppers(props) {
 
   function handleBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
-  }
-
-  function handleReset() {
-    setActiveStep(0);
   }
 
   return (

@@ -120,6 +120,37 @@ const styles = theme => ({
   companyNameBigLetter: {
     color: "#5EDFAC",
     fontSize: "20px"
+  },
+  dietetic: {
+    color: "#fff",
+    background: "#0066cc",
+    overflow: "hidden",
+    boxShadow: "inset 0 0 70px #000000",
+    transition: "all .5s",
+    "&:hover": {
+      boxShadow: "0px 0px 4px #000",
+      background: "#0066cc"
+    }
+  },
+  dieteticIcon: {
+    color: "#fff"
+  },
+  "@keyframes hotAnimation": {
+    "0%": { boxShadow: "0px 0px 4px #fff" },
+    "50%": { boxShadow: "1px 1px 15px #fff" },
+    "100%": { boxShadow: "0px 0px 4px #fff" }
+  },
+  hot: {
+    color: "#fff",
+    background: "red",
+    position: "absolute",
+    right: "-29px",
+    top: "4px",
+    transform: "rotate(45deg)",
+    padding: "2px 30px",
+    fontSize: "10px",
+    animation: "$hotAnimation 1.5s infinite",
+    textShadow: "1px 2px 3px #fff"
   }
 });
 
@@ -179,14 +210,28 @@ class PersistentDrawerLeft extends Component {
     this.handleChange();
   };
 
+  renderHot = label => {
+    const { classes } = this.props;
+    if (label === "Dietetic") return <div className={classes.hot}>HOT</div>;
+  };
+
   renderPartials = () => {
     const { classes } = this.props;
 
     return partials.map(partial => (
       <Link to={partial.path} className={classes.link} key={partial.label}>
-        <ListItem button onClick={() => this.handleChangePartial(partial)}>
-          <ListItemIcon>{partial.icon}</ListItemIcon>
+        <ListItem
+          button
+          onClick={() => this.handleChangePartial(partial)}
+          className={partial.label === "Dietetic" ? classes.dietetic : ""}
+        >
+          <ListItemIcon
+            className={partial.label === "Dietetic" ? classes.dieteticIcon : ""}
+          >
+            {partial.icon}
+          </ListItemIcon>
           <ListItemText primary={partial.label} />
+          {this.renderHot(partial.label)}
         </ListItem>
       </Link>
     ));
