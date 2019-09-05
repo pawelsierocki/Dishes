@@ -136,51 +136,51 @@ const styles = theme => ({
     color: "#fff"
   },
   "@keyframes hotAnimation": {
-    "0%": { boxShadow: "0px 0px 4px #fff" },
-    "50%": { boxShadow: "1px 1px 15px #fff" },
-    "100%": { boxShadow: "0px 0px 4px #fff" }
+    "0%": { boxShadow: "0px 0px 0px #fff" },
+    "50%": { boxShadow: "0px 0px 30px #fff" },
+    "100%": { boxShadow: "0px 0px 0px #fff" }
   },
   hot: {
     color: "#fff",
     background: "red",
     position: "absolute",
-    right: "-29px",
-    top: "4px",
+    right: "-20px",
+    top: "15px",
     transform: "rotate(45deg)",
     padding: "2px 30px",
     fontSize: "10px",
-    animation: "$hotAnimation 1.5s infinite",
+    animation: "$hotAnimation 2s infinite",
     textShadow: "1px 2px 3px #fff"
   }
 });
 
 let partials = [
   {
-    label: "List of dishes",
+    label: "Lista dań",
     path: "/list",
     icon: <FastFoodIcon />,
     component: <ItemList />
   },
   {
-    label: "Favourite",
+    label: "Ulubione",
     path: "/favourites",
     icon: <FavouriteIcon />,
     component: <FavouritesList />
   },
   {
-    label: "My dishes",
+    label: "Moje dania",
     path: "/mydishes",
     icon: <Fingerpring />,
     component: <MyDishes />
   },
   {
-    label: "Dietetic",
+    label: "Dietetyk",
     path: "/dietetic/patients",
     icon: <AccessibilityNew />,
     component: <Dietetic />
   },
   {
-    label: "Add new dish",
+    label: "Dodaj nowe danie",
     path: "/add",
     icon: <AddIcon />,
     component: <AddDish />
@@ -212,7 +212,7 @@ class PersistentDrawerLeft extends Component {
 
   renderHot = label => {
     const { classes } = this.props;
-    if (label === "Dietetic") return <div className={classes.hot}>HOT</div>;
+    if (label === "Dietetyk") return <div className={classes.hot}>NOWOŚĆ</div>;
   };
 
   renderPartials = () => {
@@ -223,10 +223,10 @@ class PersistentDrawerLeft extends Component {
         <ListItem
           button
           onClick={() => this.handleChangePartial(partial)}
-          className={partial.label === "Dietetic" ? classes.dietetic : ""}
+          className={partial.label === "Dietetyk" ? classes.dietetic : ""}
         >
           <ListItemIcon
-            className={partial.label === "Dietetic" ? classes.dieteticIcon : ""}
+            className={partial.label === "Dietetyk" ? classes.dieteticIcon : ""}
           >
             {partial.icon}
           </ListItemIcon>

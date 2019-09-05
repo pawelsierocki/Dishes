@@ -31,7 +31,7 @@ class MyDishes extends Component {
   };
 
   componentDidMount() {
-    this.props.setActivePage("My dishes");
+    this.props.setActivePage("Moje dania");
     this.getList();
   }
 

@@ -46,7 +46,7 @@ class Patients extends Component {
   }
 
   componentDidMount() {
-    this.props.setActivePage("Dietetic - Patients");
+    this.props.setActivePage("Dietetyk - Pacjenci");
 
     this.getPatients();
   }

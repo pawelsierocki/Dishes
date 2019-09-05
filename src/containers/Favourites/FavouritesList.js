@@ -30,7 +30,7 @@ class FavouritesList extends Component {
   };
 
   componentWillMount() {
-    this.props.setActivePage("Favourites");
+    this.props.setActivePage("Ulubione");
     this.onUpdateList();
   }
 

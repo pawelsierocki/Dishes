@@ -19,7 +19,7 @@ class Profile extends Component {
       user: this.props.user
     });
 
-    this.props.setActivePage("Profile");
+    this.props.setActivePage("Mój profil");
   }
 
   render() {

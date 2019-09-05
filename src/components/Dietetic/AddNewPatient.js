@@ -29,7 +29,7 @@ class AddNewPatient extends Component {
   }
 
   componentDidMount() {
-    this.props.setActivePage("Dietetic - Patients - Add new patient");
+    this.props.setActivePage("Dietetyk - Pacjenci - Dodaj nowego pacjenta");
   }
 
   handleAddPatient = patient => {

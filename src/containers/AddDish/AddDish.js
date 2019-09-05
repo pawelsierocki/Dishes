@@ -23,7 +23,7 @@ class AddDish extends Component {
   }
 
   componentDidMount() {
-    this.props.setActivePage("Add new dish");
+    this.props.setActivePage("Dodaj nowe danie");
   }
 
   handleAddNewDish = (newDish, file) => {

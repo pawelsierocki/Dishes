@@ -30,7 +30,7 @@ class ItemList extends Component {
   };
 
   componentDidMount() {
-    this.props.setActivePage("List of dishes");
+    this.props.setActivePage("Lista dań");
     this.onUpdateList();
   }
 

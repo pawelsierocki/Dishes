@@ -61,7 +61,7 @@ class Details extends Component {
   componentDidMount() {
     if (this.props.dish) {
       this.getCommentsFromDB();
-      this.props.setActivePage(`Details: ${this.props.dish.data.title}`);
+      this.props.setActivePage(`Szczegóły: ${this.props.dish.data.title}`);
     }
   }
 

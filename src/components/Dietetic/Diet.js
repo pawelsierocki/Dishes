@@ -6,7 +6,7 @@ import { setActivePage } from "../../store/actions/actions";
 
 class Diet extends Component {
   componentDidMount() {
-    this.props.setActivePage("Dietetic - Diets");
+    this.props.setActivePage("Dietetyk - Diety");
   }
 
   render() {

@@ -18,7 +18,7 @@ const styles = () => ({
 class PatientDetails extends Component {
   componentDidMount() {
     this.props.setActivePage(
-      `Dietetic - Patients - ${this.props.activePatient.data.fullName}`
+      `Dietetyk - Pacjenci - ${this.props.activePatient.data.fullName}`
     );
   }
 

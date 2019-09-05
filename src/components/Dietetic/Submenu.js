@@ -36,13 +36,13 @@ export default function Submenu() {
       >
         <Tab
           icon={<AccessibilityNew />}
-          label="PATIENTS"
+          label="PACJENCI"
           component={Link}
           to={"/dietetic/patients"}
         />
         <Tab
           icon={<Storage />}
-          label="Diets"
+          label="DIETY"
           component={Link}
           to={"/dietetic/diet"}
         />

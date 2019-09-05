@@ -12,7 +12,7 @@ class PatientDetails extends Component {
   componentDidMount() {
     if (this.props.activePatient) {
       this.props.setActivePage(
-        `Dietetic - Patients - ${this.props.activePatient.data.fullName} - Interview`
+        `Dietetyk - Pacjenci - ${this.props.activePatient.data.fullName} - Wywiad żywieniowy`
       );
     }
   }

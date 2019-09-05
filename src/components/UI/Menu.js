@@ -87,13 +87,13 @@ export default function SimpleMenu(props) {
         <Link to="/profile/" className={classes.link}>
           <MenuItem onClick={handleClose} className={classes.menuLabel}>
             <Face className={classes.iconMenu} />
-            Profile
+            Profil
           </MenuItem>
         </Link>
 
         <MenuItem onClick={logout} className={classes.menuLabel}>
           <LinkOff className={classes.iconMenu} />
-          Logout
+          Wyloguj
         </MenuItem>
       </Menu>
     </div>
