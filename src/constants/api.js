@@ -27,4 +27,8 @@ export const DIETETIC_ENDPOINT = id => {
   return `${API_DIETETIC}/${id}.json`;
 };
 
+export const DIETETIC_INTERVIEW_ENDPOINT = (id, patientID) => {
+  return `${API_DIETETIC}/${id}/${patientID}/interview.json`;
+};
+
 export const firebaseApp = firebase.initializeApp(API_CONFIG);

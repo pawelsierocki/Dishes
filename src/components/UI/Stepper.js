@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Stepper from "@material-ui/core/Stepper";
@@ -15,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import Slide from "@material-ui/core/Slide";
 
 import PatientInterviewPrimaryForm from "../Dietetic/PatientInterviewPrimaryForm";
+import PatientInterviewAdditionalForm from "../Dietetic/PatientInterviewAdditionalForm";
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -168,9 +168,9 @@ function getStepContent(step) {
     case 0:
       return <PatientInterviewPrimaryForm />;
     case 1:
-      return "Form 2";
+      return <PatientInterviewAdditionalForm />;
     case 2:
-      return "Verify";
+      return "To save interview press save button.";
     default:
       return "Unknown step";
   }
@@ -180,17 +180,18 @@ export default function CustomizedSteppers(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const patientID = props.patientId;
+  const [submitted] = React.useState(false);
 
   function handleNext() {
-    if (activeStep === steps.length - 1) setSubmitted(true);
-    else setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   }
 
   function handleBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
+  }
+
+  function handleAdd() {
+    props.handleAddInterview();
   }
 
   return (
@@ -211,32 +212,30 @@ export default function CustomizedSteppers(props) {
           ))}
         </Stepper>
         <div>
-          {submitted ? (
-            <Redirect to={`/dietetic/patients/id/${patientID}`} />
-          ) : (
-            <div className={classes.stepButtons}>
-              <div className={classes.instructions}>
-                {getStepContent(activeStep)}
-              </div>
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.button}
-                >
-                  Back
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? "Save interview" : "Next"}
-                </Button>
-              </div>
+          <div className={classes.stepButtons}>
+            <div className={classes.instructions}>
+              {getStepContent(activeStep)}
             </div>
-          )}
+            <div>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.button}
+              >
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={
+                  activeStep !== steps.length - 1 ? handleNext : handleAdd
+                }
+                className={classes.button}
+              >
+                {activeStep === steps.length - 1 ? "Save interview" : "Next"}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </Slide>
