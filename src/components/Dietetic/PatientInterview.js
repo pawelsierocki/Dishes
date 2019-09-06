@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 
 import { setActivePage } from "../../store/actions/actions";
 
-import PatientInterviewForm from "./PatientInterviewForm";
 import Stepper from "../UI/Stepper";
 
 class PatientDetails extends Component {
@@ -19,10 +18,7 @@ class PatientDetails extends Component {
 
   render() {
     return this.props.activePatient ? (
-      <>
-        <Stepper patientId={this.props.activePatient.id}/>
-        <PatientInterviewForm />
-      </>
+      <Stepper patientId={this.props.activePatient.id} />
     ) : (
       <Redirect to="/dietetic/patients" />
     );

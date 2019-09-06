@@ -12,8 +12,9 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import Mood from "@material-ui/icons/Mood";
 import StepConnector from "@material-ui/core/StepConnector";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Slide from "@material-ui/core/Slide";
+
+import PatientInterviewPrimaryForm from "../Dietetic/PatientInterviewPrimaryForm";
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -146,7 +147,8 @@ const useStyles = makeStyles(theme => ({
   },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: "3rem",
+    width: "100%"
   },
   stepButtons: {
     display: "flex",
@@ -164,7 +166,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return "Form 1";
+      return <PatientInterviewPrimaryForm />;
     case 1:
       return "Form 2";
     case 2:
@@ -213,9 +215,9 @@ export default function CustomizedSteppers(props) {
             <Redirect to={`/dietetic/patients/id/${patientID}`} />
           ) : (
             <div className={classes.stepButtons}>
-              <Typography className={classes.instructions}>
+              <div className={classes.instructions}>
                 {getStepContent(activeStep)}
-              </Typography>
+              </div>
               <div>
                 <Button
                   disabled={activeStep === 0}
