@@ -62,7 +62,7 @@ const DishSingleComment = props => {
         <img src={user.photoURL} alt="avatar" className={classes.avatar} />
         <p className={classes.username}>{user.displayName}</p>
         <p className={classes.date}>
-          Published: {comment.data.publishDate.slice(0, 10)}
+          Opublikowano: {comment.data.publishDate.slice(0, 10)}
         </p>
       </div>
       <div className={classes.messageBox}>

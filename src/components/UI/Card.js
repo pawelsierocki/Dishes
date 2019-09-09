@@ -185,7 +185,7 @@ class RecipeReviewCard extends Component {
             title={dishObj.title}
             subheader={
               dishObj.publishDate
-                ? `Published: ` + dishObj.publishDate.slice(0, 10)
+                ? `Opublikowano: ` + dishObj.publishDate.slice(0, 10)
                 : ""
             }
             className={classes.header}

@@ -46,7 +46,7 @@ class PatientsSearch extends Component {
         id="searchQuery"
         className={clsx(classes.margin, classes.textField)}
         variant="filled"
-        label="Search patient by name"
+        label="Wyszukaj pacjenta"
         value={this.state.searchquery}
         onChange={this.handleChange}
         InputProps={{

@@ -6,7 +6,7 @@ const DishOwner = props => {
 
   return (
     <>
-      <h2>Posted by: </h2>
+      <h2>Opublikowano przez: </h2>
       <p>{owner.displayName}</p>
       <p>{owner.email}</p>
     </>

@@ -99,7 +99,7 @@ class Patients extends Component {
       <div className={classes.container}>
         <div className={classes.top}>
           <Link to="/dietetic/patients/add">
-            <AddButton classes={classes.buttonAdd} text={"Add patient"} />
+            <AddButton classes={classes.buttonAdd} text={"Dodaj pacjenta"} />
           </Link>
           <PatientsSearch />
         </div>
@@ -114,7 +114,7 @@ class Patients extends Component {
       <div className={classes.container}>
         <div className={classes.top}>
           <Link to="/dietetic/patients/add">
-            <AddButton classes={classes.buttonAdd} text={"Add patient"} />
+            <AddButton classes={classes.buttonAdd} text={"Dodaj pacjenta"} />
           </Link>
           <PatientsSearch />
         </div>

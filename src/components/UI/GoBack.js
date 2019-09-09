@@ -28,7 +28,7 @@ const GoBack = () => {
     <Link to="/dietetic/patients" className={classes.button}>
       <Button variant="contained" color="primary" className={classes.btn}>
         <ArrowBack className={classes.leftIcon} />
-        Go back
+        Powrót
       </Button>
     </Link>
   );

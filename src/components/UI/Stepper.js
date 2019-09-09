@@ -160,7 +160,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ["Primary info", "Additional informations", "Verify interview"];
+  return ["Informacje podstawowe", "Informacje dodatkowe", "Zaakceptuj i zapisz"];
 }
 
 function getStepContent(step) {
@@ -170,7 +170,7 @@ function getStepContent(step) {
     case 1:
       return <PatientInterviewAdditionalForm />;
     case 2:
-      return "To save interview press save button.";
+      return "Aby zapisać wywiad kliknij przycisk Zapisz";
     default:
       return "Unknown step";
   }
@@ -222,7 +222,7 @@ export default function CustomizedSteppers(props) {
                 onClick={handleBack}
                 className={classes.button}
               >
-                Back
+                Cofnij
               </Button>
               <Button
                 variant="contained"
@@ -232,7 +232,7 @@ export default function CustomizedSteppers(props) {
                 }
                 className={classes.button}
               >
-                {activeStep === steps.length - 1 ? "Save interview" : "Next"}
+                {activeStep === steps.length - 1 ? "Zapisz wywiad" : "Dalej"}
               </Button>
             </div>
           </div>

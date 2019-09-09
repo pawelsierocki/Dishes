@@ -40,7 +40,9 @@ const styles = makeStyles({
   },
   paragraph: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     margin: "1rem auto",
     padding: "5px",
     width: "15%",
@@ -51,8 +53,8 @@ const styles = makeStyles({
     }
   },
   icon: {
-    marginRight: "auto",
-    fontSize: "20px"
+    fontSize: "20px",
+    marginBottom: "1rem"
   },
   headerJoined: {
     position: "absolute",
@@ -66,6 +68,11 @@ const styles = makeStyles({
     position: "fixed",
     bottom: "1rem",
     left: "1rem"
+  },
+  "@media only screen and (max-width: 767px)": {
+    headerJoined: {
+      display: "none"
+    }
   }
 });
 
@@ -78,7 +85,7 @@ const ProfileView = props => {
       <div className={classes.header}>
         <UserImage userPhoto={user.photoURL} scale={classes.image} />
         <p className={classes.headerJoined}>
-          Joined: {user.metadata.creationTime.slice(0, 16)}
+          Dołączono: {user.metadata.creationTime.slice(0, 16)}
         </p>
       </div>
 

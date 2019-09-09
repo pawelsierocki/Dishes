@@ -31,20 +31,30 @@ export default function AlertDialogSlide(props) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {"It seem's that interview is not finished yet"}
+          {"Wywiad żywieniowy nie został jeszcze przeprowadzony"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Do you want to finish interview for{" "}
+            Czy chcesz wypełnić ankietę żywieniową dla{" "}
             <span style={{ color: "#0066cc" }}>
               {activePatient.data.fullName}
-            </span>{" "}
-            now ?
+            </span>
+            {"?"}
+            <p
+              style={{
+                fontSize: "10px",
+                marginTop: "2rem",
+                fontStyle: "italic"
+              }}
+            >
+              Uwaga: Ankietę można wypełnić później klikając przycisk w
+              szczegołach pacjenta.
+            </p>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} style={{ color: "red" }}>
-            No
+            Anuluj
           </Button>
           <Link
             to={`/dietetic/patients/id/${activePatient.id}/interview`}
@@ -54,7 +64,7 @@ export default function AlertDialogSlide(props) {
               onClick={handleClose}
               style={{ color: "#0066cc", fontWeight: "bold" }}
             >
-              Yes
+              Tak
             </Button>
           </Link>
         </DialogActions>

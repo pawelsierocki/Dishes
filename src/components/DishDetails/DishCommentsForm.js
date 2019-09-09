@@ -21,11 +21,11 @@ const styles = {
     width: "100%"
   },
   button: {
-    width: "10rem",
+    width: "14rem",
     marginTop: "2rem"
   },
   rightIcon: {
-    marginLeft: "1rem"
+    marginLeft: "auto"
   },
   invalid: {
     color: "red",
@@ -87,22 +87,21 @@ class DishCommentsForm extends Component {
         />
         <TextField
           id="standard-textarea"
-          label="Place your comment"
-          placeholder="Type something..."
+          label="Dodaj komentarz.."
           multiline
           className={classes.form}
           margin="normal"
           value={this.state.message}
           onChange={this.onChange}
         />
-        {invalid && <p className={classes.invalid}>Comment can not be empty</p>}
+        {invalid && <p className={classes.invalid}>Komentarz nie może być pusty</p>}
         <Button
           variant="contained"
           color="primary"
           className={classes.button}
           onClick={this.handleSubmit}
         >
-          Send
+          Dodaj komentarz
           <SendIcon className={classes.rightIcon}>send</SendIcon>
         </Button>
       </div>

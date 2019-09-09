@@ -15,9 +15,9 @@ export default function Modal(props) {
 
   switch (type) {
     case "delete": {
-      title = "Are you sure you want to delete " + dish + "?";
+      title = "Jesteś pewien, że chcesz usunąć " + dish + "?";
       body =
-        "This proccess can not be revert. If you want to delete this dish press Yes button.";
+        "Proces ten nie może zostać odwrócony. Jeżeli nadal chcesz usunąć to danie wciśnij TAK";
       break;
     }
 
@@ -41,10 +41,10 @@ export default function Modal(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClick} color="primary">
-            No
+            Anuluj
           </Button>
           <Button onClick={handleRemove} color="primary" autoFocus>
-            Yes
+            Tak
           </Button>
         </DialogActions>
       </Dialog>

@@ -102,9 +102,10 @@ const styles = theme => ({
     padding: "1rem 0"
   },
   userLeftPhoto: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%"
+    width: "75px",
+    height: "75px",
+    borderRadius: "50%",
+    marginTop: "14px"
   },
   logo: {
     width: 50,

@@ -93,12 +93,12 @@ function SimpleTable(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Patient</TableCell>
-            <TableCell align="right">Age</TableCell>
-            <TableCell align="right">City</TableCell>
-            <TableCell align="right">Telephone</TableCell>
-            <TableCell align="right">Sex</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell>Pacjent</TableCell>
+            <TableCell align="right">Wiek</TableCell>
+            <TableCell align="right">Miasto</TableCell>
+            <TableCell align="right">Telefon</TableCell>
+            <TableCell align="right">Płeć</TableCell>
+            <TableCell align="right">Akcje</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -157,7 +157,7 @@ function SimpleTable(props) {
         disableRestoreFocus
       >
         <Typography className={classes.tooltipText}>
-          Interview is not conducted. Click edit button to finish an interview.
+          Wywiad żywieniowy nie został jeszcze przeprowadzony. Przejdź do szczegółów pacjenta aby wypełnić ankietę.
         </Typography>
       </Popover>
     </Paper>

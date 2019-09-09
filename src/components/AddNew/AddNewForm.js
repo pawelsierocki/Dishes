@@ -25,10 +25,11 @@ const styles = theme => ({
   button: {
     margin: theme.spacing(1),
     marginTop: "2rem",
-    width: "10rem"
+    width: "auto"
   },
   rightIcon: {
-    marginLeft: theme.spacing(1)
+    marginLeft: "1rem",
+    fontSize: "1.2rem"
   },
   form: {
     display: "flex",
@@ -204,8 +205,8 @@ class AddNewForm extends Component {
         >
           <TextField
             id="name"
-            label="Name of a dish"
-            placeholder="Name should be no longer than 50 characters."
+            label="Nazwa dania"
+            placeholder="Nazwa nie powinna być dłuższa niż 50 znaków"
             className={classes.textField}
             variant="filled"
             fullWidth
@@ -214,8 +215,8 @@ class AddNewForm extends Component {
           />
           <TextField
             id="shortDescription"
-            label="Short description"
-            placeholder="Max. length 250 characters."
+            label="Krótki opis dania"
+            placeholder="Maksymalnie 250 znaków"
             className={classes.textField}
             variant="filled"
             fullWidth
@@ -224,8 +225,8 @@ class AddNewForm extends Component {
           />
           <TextField
             id="fullDescription"
-            label="List of ingredients"
-            placeholder="Ingredients must be separated with space"
+            label="Lista składników"
+            placeholder="Składniki powinny być oddzielone spacją"
             multiline
             className={classes.textField}
             variant="filled"
@@ -242,7 +243,7 @@ class AddNewForm extends Component {
                 onChange={this.onChangeCheckbox}
               />
             }
-            label="Add to favourites"
+            label="Dodaj do ulubionych"
             className={classes.checkbox}
           />
           {file && <img ref={this.image} alt="miniature" />}
@@ -261,7 +262,7 @@ class AddNewForm extends Component {
               component="span"
               className={classes.button}
             >
-              {!file ? `Upload image` : `${file.name}`}
+              {!file ? `Dodaj zdjęcie` : `${file.name}`}
             </Button>
           </label>
           <Button
@@ -271,7 +272,7 @@ class AddNewForm extends Component {
             className={classes.button}
             disabled={!this.state.isValid}
           >
-            Send
+            Dodaj danie
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
         </form>

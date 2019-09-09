@@ -36,7 +36,7 @@ const styles = theme => ({
     width: "100%"
   },
   button: {
-    width: "170px",
+    width: "12rem",
     marginTop: "2rem"
   },
   rightIcon: {
@@ -139,8 +139,7 @@ class AddNewPatientForm extends Component {
         >
           <TextField
             id="fullName"
-            label="Patient full name"
-            placeholder="Type patient full name"
+            label="Imię i nazwisko"
             className={classes.textField}
             variant="filled"
             fullWidth
@@ -149,8 +148,7 @@ class AddNewPatientForm extends Component {
           />
           <TextField
             id="city"
-            label="City"
-            placeholder="City"
+            label="Miasto"
             className={classes.textField}
             variant="filled"
             fullWidth
@@ -159,8 +157,7 @@ class AddNewPatientForm extends Component {
           />
           <TextField
             id="telephoneNumber"
-            label="Telephone number"
-            placeholder="Telephone number"
+            label="Numer telefonu"
             className={classes.textField}
             variant="filled"
             fullWidth
@@ -172,21 +169,21 @@ class AddNewPatientForm extends Component {
             className={classes.formControl}
             fullWidth
           >
-            <InputLabel htmlFor="filled-age-simple">Sex</InputLabel>
+            <InputLabel htmlFor="filled-age-simple">Płeć</InputLabel>
             <Select
               value={this.state.sex}
               onChange={this.handleChangeSex}
               input={<FilledInput name="sex" id="filled-age-simple" />}
             >
-              <MenuItem value={"Male"}>Male</MenuItem>
-              <MenuItem value={"Female"}>Female</MenuItem>
+              <MenuItem value={"Male"}>Mężczyzna</MenuItem>
+              <MenuItem value={"Female"}>Kobieta</MenuItem>
             </Select>
           </FormControl>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               margin="normal"
               id="mui-pickers-date"
-              label="Birth date"
+              label="Data urodzenia"
               onChange={this.handleDateChange}
               KeyboardButtonProps={{
                 "aria-label": "change date"
@@ -202,7 +199,7 @@ class AddNewPatientForm extends Component {
             className={classes.button}
             disabled={!this.state.isValid}
           >
-            Add patient
+            Dodaj pacjenta
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
         </form>
