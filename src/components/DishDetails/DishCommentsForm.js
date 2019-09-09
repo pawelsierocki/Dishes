@@ -21,7 +21,7 @@ const styles = {
     width: "100%"
   },
   button: {
-    width: "50%",
+    width: "10rem",
     marginTop: "2rem"
   },
   rightIcon: {
@@ -31,6 +31,10 @@ const styles = {
     color: "red",
     fontSize: "10px",
     fontStyle: "italic"
+  },
+  name: {
+    width: "auto",
+    alignSelf: "flex-start"
   }
 };
 
@@ -77,7 +81,7 @@ class DishCommentsForm extends Component {
           id="standard-textarea"
           multiline
           margin="normal"
-          className={classes.form}
+          className={classes.name}
           disabled
           value={user.displayName}
         />

@@ -32,6 +32,17 @@ const styles = {
     borderRadius: 0,
     padding: "5px 15px",
     fontSize: "10px"
+  },
+  "@media only screen and (max-width: 767px)": {
+    buttonAdd: {
+      float: "none",
+      width: "100%",
+      height: "auto",
+      borderRadius: 0,
+      padding: "5px 15px",
+      fontSize: "10px",
+      marginBottom: "1rem"
+    }
   }
 };
 

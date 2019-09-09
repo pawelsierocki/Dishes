@@ -34,18 +34,28 @@ const styles = {
     fontStyle: "italic"
   },
   form: {
-    width: "20%"
+    width: "100%",
+    marginBottom: "3rem"
   },
   bottom: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     marginTop: "5rem",
     borderTop: "1px solid #000",
-    paddingTop: "5rem"
+    paddingTop: "5rem",
+    flexWrap: "wrap"
   },
   commentSection: {
-    width: "70%",
+    width: "100%",
     marginLeft: "auto"
+  },
+  "@media only screen and (max-width: 991px)": {
+    main: {
+      flexDirection: "column"
+    },
+    owner: {
+      marginLeft: 0
+    }
   }
 };
 

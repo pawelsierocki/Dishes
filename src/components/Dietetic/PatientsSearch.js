@@ -13,6 +13,11 @@ const styles = {
   icon: {
     fontSize: "18px",
     color: "#0066cc"
+  },
+  "@media only screen and (max-width: 767px)": {
+    textField: {
+      width: "100%"
+    }
   }
 };
 

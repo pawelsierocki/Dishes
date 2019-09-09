@@ -6,34 +6,48 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   container: {
     background: "#fff",
-    padding: "1rem",
     boxShadow: "1px 2px 5px #000",
     marginBottom: "2rem",
-    borderRadius: "5px",
     display: "flex",
     flexDirection: "column"
   },
   userInfo: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    background: "#0066cc",
+    color: "#fff",
+    padding: ".5rem"
   },
   avatar: {
     width: "2.5rem",
     height: "2.5rem",
-    borderRadius: "50%"
+    borderRadius: "50%",
+    border: "2px solid #fff"
   },
   username: {
     marginLeft: "1rem",
     fontSize: "14px"
   },
   messageBox: {
-    marginTop: "1.5rem",
-    padding: "0 .5rem"
+    marginTop: "1rem",
+    padding: "0 1rem"
   },
   date: {
     marginLeft: "auto",
     fontSize: "10px",
     fontStyle: "italic"
+  },
+  "@media only screen and (max-width: 767px)": {
+    avatar: {
+      width: "2rem",
+      height: "2rem"
+    },
+    username: {
+      fontSize: "12px"
+    },
+    date: {
+      fontSize: "8px"
+    }
   }
 }));
 

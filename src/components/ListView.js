@@ -17,6 +17,11 @@ const styles = {
     flexWrap: "wrap",
     margin: "3rem auto",
     width: "85%"
+  },
+  "@media only screen and (max-width: 934px)": {
+    container: {
+      justifyContent: "center"
+    }
   }
 };
 
