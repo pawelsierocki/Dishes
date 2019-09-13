@@ -17,9 +17,11 @@ const styles = () => ({
 
 class PatientDetails extends Component {
   componentDidMount() {
-    this.props.setActivePage(
-      `Dietetyk - Pacjenci - ${this.props.activePatient.data.fullName}`
-    );
+    if (this.props.activePatient) {
+      this.props.setActivePage(
+        `Dietetyk - Pacjenci - ${this.props.activePatient.data.fullName}`
+      );
+    }
   }
 
   render = () => {

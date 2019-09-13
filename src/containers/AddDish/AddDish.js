@@ -69,6 +69,9 @@ class AddDish extends Component {
 
   render() {
     const { success } = this.state;
+    const { ingredients } = this.props;
+
+    console.log(ingredients);
     return !success ? (
       <AddNewForm handleAddNew={this.handleAddNewDish} />
     ) : (
@@ -82,7 +85,8 @@ AddDish.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.userReducer.user
+  user: state.userReducer.user,
+  ingredients: state.dishesReducer.ingredients
 });
 
 const mapDispatchToProps = dispatch => ({

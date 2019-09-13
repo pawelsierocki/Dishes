@@ -14,6 +14,7 @@ const API_COMMENTS_URI = `${API_HOST}/comments`;
 const API_DIETETIC = `${API_HOST}/dietetic`;
 
 export const ENDPOINT_DISH = `${API_URI}/dishes.json`;
+export const ENDPOINT_INGREDIENTS = `${API_URI}/ingredients.json`;
 
 export const ENDPOINT_DISH_CHANGE = id => {
   return `${API_URI}/dishes/${id}.json`;

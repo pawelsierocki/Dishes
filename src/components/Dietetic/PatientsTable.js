@@ -64,6 +64,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: "12px",
     fontStyle: "italic",
     color: "red"
+  },
+  header: {
+    background: "#0066cc"
+  },
+  headerCell: {
+    color: "#fff"
   }
 }));
 
@@ -91,14 +97,24 @@ function SimpleTable(props) {
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
-        <TableHead>
+        <TableHead className={classes.header}>
           <TableRow>
-            <TableCell>Pacjent</TableCell>
-            <TableCell align="right">Wiek</TableCell>
-            <TableCell align="right">Miasto</TableCell>
-            <TableCell align="right">Telefon</TableCell>
-            <TableCell align="right">Płeć</TableCell>
-            <TableCell align="right">Akcje</TableCell>
+            <TableCell className={classes.headerCell}>Pacjent</TableCell>
+            <TableCell className={classes.headerCell} align="right">
+              Wiek
+            </TableCell>
+            <TableCell className={classes.headerCell} align="right">
+              Miasto
+            </TableCell>
+            <TableCell className={classes.headerCell} align="right">
+              Telefon
+            </TableCell>
+            <TableCell className={classes.headerCell} align="right">
+              Płeć
+            </TableCell>
+            <TableCell className={classes.headerCell} align="right">
+              Akcje
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -157,7 +173,8 @@ function SimpleTable(props) {
         disableRestoreFocus
       >
         <Typography className={classes.tooltipText}>
-          Wywiad żywieniowy nie został jeszcze przeprowadzony. Przejdź do szczegółów pacjenta aby wypełnić ankietę.
+          Wywiad żywieniowy nie został jeszcze przeprowadzony. Przejdź do
+          szczegółów pacjenta aby wypełnić ankietę.
         </Typography>
       </Popover>
     </Paper>

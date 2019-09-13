@@ -2,6 +2,7 @@ import {
   FETCH_CURRENT_USER,
   SET_CURRENT_DISH,
   SET_ACTIVE_PAGE,
+  SET_INGREDIENTS,
   SET_ACTIVE_PATIENT,
   SET_SEARCH_QUERY
 } from "../../constants/action-types";
@@ -18,6 +19,11 @@ export const setSelectedDish = payload => ({
 
 export const setActivePage = payload => ({
   type: SET_ACTIVE_PAGE,
+  payload
+});
+
+export const setIngredients = payload => ({
+  type: SET_INGREDIENTS,
   payload
 });
 

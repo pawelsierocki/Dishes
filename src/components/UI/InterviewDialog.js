@@ -40,16 +40,17 @@ export default function AlertDialogSlide(props) {
               {activePatient.data.fullName}
             </span>
             {"?"}
-            <p
+            <span
               style={{
                 fontSize: "10px",
                 marginTop: "2rem",
-                fontStyle: "italic"
+                fontStyle: "italic",
+                display: "block"
               }}
             >
               Uwaga: Ankietę można wypełnić później klikając przycisk w
               szczegołach pacjenta.
-            </p>
+            </span>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
