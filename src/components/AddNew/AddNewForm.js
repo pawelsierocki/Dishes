@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +10,8 @@ import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+
+import MultiSelect from "../UI/MultiSelect";
 
 const styles = theme => ({
   container: {
@@ -53,7 +56,7 @@ class AddNewForm extends Component {
     this.state = {
       name: "",
       shortDescription: "",
-      fullDescription: "",
+      ingredients: [],
       favourite: false,
       isValidForm: false,
       validName: false,
@@ -70,7 +73,7 @@ class AddNewForm extends Component {
     this.setState({
       name: "",
       shortDescription: "",
-      fullDescription: "",
+      ingredients: [],
       favourite: false,
       isValid: false,
       validName: false,
@@ -86,7 +89,7 @@ class AddNewForm extends Component {
     const newDish = {
       title: this.state.name,
       shortDescription: this.state.shortDescription,
-      fullDescription: this.state.fullDescription,
+      ingredients: this.state.ingredients,
       favourite: this.state.favourite
     };
 
@@ -108,19 +111,23 @@ class AddNewForm extends Component {
   };
 
   componentDidMount() {
-    this.inputFile.current.addEventListener(
-      "change",
-      ev => this.handleImageChange(ev),
-      false
-    );
+    if (this.props.items) {
+      this.inputFile.current.addEventListener(
+        "change",
+        ev => this.handleImageChange(ev),
+        false
+      );
+    }
   }
 
   componentWillUnmount() {
-    this.inputFile.current.removeEventListener(
-      "change",
-      ev => this.handleImageChange(ev),
-      false
-    );
+    if (this.props.items) {
+      this.inputFile.current.removeEventListener(
+        "change",
+        ev => this.handleImageChange(ev),
+        false
+      );
+    }
   }
 
   handleChange = e => {
@@ -164,7 +171,7 @@ class AddNewForm extends Component {
         );
         break;
       }
-      case "fullDescription": {
+      case "ingredients": {
         this.setState(
           {
             validFull: val.length > 0 ? true : false
@@ -190,12 +197,21 @@ class AddNewForm extends Component {
     this.setState({ file: e.target.files[0] });
   };
 
+  setChangeIngredients = ingredients => {
+    this.setState(
+      {
+        ingredients
+      },
+      () => this.validateForm("ingredients", ingredients)
+    );
+  };
+
   render() {
     const { classes } = this.props;
 
     const { file } = this.state;
 
-    return (
+    return this.props.items ? (
       <div className={classes.container}>
         <form
           noValidate
@@ -223,16 +239,11 @@ class AddNewForm extends Component {
             value={this.state.shortDescription}
             onChange={this.handleChange}
           />
-          <TextField
-            id="fullDescription"
-            label="Lista składników"
-            placeholder="Składniki powinny być oddzielone spacją"
-            multiline
+          <MultiSelect
             className={classes.textField}
-            variant="filled"
-            fullWidth
-            value={this.state.fullDescription}
-            onChange={this.handleChange}
+            items={this.props.items}
+            onChangeIngredients={this.setChangeIngredients}
+            id="ingredients"
           />
           <FormControlLabel
             control={
@@ -277,6 +288,8 @@ class AddNewForm extends Component {
           </Button>
         </form>
       </div>
+    ) : (
+      <Redirect to={"/list"} />
     );
   }
 }

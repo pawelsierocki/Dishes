@@ -165,7 +165,7 @@ class RecipeReviewCard extends Component {
   render() {
     const { classes, dish, showDeleteBtn } = this.props;
     const dishObj = { ...dish.data };
-    const ingredients = dishObj.fullDescription.split("\n").map((el, index) => (
+    const ingredients = dishObj.ingredients.map((el, index) => (
       <div className={classes.ingredientContainer} key={index}>
         <Check className={classes.icon} />
         <Typography paragraph className={classes.ingredient}>

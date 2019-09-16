@@ -69,11 +69,12 @@ class AddDish extends Component {
 
   render() {
     const { success } = this.state;
-    const { ingredients } = this.props;
 
-    console.log(ingredients);
     return !success ? (
-      <AddNewForm handleAddNew={this.handleAddNewDish} />
+      <AddNewForm
+        handleAddNew={this.handleAddNewDish}
+        items={this.props.ingredients}
+      />
     ) : (
       <Redirect to="/mydishes" />
     );
