@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ProfileView from "../../components/ProfileView";
+import Accordion from "../../components/UI/Accordion";
 import { setActivePage } from "../../store/actions/actions";
 
 class Profile extends Component {
@@ -25,7 +26,14 @@ class Profile extends Component {
   render() {
     const { user } = this.state;
 
-    return user && <ProfileView user={user} />;
+    return (
+      user && (
+        <>
+          <Accordion />
+          <ProfileView user={user} />
+        </>
+      )
+    );
   }
 }
 

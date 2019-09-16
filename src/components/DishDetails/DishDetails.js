@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 const DishDetails = props => {
   const { dish } = props;
-  const ingredients = dish.fullDescription
-    .split("\n")
-    .map((ingredient, index) => <p key={index}>{ingredient}</p>);
+  const ingredients = dish.ingredients.map((ingredient, index) => (
+    <p key={index}>{ingredient}</p>
+  ));
 
   return (
     <>
