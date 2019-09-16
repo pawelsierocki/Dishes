@@ -10,7 +10,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     marginTop: "1rem",
-    boxShadow: "0 2px 5px #000"
+    boxShadow: "0 2px 5px #a9a9a9",
+    position: "fixed",
+    zIndex: "999"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -20,6 +22,11 @@ const useStyles = makeStyles(theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary
+  },
+  "@media only screen and (max-width: 600px)": {
+    root: {
+      marginTop: ".5rem"
+    }
   }
 }));
 

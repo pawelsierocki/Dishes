@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { setActivePage } from "../../store/actions/actions";
 import GoBack from "../UI/GoBack";
 import InterviewDialog from "../UI/InterviewDialog";
+import Paper from "../UI/Paper";
 
 const styles = () => ({
   top: {
@@ -35,9 +36,11 @@ class PatientDetails extends Component {
         <div className={classes.bottom}>
           <>
             {!activePatient.data.interview && (
-              <InterviewDialog activePatient={activePatient} />
+              <>
+                <InterviewDialog activePatient={activePatient} />
+                <Paper title={"Ostrzeżenie !"} message={"Wywiad żywieniowy nie został przeprowadzony ! Aby móc ułożyć jadłospis dla tego pacjenta należy najpierw wypełnić ankietę zdrowotną !"} warning={true} />
+              </>
             )}
-            {activePatient.data.fullName}
           </>
         </div>
       </div>

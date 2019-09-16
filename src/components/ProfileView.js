@@ -11,7 +11,10 @@ import UserImage from "../components/UI/UserImage";
 const styles = makeStyles({
   container: {
     width: "100%",
-    fontFamily: "Encode Sans Condensed"
+    fontFamily: "Encode Sans Condensed",
+    position: "relative",
+    top: "8rem",
+    zIndex: "50"
   },
   header: {
     height: "300px",

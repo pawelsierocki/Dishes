@@ -156,21 +156,35 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     flexDirection: "column",
     marginTop: "2rem"
+  },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex"
   }
 }));
 
 function getSteps() {
-  return ["Informacje podstawowe", "Informacje dodatkowe", "Zaakceptuj i zapisz"];
+  return [
+    "Informacje podstawowe",
+    "Informacje dodatkowe",
+    "Zaakceptuj i zapisz"
+  ];
 }
 
-function getStepContent(step) {
+function getStepContent(step, classes) {
   switch (step) {
     case 0:
       return <PatientInterviewPrimaryForm />;
     case 1:
       return <PatientInterviewAdditionalForm />;
     case 2:
-      return "Aby zapisać wywiad kliknij przycisk Zapisz";
+      return (
+        <p className={classes.center}>
+          Aby zapisać wywiad kliknij przycisk{" "}
+          <span style={{ color: "#0066cc", marginLeft: ".2rem" }}>Zapisz wywiad</span>
+        </p>
+      );
     default:
       return "Unknown step";
   }
@@ -214,7 +228,7 @@ export default function CustomizedSteppers(props) {
         <div>
           <div className={classes.stepButtons}>
             <div className={classes.instructions}>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, classes)}
             </div>
             <div>
               <Button
