@@ -8,11 +8,15 @@ import { withStyles } from "@material-ui/core/styles";
 import { setActivePage } from "../../store/actions/actions";
 import GoBack from "../UI/GoBack";
 import InterviewDialog from "../UI/InterviewDialog";
-import Paper from "../UI/Paper";
+import Popup from "../UI/Popup";
+import DataDisplay from "../UI/DataDisplay";
 
 const styles = () => ({
   top: {
     marginBottom: "2rem"
+  },
+  inner: {
+    marginTop: "2rem"
   }
 });
 
@@ -31,16 +35,27 @@ class PatientDetails extends Component {
     const render = activePatient ? (
       <div className={classes.container}>
         <div className={classes.top}>
-          <GoBack />
+          <GoBack href={"/dietetic/patients"} />
         </div>
         <div className={classes.bottom}>
           <>
             {!activePatient.data.interview && (
               <>
                 <InterviewDialog activePatient={activePatient} />
-                <Paper title={"Ostrzeżenie !"} message={"Wywiad żywieniowy nie został przeprowadzony ! Aby móc ułożyć jadłospis dla tego pacjenta należy najpierw wypełnić ankietę zdrowotną !"} warning={true} />
+                <Popup
+                  title={"Ostrzeżenie !"}
+                  message={
+                    "Wywiad żywieniowy nie został przeprowadzony ! Aby móc ułożyć jadłospis dla tego pacjenta należy najpierw wypełnić ankietę zdrowotną !"
+                  }
+                  warning={true}
+                  activePatient={this.props.activePatient}
+                />
               </>
             )}
+
+            <div className={classes.inner}>
+              <DataDisplay activePatient={activePatient} />
+            </div>
           </>
         </div>
       </div>

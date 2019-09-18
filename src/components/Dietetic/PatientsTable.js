@@ -14,6 +14,8 @@ import Paper from "@material-ui/core/Paper";
 import Edit from "@material-ui/icons/Edit";
 import PriorityHigh from "@material-ui/icons/NotificationsNone";
 
+import { calculateAge } from "../../store/helpers/patients";
+
 const useStyles = makeStyles(theme => ({
   root: {
     marginTop: theme.spacing(3),
@@ -72,13 +74,6 @@ const useStyles = makeStyles(theme => ({
     color: "#fff"
   }
 }));
-
-const calculateAge = birthdayDate => {
-  const diff = Date.now() - new Date(birthdayDate).getTime();
-  const ageDate = new Date(diff);
-
-  return Math.abs(ageDate.getUTCFullYear() - 1970);
-};
 
 function SimpleTable(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);

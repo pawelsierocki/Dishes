@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,17 +22,21 @@ const useStyles = makeStyles({
   }
 });
 
-const GoBack = () => {
+const GoBack = props => {
   const classes = useStyles();
 
   return (
-    <Link to="/dietetic/patients" className={classes.button}>
+    <Link to={props.href} className={classes.button}>
       <Button variant="contained" color="primary" className={classes.btn}>
         <ArrowBack className={classes.leftIcon} />
         Powrót
       </Button>
     </Link>
   );
+};
+
+GoBack.propTypes = {
+  href: PropTypes.string.isRequired
 };
 
 export default GoBack;

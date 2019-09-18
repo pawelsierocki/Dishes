@@ -54,7 +54,7 @@ class AddNewPatient extends Component {
     return (
       <div className={classes.container}>
         {this.state.addedNewPatient && this.redirectToMain()}
-        <GoBack />
+        <GoBack href={"/dietetic/patients"} />
         <AddNewPatientForm handleAddPatient={this.handleAddPatient} />
       </div>
     );

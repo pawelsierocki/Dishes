@@ -3,10 +3,19 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
+import { withStyles } from "@material-ui/core/styles";
+
 import { setActivePage } from "../../store/actions/actions";
 
 import Stepper from "../UI/Stepper";
+import GoBack from "../UI/GoBack";
 import { addInterviewForPatient } from "../../shared/api/patientsAPI";
+
+const styles = () => ({
+  top: {
+    marginBottom: "2rem"
+  }
+});
 
 class PatientDetails extends Component {
   constructor() {
@@ -45,8 +54,16 @@ class PatientDetails extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return this.props.activePatient && !this.state.submittedInterview ? (
-      <Stepper handleAddInterview={this.saveInterview} />
+      <>
+        <div className={classes.top}>
+          <GoBack
+            href={`/dietetic/patients/id/${this.props.activePatient.id}`}
+          />
+        </div>
+        <Stepper handleAddInterview={this.saveInterview} />
+      </>
     ) : (
       <Redirect to="/dietetic/patients" />
     );
@@ -69,4 +86,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PatientDetails);
+)(withStyles(styles)(PatientDetails));
