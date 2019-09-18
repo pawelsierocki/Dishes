@@ -50,6 +50,21 @@ const useStyles = makeStyles(theme => ({
   },
   edit: {
     marginLeft: "auto"
+  },
+  "@media only screen and (max-width: 600px)": {
+    title: {
+      fontSize: "14px"
+    },
+    paragraph: {
+      fontSize: "10px"
+    },
+    icon: {
+      fontSize: "40px"
+    },
+    info: {
+      marginLeft: "2rem",
+      marginRight: "2rem"
+    }
   }
 }));
 
@@ -72,7 +87,7 @@ export default function PaperSheet(props) {
         )}
 
         <div className={classes.info}>
-          <Typography variant="h5" component="h3">
+          <Typography variant="h5" component="h3" className={classes.title}>
             {props.title}
           </Typography>
           <Typography component="p" className={classes.paragraph}>

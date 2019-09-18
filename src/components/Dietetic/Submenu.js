@@ -13,6 +13,11 @@ const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     width: "100%"
+  },
+  "@media only screen and (max-width: 600px)": {
+    root: {
+      marginTop: "-.5rem"
+    }
   }
 });
 

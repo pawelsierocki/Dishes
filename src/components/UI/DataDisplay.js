@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -21,12 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PaperSheet(props) {
+export default function DataDisplay(props) {
   const classes = useStyles();
 
   const { activePatient } = props;
 
-  console.log(activePatient);
   return (
     <div>
       <Paper className={classes.root}>
@@ -69,3 +69,7 @@ export default function PaperSheet(props) {
     </div>
   );
 }
+
+DataDisplay.propTypes = {
+  activePatient: PropTypes.object.isRequired
+};
