@@ -32,13 +32,22 @@ class PatientInterviewPrimaryForm extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const form = JSON.parse(localStorage.getItem("primaryForm"));
+
+    this.setState({
+      ...form
+    });
+  };
+
+  componentWillUnmount = () => {
+    localStorage.setItem("primaryForm", JSON.stringify({ ...this.state }));
+  };
+
   handleChange = event => {
-    this.setState(
-      {
-        [event.target.id]: event.target.value
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   };
 
   render() {

@@ -26,6 +26,18 @@ class PatientInterviewAdditionalForm extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const form = JSON.parse(localStorage.getItem("extendedForm"));
+
+    this.setState({
+      ...form
+    });
+  };
+
+  componentWillUnmount = () => {
+    localStorage.setItem("extendedForm", JSON.stringify({ ...this.state }));
+  };
+
   handleChange = event => {
     this.setState(
       {

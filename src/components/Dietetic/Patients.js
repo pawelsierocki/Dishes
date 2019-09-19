@@ -60,6 +60,9 @@ class Patients extends Component {
     this.props.setActivePage("Dietetyk - Pacjenci");
 
     this.getPatients();
+
+    localStorage.removeItem("primaryForm");
+    localStorage.removeItem("extendedForm");
   }
 
   componentWillUnmount() {

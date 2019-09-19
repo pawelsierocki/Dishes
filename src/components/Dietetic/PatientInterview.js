@@ -55,6 +55,7 @@ class PatientDetails extends Component {
 
   render() {
     const { classes } = this.props;
+
     return this.props.activePatient && !this.state.submittedInterview ? (
       <>
         <div className={classes.top}>

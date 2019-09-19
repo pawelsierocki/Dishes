@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic",
     fontSize: "14px",
     marginBottom: ".2rem"
+  },
+  bold: {
+    fontWeight: "bold"
   }
 }));
 
@@ -30,39 +33,47 @@ export default function DataDisplay(props) {
   return (
     <div>
       <Paper className={classes.root}>
-        <Typography className={classes.header}>Patient details</Typography>
+        <Typography className={classes.header}>Dane pacjenta</Typography>
 
         <Typography className={classes.paragraph}>
-          Name: {activePatient.data.fullName}
+          Imię i nazwisko:{" "}
+          <span className={classes.bold}> {activePatient.data.fullName}</span>
         </Typography>
 
         <Typography className={classes.paragraph}>
-          Age: {calculateAge(activePatient.data.date)}
+          Wiek:{" "}
+          <span className={classes.bold}>
+            {calculateAge(activePatient.data.date)}
+          </span>
         </Typography>
 
         <Typography className={classes.paragraph}>
-          Sex: {activePatient.data.sex}
+          Płeć: <span className={classes.bold}>{activePatient.data.sex}</span>
         </Typography>
 
         <Typography className={classes.paragraph}>
-          City: {activePatient.data.city}
+          Miasto:{" "}
+          <span className={classes.bold}>{activePatient.data.city}</span>
         </Typography>
 
         <Typography className={classes.paragraph}>
-          Telephone number: {activePatient.data.telephoneNumber}
+          Numer kontaktowy:{" "}
+          <span className={classes.bold}>
+            {activePatient.data.telephoneNumber}
+          </span>
         </Typography>
       </Paper>
 
       <Paper className={classes.root}>
-        <Typography className={classes.header}>Interview details</Typography>
+        <Typography className={classes.header}>
+          Szczegóły wywiadu żywieniowego
+        </Typography>
 
         {activePatient.data.interview ? (
-          <Typography className={classes.paragraph}>
-            Interview details
-          </Typography>
+          <Typography className={classes.paragraph}>Szczegóły</Typography>
         ) : (
           <Typography className={classes.paragraph}>
-            No interview finished yet
+            Wywiad żywieniowy nie został jeszcze przeprowadzony
           </Typography>
         )}
       </Paper>
