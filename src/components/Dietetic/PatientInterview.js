@@ -37,10 +37,10 @@ class PatientDetails extends Component {
   saveInterview = () => {
     const { activePatient, user } = this.props;
 
-    var interview = {
-      height: 180,
-      weight: 82
-    };
+    const primaryForm = JSON.parse(localStorage.getItem("primaryForm"));
+    const extendedForm = JSON.parse(localStorage.getItem("extendedForm"));
+
+    const interview = { ...primaryForm, ...extendedForm };
 
     addInterviewForPatient(user.uid, activePatient.id, interview)
       .then(() => {

@@ -39,12 +39,9 @@ class PatientInterviewAdditionalForm extends Component {
   };
 
   handleChange = event => {
-    this.setState(
-      {
-        [event.target.id]: event.target.value
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   };
 
   render() {
