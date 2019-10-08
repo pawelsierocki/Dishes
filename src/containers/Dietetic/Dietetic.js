@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core";
 
 import Submenu from "../../components/Dietetic/Submenu";
-import Patients from "../../components/Dietetic/Patients";
-import Diet from "../../components/Dietetic/Diet";
-import AddNewPatient from "../../components/Dietetic/AddNewPatient";
-import PatientDetails from "../../components/Dietetic/PatientDetails";
-import PatientInterview from "../../components/Dietetic/PatientInterview";
+import DieteticRouter from "../Router/DieteticRouter";
 
 const styles = {
   submenu: {
@@ -30,20 +25,7 @@ class Dietetic extends Component {
           <Submenu />
         </div>
         <div className={classes.main}>
-          <Route path="/dietetic/patients" exact component={Patients} />
-          <Route
-            path="/dietetic/patients/id/:id"
-            exact
-            component={PatientDetails}
-          />
-          <Route
-            path="/dietetic/patients/id/:id/interview"
-            exact
-            component={PatientInterview}
-          />
-          <Route path="/dietetic/patients/add" component={AddNewPatient} />
-
-          <Route path="/dietetic/diet" component={Diet} />
+          <DieteticRouter />
         </div>
       </>
     );

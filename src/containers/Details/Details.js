@@ -60,6 +60,8 @@ const styles = {
 };
 
 class Details extends Component {
+  _isMounted = false;
+
   constructor() {
     super();
 
@@ -76,15 +78,18 @@ class Details extends Component {
   }
 
   componentWillUnmount() {
-    this.props.setSelectedDish({ selectedDish: null });
+    this._isMounted = false;
   }
 
   getCommentsFromDB = () => {
+    this._isMounted = true;
+
     getCommentsForDish(this.props.dish.id)
       .then(resp => {
-        this.setState({
-          comments: resp.data
-        });
+        if (this._isMounted)
+          this.setState({
+            comments: resp.data
+          });
       })
       .catch(() => {
         this.setState({

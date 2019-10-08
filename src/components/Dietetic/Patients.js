@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -47,6 +46,8 @@ const styles = {
 };
 
 class Patients extends Component {
+  _isMounted = false;
+
   constructor() {
     super();
 
@@ -67,15 +68,19 @@ class Patients extends Component {
 
   componentWillUnmount() {
     this.props.setSearchQuery("");
+    this._isMounted = false;
   }
 
   getPatients = () => {
+    this._isMounted = true;
+
     getPatientsForDietetic(this.props.user.uid)
       .then(resp => {
-        this.setState({
-          patients: resp.data,
-          loading: false
-        });
+        if (this._isMounted)
+          this.setState({
+            patients: resp.data,
+            loading: false
+          });
       })
       .catch(error => {
         console.log(error);
@@ -101,9 +106,11 @@ class Patients extends Component {
     ) : !loading && patients !== null && mappedPatients.length ? (
       <div className={classes.container}>
         <div className={classes.top}>
-          <Link to="/dietetic/patients/add">
-            <AddButton classes={classes.buttonAdd} text={"Dodaj pacjenta"} />
-          </Link>
+          <AddButton
+            classes={classes.buttonAdd}
+            text={"Dodaj pacjenta"}
+            href={"/dietetic/patients/add"}
+          />
           <PatientsSearch />
         </div>
         <div className={classes.bottom}>
@@ -116,9 +123,11 @@ class Patients extends Component {
     ) : (
       <div className={classes.container}>
         <div className={classes.top}>
-          <Link to="/dietetic/patients/add">
-            <AddButton classes={classes.buttonAdd} text={"Dodaj pacjenta"} />
-          </Link>
+          <AddButton
+            classes={classes.buttonAdd}
+            text={"Dodaj pacjenta"}
+            href={"/dietetic/patients/add"}
+          />
           <PatientsSearch />
         </div>
         <h3>No patients with this criteria</h3>

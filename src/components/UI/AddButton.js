@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
@@ -17,10 +18,12 @@ const useStyles = makeStyles({
 const AddButton = props => {
   const classes = useStyles();
   return (
-    <Fab color="primary" aria-label="Add" className={props.classes}>
-      <p className={classes.text}>{props.text}</p>{" "}
-      <AddIcon className={classes.icon} />
-    </Fab>
+    <Link to={props.href}>
+      <Fab color="primary" aria-label="Add" className={props.classes}>
+        <p className={classes.text}>{props.text}</p>{" "}
+        <AddIcon className={classes.icon} />
+      </Fab>
+    </Link>
   );
 };
 

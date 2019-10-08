@@ -1,26 +1,35 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import ItemList from "../ItemList/ItemList";
-import FavouritesList from "../Favourites/FavouritesList";
-import AddDish from "../AddDish/AddDish";
-import MyDishes from "../MyDishes/MyDishes";
-import Profile from "../Profile/Profile";
-import Details from "../Details/Details";
 import Dietetic from "../Dietetic/Dietetic";
+
+const AddDish = lazy(() => import("../AddDish/AddDish"));
+const FavouritesList = lazy(() => import("../Favourites/FavouritesList"));
+const MyDishes = lazy(() => import("../MyDishes/MyDishes"));
+const Profile = lazy(() => import("../Profile/Profile"));
+const Details = lazy(() => import("../Details/Details"));
 
 const AppRouter = () => {
   return (
     <Switch>
-      <Route path="/add" component={AddDish} />
       <Route path="/list" component={ItemList} />
-      <Route path="/favourites" component={FavouritesList} />
-      <Route path="/mydishes" component={MyDishes} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/details/:id" component={Details} />
+      <Route path="/add" component={WaitingComponent(AddDish)} />
+      <Route path="/favourites" component={WaitingComponent(FavouritesList)} />
+      <Route path="/mydishes" component={WaitingComponent(MyDishes)} />
+      <Route path="/profile" component={WaitingComponent(Profile)} />
+      <Route path="/details/:id" component={WaitingComponent(Details)} />
       <Route path="/dietetic" component={Dietetic} />
       <Redirect to="/list" />
     </Switch>
+  );
+};
+
+const WaitingComponent = Component => {
+  return props => (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Component {...props} />
+    </Suspense>
   );
 };
 

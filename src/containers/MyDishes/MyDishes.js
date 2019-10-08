@@ -8,6 +8,8 @@ import { getAllDishes } from "../../shared/api/dishesAPI";
 import { setActivePage } from "../../store/actions/actions";
 
 class MyDishes extends Component {
+  _isMounted = false;
+
   constructor() {
     super();
 
@@ -18,12 +20,15 @@ class MyDishes extends Component {
   }
 
   getList = () => {
+    this._isMounted = true;
+
     getAllDishes()
       .then(response => {
-        this.setState({
-          dishesList: response.data,
-          loading: false
-        });
+        if (this._isMounted)
+          this.setState({
+            dishesList: response.data,
+            loading: false
+          });
       })
       .catch(error => {
         console.log(error);
@@ -33,6 +38,10 @@ class MyDishes extends Component {
   componentDidMount() {
     this.props.setActivePage("Moje dania");
     this.getList();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   onUpdateList = () => {

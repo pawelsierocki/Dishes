@@ -7,6 +7,8 @@ import { getAllDishes } from "../../shared/api/dishesAPI";
 import { setActivePage } from "../../store/actions/actions";
 
 class FavouritesList extends Component {
+  _isMounted = false;
+
   constructor() {
     super();
 
@@ -17,12 +19,15 @@ class FavouritesList extends Component {
   }
 
   getList = () => {
+    this._isMounted = true;
+
     getAllDishes()
       .then(response => {
-        this.setState({
-          dishesList: response.data,
-          loading: false
-        });
+        if (this._isMounted)
+          this.setState({
+            dishesList: response.data,
+            loading: false
+          });
       })
       .catch(error => {
         console.log(error);
@@ -32,6 +37,10 @@ class FavouritesList extends Component {
   componentWillMount() {
     this.props.setActivePage("Ulubione");
     this.onUpdateList();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   onUpdateList = () => {
