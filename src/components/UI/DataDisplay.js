@@ -155,22 +155,22 @@ export default function DataDisplay(props) {
         </Paper>
       )}
 
+      {activePatient.data.interview && activePatient.data.diet && (
+        <Paper className={classes.root}>
+          <Typography className={classes.header}>Diety</Typography>
+
+          <Typography className={classes.paragraph}>
+            #1 Dieta do wyświetlenia
+          </Typography>
+        </Paper>
+      )}
+
       {activePatient.data.interview && (
-        <>
-          <Paper className={classes.root}>
-            <Typography className={classes.header}>Diety</Typography>
-
-            <Typography className={classes.paragraph}>
-              #1 Dieta do wyświetlenia
-            </Typography>
-          </Paper>
-
-          <AddButton
-            text={"Dodaj dietę"}
-            href={"/dietetic/diet"}
-            classes={classes.buttonAdd}
-          />
-        </>
+        <AddButton
+          text={"Dodaj dietę"}
+          href={`/dietetic/patients/id/${activePatient.id}/add-new-diet`}
+          classes={classes.buttonAdd}
+        />
       )}
     </div>
   );

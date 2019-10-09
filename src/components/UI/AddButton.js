@@ -12,13 +12,16 @@ const useStyles = makeStyles({
   icon: {
     width: ".8em",
     height: ".8em"
+  },
+  link: {
+    textDecoration: "none"
   }
 });
 
 const AddButton = props => {
   const classes = useStyles();
   return (
-    <Link to={props.href}>
+    <Link to={props.href} className={classes.link}>
       <Fab color="primary" aria-label="Add" className={props.classes}>
         <p className={classes.text}>{props.text}</p>{" "}
         <AddIcon className={classes.icon} />

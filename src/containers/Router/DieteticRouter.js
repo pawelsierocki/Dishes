@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Patients from "../../components/Dietetic/Patients";
 import Diet from "../../components/Dietetic/Diet";
+import AddDiet from "../../components/Dietetic/NewDiet/AddDiet";
 import AddNewPatient from "../../components/Dietetic/AddNewPatient";
 import PatientDetails from "../../components/Dietetic/PatientDetails";
 import PatientInterview from "../../components/Dietetic/PatientInterview";
@@ -21,8 +22,13 @@ const DieteticRouter = () => {
         exact
         component={PatientInterview}
       />
+      <Route
+        path="/dietetic/patients/id/:id/add-new-diet"
+        exact
+        component={AddDiet}
+      />
       <Route path="/dietetic/patients/add" component={AddNewPatient} />
-      <Route path="/dietetic/diet" component={Diet} />
+      <Route path="/dietetic/diet/:id" component={Diet} />
     </Switch>
   );
 };
