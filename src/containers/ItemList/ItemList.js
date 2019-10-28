@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import ListView from "../../components/ListView";
 import { filterDishes } from "../../store/helpers/dishes";
-import { getAllDishes, getAllIngredients } from "../../shared/api/dishesAPI";
-import { setActivePage, setIngredients } from "../../store/actions/actions";
+import { getAllDishes } from "../../shared/api/dishesAPI";
+import { setActivePage } from "../../store/actions/actions";
 
 class ItemList extends Component {
   _isMounted = false;
@@ -23,24 +23,9 @@ class ItemList extends Component {
       .then(response => {
         if (this._isMounted)
           this.setState({
-            dishesList: response.data
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getIngredients = () => {
-    getAllIngredients()
-      .then(response => {
-        if (this._isMounted)
-          this.setState({
-            ingredients: response.data,
+            dishesList: response.data,
             loading: false
           });
-
-        this.props.setIngredients(response.data);
       })
       .catch(err => {
         console.log(err);
@@ -51,7 +36,6 @@ class ItemList extends Component {
     this._isMounted = true;
 
     this.props.setActivePage("Lista dań");
-    this.getIngredients();
     this.onUpdateList();
   }
 
@@ -78,8 +62,7 @@ class ItemList extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setActivePage: page => dispatch(setActivePage(page)),
-  setIngredients: ingredients => dispatch(setIngredients(ingredients))
+  setActivePage: page => dispatch(setActivePage(page))
 });
 
 export default connect(
