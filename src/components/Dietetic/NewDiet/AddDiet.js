@@ -154,7 +154,6 @@ const AddDiet = props => {
           onClose={handleClose}
           dayNumber={dayNumber}
           month={monthName}
-          ingredients={props.ingredients}
         />
       )}
     </div>
@@ -164,8 +163,7 @@ const AddDiet = props => {
 };
 
 const mapStateToProps = state => ({
-  activePatient: state.userReducer.activePatient,
-  ingredients: state.dishesReducer.ingredients
+  activePatient: state.userReducer.activePatient
 });
 
 const mapDispatchToProps = dispatch => ({
