@@ -21,11 +21,14 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   dialogContainer: {
-    display: "flex",
-    padding: "20px"
+    display: "flex"
   },
   addMeal: {
-    width: "50%"
+    width: "50%",
+    padding: "15px"
+  },
+  ingredients: {
+    padding: "15px"
   }
 }));
 
@@ -36,6 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function FullScreenDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [picked, setPicked] = React.useState(null);
 
   useEffect(() => {
     setOpen(true);
@@ -44,6 +48,10 @@ export default function FullScreenDialog(props) {
   const handleClose = () => {
     setOpen(false);
     props.onClose();
+  };
+
+  const onChoose = ingredient => {
+    setPicked(ingredient);
   };
 
   return (
@@ -74,10 +82,10 @@ export default function FullScreenDialog(props) {
         </AppBar>
         <div className={classes.dialogContainer}>
           <div className={classes.addMeal}>
-            <AddMeal />
+            <AddMeal picked={picked} />
           </div>
           <div className={classes.ingredients}>
-            <Ingredients />
+            <Ingredients onChoose={onChoose} />
           </div>
         </div>
       </Dialog>

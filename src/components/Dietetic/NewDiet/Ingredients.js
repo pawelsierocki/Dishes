@@ -10,7 +10,11 @@ const Ingredients = props => {
     setIngredients(props.ingredients);
   }, []);
 
-  return <IngredientsTable dataSource={ingredients} />;
+  function handleChoose(ingredient) {
+    props.onChoose(ingredient);
+  }
+
+  return <IngredientsTable dataSource={ingredients} onClick={handleChoose} />;
 };
 
 const mapStateToProps = state => ({

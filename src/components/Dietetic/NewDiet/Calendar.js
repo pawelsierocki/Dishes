@@ -12,6 +12,7 @@ const DAY_LABELS = [
   "Sobota",
   "Niedziela"
 ];
+
 const MONTH_LABELS = [
   "Styczeń",
   "Luty",
