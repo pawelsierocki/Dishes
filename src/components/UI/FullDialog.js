@@ -24,11 +24,12 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   addMeal: {
-    width: "50%",
-    padding: "15px"
+    width: "50%"
   },
   ingredients: {
-    padding: "15px"
+    padding: "15px",
+    width: "52%",
+    boxSizing: "border-box"
   }
 }));
 

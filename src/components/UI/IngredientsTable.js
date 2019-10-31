@@ -15,21 +15,21 @@ const columns = [
   {
     id: "fat",
     label: "Tłuszcz",
-    minWidth: 170,
+    minWidth: 150,
     align: "right",
     format: value => value.toFixed(2)
   },
   {
     id: "fiber",
     label: "Błonnik",
-    minWidth: 170,
+    minWidth: 150,
     align: "right",
     format: value => value.toFixed(2)
   },
   {
     id: "carbohydrates",
     label: "Węglodowany",
-    minWidth: 170,
+    minWidth: 150,
     align: "right",
     format: value => value.toFixed(2)
   }

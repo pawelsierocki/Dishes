@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { withStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -6,18 +6,24 @@ import TextField from "@material-ui/core/TextField";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import AddMealForm from "./AddMealForm";
+import MakroElements from "./MakroElements";
 
 const styles = () => ({
+  container: {
+    padding: "15px"
+  },
   mealContainer: {
-    margin: "2rem 0",
+    margin: "1rem 0",
     padding: "1rem",
-    boxShadow: "0px 0px 2px #000",
+    border: "1px solid #f50057",
     transition: "all .5s",
     borderRadius: "3px",
+    minHeight: "5rem",
+    background: "#f50057",
+    color: "#fff",
     "&:hover": {
-      boxShadow: "none",
-      color: "#fff",
-      background: "#f50057",
+      color: "#000",
+      background: "#fff",
       cursor: "pointer"
     }
   },
@@ -61,6 +67,9 @@ const styles = () => ({
   },
   bold: {
     fontWeight: "bold"
+  },
+  ingredientContainer: {
+    marginBottom: ".5rem"
   }
 });
 
@@ -130,9 +139,11 @@ const AddMeal = props => {
   return (
     <>
       {newMeal ? (
-        <AddMealForm onClose={() => setNewMeal(false)} onSave={handleSave} />
+        <div className={classes.container}>
+          <AddMealForm onClose={() => setNewMeal(false)} onSave={handleSave} />
+        </div>
       ) : choosen ? (
-        <>
+        <div className={classes.container}>
           <Button
             variant="contained"
             color="secondary"
@@ -183,7 +194,7 @@ const AddMeal = props => {
                   meal.ingredients &&
                   meal.ingredients.map((ingredient, index) => {
                     return (
-                      <div key={index}>
+                      <div key={index} className={classes.ingredientContainer}>
                         <div className={classes.ingredientBox}>
                           <p className={classes.bold}>{ingredient.name}</p>
                           <TextField
@@ -204,27 +215,35 @@ const AddMeal = props => {
                         </div>
                         <div className={classes.macros}>
                           <p className={classes.macro}>
-                            T: 
-                            {(ingredient.multiplier / ingredient.grams) *
-                              ingredient.fat}{" "}
+                            T:
+                            {(
+                              (ingredient.multiplier / ingredient.grams) *
+                              ingredient.fat
+                            ).toFixed(2)}{" "}
                           </p>
 
                           <p className={classes.macro}>
-                            B: 
-                            {(ingredient.multiplier / ingredient.grams) *
-                              ingredient.protein}{" "}
+                            B:
+                            {(
+                              (ingredient.multiplier / ingredient.grams) *
+                              ingredient.protein
+                            ).toFixed(2)}{" "}
                           </p>
 
                           <p className={classes.macro}>
-                            F: 
-                            {(ingredient.multiplier / ingredient.grams) *
-                              ingredient.fiber}{" "}
+                            F:
+                            {(
+                              (ingredient.multiplier / ingredient.grams) *
+                              ingredient.fiber
+                            ).toFixed(2)}{" "}
                           </p>
 
                           <p className={classes.macro}>
-                            Ww: 
-                            {(ingredient.multiplier / ingredient.grams) *
-                              ingredient.carbohydrates}{" "}
+                            W:
+                            {(
+                              (ingredient.multiplier / ingredient.grams) *
+                              ingredient.carbohydrates
+                            ).toFixed(2)}{" "}
                           </p>
                         </div>
                       </div>
@@ -233,18 +252,25 @@ const AddMeal = props => {
               )}
             </>
           )}
-        </>
+        </div>
       ) : (
         <>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={() => setNewMeal(true)}
-          >
-            Dodaj nowe danie
-          </Button>
-          {mealsRender}
+          <div className={classes.container}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={() => setNewMeal(true)}
+            >
+              Dodaj nowe danie
+            </Button>
+            {mealsRender}
+          </div>
+          {meals && meals.length > 0 && (
+            <div className={classes.makro}>
+              <MakroElements meals={meals} />
+            </div>
+          )}
         </>
       )}
     </>
